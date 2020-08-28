@@ -1,0 +1,23 @@
+image: ubuntu-18.04-amd64
+
+install:
+  - nvm use 10
+  # i2c-bus as of v4.0.10 cannot be installed with Python 3.x.
+  - sudo -i python_select 2.7@latest
+  - npm install --prefix sensors
+  - npm install --prefix web
+
+build_script:
+  - npm run --prefix sensors build
+  - npm run --prefix web build
+
+test_script:
+  - npm run --prefix sensors test
+  - npm run --prefix web test
+
+on_finish:
+  - sh: |
+      find . -type f -name 'junit*.xml' -print0 | xargs -0 -I '{}' curl -F 'file=@{}' "https://ci.cloudlab.zhaw.ch/api/testresults/junit/$APPVEYOR_JOB_ID"
+
+skip_tags: true
+version: "{build}"

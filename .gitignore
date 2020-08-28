@@ -1,0 +1,17 @@
+# Generated directories and files
+coverage
+node_modules
+bower_components
+**/dist/
+yarn.lock
+junit.xml
+
+# Secrets, local configuration
+.env
+
+# OS & editor metadata
+._*
+.DS_Store
+Thumbs.db
+.idea
+*.iml
