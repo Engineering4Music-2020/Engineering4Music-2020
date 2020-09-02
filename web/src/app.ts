@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import exphbs  from "express-handlebars";
+import exphbs from "express-handlebars";
 
 import * as homeController from "./controllers/home";
 import * as dataOutputController from "./controllers/dataOutput";
@@ -17,9 +17,8 @@ app.use(
 	express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
 );
 
-/**
- * Primary app routes.
- */
+// Primary app routes.
+
 app.get("/", homeController.index);
 app.get("/main", dataOutputController.main);
 
