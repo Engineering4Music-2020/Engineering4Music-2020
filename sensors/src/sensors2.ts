@@ -27,7 +27,11 @@ export class Humidity {
 		if (typeof value !== "number" || isNaN(value)) {
 			throw new Error(`Humdity is not a number: ${value}`);
 		}
+
+		// START: TO BE PROGRAMMED - EXERCISE 1.1.2.
+
 		if (value < 0 || value > 100) {
+			// END: TO BE PROGRAMMED - EXERCISE 1.1.2.
 			throw new Error(`Humidity must be in range [0, 100], but is: ${value}`);
 		}
 
@@ -44,19 +48,28 @@ export class AirQuality {
 
 	public constructor(value: number) {
 		if (value < 0) {
-			throw new Error(`Air quality must be >= 0, but is: ${value}`);
+			// START: TO BE PROGRAMMED - EXERCISE 1.1.1.
+			throw new Error(`Air quality must be greater than 0, but is: ${value}`);
+			// END: TO BE PROGRAMMED - EXERCISE 1.1.1.
 		}
 		this.value = value;
 	}
 
 	public getRange(): AirQualityRange {
-		if (this.value < 300) {
+		if (this.value < 100) {
+			// console.log("Test get range < 100.");
 			return AirQualityRange.FRESH;
-		} else if (this.value >= 700) {
-			return AirQualityRange.HIGH_POLLUTION;
-		} else {
+		}
+		// START: TO BE PROGRAMMED - EXERCISE 2.2.
+		if (this.value < 200) {
+			// console.log("Test get range >= 100 && < 200.");
 			return AirQualityRange.LOW_POLLUTION;
 		}
+		if (this.value >= 200) {
+			// console.log("Test get range >= 200.");
+			return AirQualityRange.HIGH_POLLUTION;
+		}
+		// END: TO BE PROGRAMMED - EXERCISE 2.2.
 	}
 
 	public toString = (): string => {
@@ -65,20 +78,11 @@ export class AirQuality {
 }
 
 export enum AirQualityRange {
-	/**
-	 * Less than 300.
-	 */
 	FRESH,
-
-	/**
-	 * Between 300 and 700.
-	 */
+	// START: TO BE PROGRAMMED - EXERCISE 2.1.
 	LOW_POLLUTION,
-
-	/**
-	 * Higher than 700.
-	 */
 	HIGH_POLLUTION,
+	// END: TO BE PROGRAMMED - EXERCISE 2.1.
 }
 
 export class BarometricPressure {
@@ -278,6 +282,7 @@ export class GrovePi implements Sensor {
 			i2cBus.closeSync();
 
 			// Convert pressure and temperature readings to 19 bit values.
+			// START: TO BE PROGRAMMED - EXERCISE 3.1.
 			const adcP =
 				(readBuffer[0] << 12) + (readBuffer[1] << 4) + (readBuffer[2] >> 4);
 			const adcT =
