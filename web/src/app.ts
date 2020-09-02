@@ -3,6 +3,7 @@ import path from "path";
 import exphbs  from "express-handlebars";
 
 import * as homeController from "./controllers/home";
+import * as dataOutputController from "./controllers/dataOutput";
 
 // Create Express server
 const app = express();
@@ -20,5 +21,6 @@ app.use(
  * Primary app routes.
  */
 app.get("/", homeController.index);
+app.get("/main", dataOutputController.main);
 
 export default app;

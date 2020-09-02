@@ -1,4 +1,4 @@
-import request from "supertest";
+/*import request from "supertest";
 import app from "../src/app";
 
 describe("GET /", () => {
@@ -7,3 +7,4 @@ describe("GET /", () => {
 			.expect(200, done);
 	});
 });
+*/
