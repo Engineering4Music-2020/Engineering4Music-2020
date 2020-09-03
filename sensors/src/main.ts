@@ -6,6 +6,7 @@ import { Temperature } from "./sensors";
 dotenv.config();
 
 export function getData(): Promise<Temperature> {
+	// console.log(process.env.RASPBERRY_AVAILABLE);
 	let sensors_m: any;
 	let sensor: any;
 	if (process.env.RASPBERRY_AVAILABLE === "true") {
