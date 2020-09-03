@@ -22,7 +22,7 @@ This project was created by Michael Schnyder and Lars Schmid in September 2020 a
 - `sensors` : Part of the weather station that controls the sensors.
 - `web` : Web part of the weather station.
 
-## Scripts
+## Scripts
 
 - In folder "web":
   - `npm run start` will open a webserver at localhost:3000/main where the current temperature will be displayed. If the Raspberry Pi is not available, mock data (15°C) will be displayed.
