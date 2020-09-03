@@ -1,8 +1,17 @@
-# Template for Weather Station
+# Weather Station for Musicians
 
-The template consists of two separate projects:
+Simple weather station using a Raspberry Pi that allows musicians to keep an eye on the temperature and humidity in their rehearsal rooms / studios.
+This project was created by Michael Schnyder and Lars Schmid in September 2020 as part of the course "Youth2Engineers".
 
-* `sensors`: Template for the part of the weather station that controls the sensors.
-* `web`: Template for the web part of the weather station.
+## Technologies
 
-See the README in the respective folders for the details.
+- 'TypeScript'
+- 'JavaScript / Node.js'
+- 'HTML'
+- 'CSS'
+- 'PostgreSQL'
+
+## Contents
+
+- `sensors`: Part of the weather station that controls the sensors.
+- `web`: Web part of the weather station.
