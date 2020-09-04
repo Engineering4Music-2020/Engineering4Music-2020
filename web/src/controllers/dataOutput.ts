@@ -12,7 +12,7 @@ export const main = (req: Request, res: Response) => {
 			layout: false,
 			temperature: data.temperature,
 			humidity: data.humidity,
-			date: data.date,
+			date: data.date.toDateString(),
 		});
 	});
 };
