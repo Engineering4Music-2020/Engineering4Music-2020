@@ -18,6 +18,10 @@ export class Temperature {
 	public toString = (): string => {
 		return `${this.value} °C`;
 	};
+
+	public toNumber = (): number => {
+		return this.value;
+	};
 }
 
 export class Humidity {
@@ -36,6 +40,10 @@ export class Humidity {
 
 	public toString = (): string => {
 		return `${this.value}%`;
+	};
+
+	public toNumber = (): number => {
+		return this.value;
 	};
 }
 
@@ -95,6 +103,10 @@ export class BarometricPressure {
 
 	public toString = (): string => {
 		return `${this.pressureNN} hPa`;
+	};
+
+	public toNumber = (): number => {
+		return this.pressureNN;
 	};
 }
 

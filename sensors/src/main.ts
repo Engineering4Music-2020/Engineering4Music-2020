@@ -49,6 +49,10 @@ export function getData(): Promise<Temperature> {
 			public toString = (): string => {
 				return `${this.value} °C`;
 			};
+
+			public toNumber = (): number => {
+				return this.value;
+			};
 		}
 
 		class Humidity {
@@ -69,6 +73,10 @@ export function getData(): Promise<Temperature> {
 
 			public toString = (): string => {
 				return `${this.value}%`;
+			};
+
+			public toNumber = (): number => {
+				return this.value;
 			};
 		}
 
@@ -117,6 +125,10 @@ export function getData(): Promise<Temperature> {
 
 			public toString = (): string => {
 				return `${this.pressureNN} hPa`;
+			};
+
+			public toNumber = (): number => {
+				return this.pressureNN;
 			};
 		}
 		interface Sensor {
