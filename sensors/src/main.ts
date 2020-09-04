@@ -1,11 +1,14 @@
 // import { GrovePi } from "./sensors";
 // import * as Sensors_Module from "./sensors";
 import dotenv from "dotenv";
-import { Temperature } from "./sensors";
+import { Temperature, Humidity } from "./sensors";
+import { MeasureData } from "./measureData";
 
 dotenv.config();
 
-export function getData(): Promise<Temperature> {
+// console.log(getData().then((value) => console.log(value.temperature)));
+
+export async function getData(): Promise<MeasureData> {
 	// console.log(process.env.RASPBERRY_AVAILABLE);
 	let sensors_m: any;
 	let sensor: any;
@@ -13,7 +16,10 @@ export function getData(): Promise<Temperature> {
 		console.log("Sensors are available. Sending data from sensors:");
 		sensors_m = require("./sensors");
 		sensor = new sensors_m.GrovePi(1);
-		return Promise.resolve(sensor.measureTemperature());
+		const humidity: Humidity = await sensor.measureHumidity();
+		const temperature: Temperature = await sensor.measureTemperature();
+		const measureData = new MeasureData(temperature.value, humidity.value);
+		return measureData;
 
 		// sensor
 		// 	.measureTemperature()
@@ -165,7 +171,10 @@ export function getData(): Promise<Temperature> {
 
 		sensor = new GrovePi();
 
-		return sensor.measureTemperature();
+		const humidity: Humidity = await sensor.measureHumidity();
+		const temperature: Temperature = await sensor.measureTemperature();
+		const measureData = new MeasureData(temperature.value, humidity.value);
+		return measureData;
 
 		// sensor
 		// 	.measureTemperature()
