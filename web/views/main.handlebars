@@ -3,47 +3,9 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Example App</title>
+	<title>Engineering4Music</title>
 	<link href="css/main.css" rel="stylesheet" title="Default Style" />
 	<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
-	<style>
-		body {
-			background: url("/images/sky-690293_1920.jpg");
-			background-repeat: no-repeat;
-			background-position: center;
-			background-size: 100% 100%;
-			height: 100vh;
-		}
-
-		h1 {
-			font-family: "Crimson Text";
-			text-align: center;
-			color: white;
-		}
-
-		.content {
-			font-family: "Work Sans";
-			color: black;
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: center;
-			align-items: stretch;
-			text-align: center;
-		}
-
-		.wrapper {
-			border: 1px solid #ddd;
-			padding: 1em;
-			margin: 0.5em;
-			border-radius: 0.4em;
-			width: 16em;
-			/* box-shadow: 1px 1px 0.3px #9c6c43; */
-			box-shadow: 1px 1px 0.3px #eee;
-			max-height: fit-content;
-			background: #fff;
-			overflow: hidden;
-		}
-	</style>
 </head>
 
 <body>
@@ -53,10 +15,10 @@
 			<p>Date: {{{date}}}</p>
 		</div>
 		<div class="temperature wrapper">
-			<p>Temperature: {{{temperature}}}.</p>
+			<p>Temperature: {{{temperature}}}° Celsius.</p>
 		</div>
 		<div class="humidity wrapper">
-			<p>Humidity: {{{humidity}}}.</p>
+			<p>Humidity: {{{humidity}}}%.</p>
 		</div>
 	</div>
 </body>
