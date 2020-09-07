@@ -14,7 +14,7 @@
 		"copy_public": "cp -r ./public/* ./dist/web/public && echo 'successfully copied ./web/public into ./web/dist/web/public'",
 		"copy_views": "cp -r ./views/* ./dist/web/views && echo 'successfully copied ./web/views into ./web/dist/web/src/views'",
 		"create_public": "mkdir ./dist/web/public && echo 'successfully created ./web/dist/web/public' || echo './dist/web/public already exists'",
-		"create_views": "mkdir ./dist/web/views && echo 'successfully created ./web/dist/web/views'",
+		"create_views": "mkdir ./dist/web/views && echo 'successfully created ./web/dist/web/views' || echo '.dist/web/views already exists'",
 		"delete_dist": "rm -r ./dist && echo 'successfully deleted ./web/dist' && cd ../sensors && rm -r ./dist && echo 'successfully deleted ./sensors/dist'",
 		"start": "node dist/web/src/server.js",
 		"transpile": "tsc && echo 'successfully transpiled web' && cd ../sensors && tsc && echo 'successfully transpiled sensors'"
