@@ -7,10 +7,12 @@ import { getData } from "../../../sensors/src/main";
 // dotenv.config();
 
 export const main = (req: Request, res: Response) => {
-	const temp = getData().then((temp) => {
+	const temp = getData().then((data) => {
 		res.render("main", {
 			layout: false,
-			body: temp,
+			temperature: data.temperature,
+			humidity: data.humidity,
+			date: data.date.toDateString(),
 		});
 	});
 };

@@ -1,7 +1,6 @@
-import { Client } from 'pg';
-import dotenv from 'dotenv';
-import { getData } from '../sensors/src/main';
-
+import { Client } from "pg";
+import dotenv from "dotenv";
+import { getData } from "../sensors/src/main";
 
 const temp = getData().then((data) => {
     let humidity = data.humidity;

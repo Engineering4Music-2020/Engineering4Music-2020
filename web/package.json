@@ -9,9 +9,11 @@
 	"author": "Andreas Ahlenstorf",
 	"license": "Apache-2.0",
 	"scripts": {
-		"build": "npm run clean && npm run transpile && npm run create_views && npm run copy_views",
+		"build": "npm run clean && npm run transpile && npm run create_views && npm run create_public && npm run copy_views && npm run copy_public",
 		"clean": "[ -d ./dist ] && echo 'web/dist exists' && npm run delete_dist || echo 'ERROR: web/dist does not exist'",
-		"copy_views": "cp -r ./views/* ./dist/web/views && echo 'successfully copied web/views into ./web/dist/web/src/views'",
+		"copy_public": "cp -r ./public/* ./dist/web/public && echo 'successfully copied ./web/public into ./web/dist/web/public'",
+		"copy_views": "cp -r ./views/* ./dist/web/views && echo 'successfully copied ./web/views into ./web/dist/web/src/views'",
+		"create_public": "mkdir ./dist/web/publics && echo 'successfully created ./web/dist/web/public'",
 		"create_views": "mkdir ./dist/web/views && echo 'successfully created ./web/dist/web/views'",
 		"delete_dist": "rm -r ./dist && echo 'successfully deleted ./web/dist' && cd ../sensors && rm -r ./dist && echo 'successfully deleted ./sensors/dist'",
 		"start": "node dist/web/src/server.js",
