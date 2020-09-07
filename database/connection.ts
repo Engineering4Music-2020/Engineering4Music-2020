@@ -5,7 +5,6 @@ import { getData } from "../sensors/src/main";
 const temp = getData().then((data) => {
     let humidity = data.humidity;
     let temperature = data.temperature;
-    let date = data.date;
 
     dotenv.config();
     
