@@ -25,5 +25,5 @@ This project was created by Michael Schnyder and Lars Schmid in September 2020 a
 ## Scripts
 
 - In folder "web":
-  - `npm run start` will open a webserver at localhost:3000/main where the current temperature will be displayed. If the Raspberry Pi is not available, mock data (15°C) will be displayed.
-  - `npm run build` will delete and re-create the dist-folders in "web" and in "sensors", transpile the .ts-files, and copy the views folder from "src" to "dist" (within "web")
+  - `npm run start` will open a webserver at `localhost:3000/main` where the current temperature will be displayed. If the Raspberry Pi is not available, mock data (15°C / 50%) will be displayed.
+  - `npm run build` will delete and re-create the dist-folders in "web" and in "sensors", transpile the .ts-files, and copy the views and public folder from "src" to "dist" (within "web")
