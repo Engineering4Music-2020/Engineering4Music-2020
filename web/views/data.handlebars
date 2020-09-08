@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Data from Database</h1>    
+    <table border> 
+        <tr>
+            <th>Temperature</th>
+            <th>Humidity</th>
+            <th>Date</th>
+        </tr>
+        {{#each data}}       
+        <tr>            
+            <td>{{temperature}}</td>
+            <td>{{humidity}}</td>
+            <td>{{date}}</td>            
+        </tr>         
+        {{/each}}      
+    </table>    
+</body>
+</html>

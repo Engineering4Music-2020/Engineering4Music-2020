@@ -4,6 +4,7 @@ import exphbs from "express-handlebars";
 
 import * as homeController from "./controllers/home";
 import * as dataOutputController from "./controllers/dataOutput";
+import * as downloadDataController from "./controllers/downloadData";
 
 // Create Express server
 const app = express();
@@ -21,5 +22,6 @@ app.set("view engine", "handlebars");
 
 app.get("/", homeController.index);
 app.get("/main", dataOutputController.main);
+app.get("/data", downloadDataController.loadData);
 
 export default app;
