@@ -42,7 +42,6 @@ export async function loadJSON(req: Request, res: Response) {
 		await client.connect();
 		console.log(`Connected to database`);
 		const result = await client.query(`SELECT * FROM data ORDER BY date;`);
-		// res.send("Hello World!");
 		res.send(JSON.stringify(result));
 	} catch (error) {
 		console.log(error);
