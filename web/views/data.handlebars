@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {{!-- <script src="https://d3js.org/d3.v6.min.js"></script> --}}
+
+    <script src="js/d3.v6.min.js"></script>
+    <script src="js/d3.js" defer></script>
+    <title>Data</title>
 </head>
+
 <body>
-    <h1>Data from Database</h1>    
-    <table border> 
-        <tr>
-            <th>Temperature</th>
-            <th>Humidity</th>
-            <th>Date</th>
-        </tr>
-        {{#each data}}       
-        <tr>            
-            <td>{{temperature}}</td>
-            <td>{{humidity}}</td>
-            <td>{{date}}</td>            
-        </tr>         
-        {{/each}}      
-    </table>    
+    <h1>Data from Database</h1>
+    <div id="my_dataviz"></div>
 </body>
+
 </html>

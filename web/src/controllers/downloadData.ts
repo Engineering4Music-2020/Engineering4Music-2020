@@ -5,31 +5,52 @@ import { Request, Response } from "express";
 dotenv.config();
 
 async function readData(res: Response) {
-        const client = new Client({
-                connectionString: process.env.DB_URI,
-                ssl: {
-                        rejectUnauthorized: false,
-                },
-        });
+	const client = new Client({
+		connectionString: process.env.DB_URI,
+		ssl: {
+			rejectUnauthorized: false,
+		},
+	});
 
-        try {
-                console.log(`Connecting`);
-                await client.connect();
-                console.log(`Connected to database`);
-                const result = await client.query(`SELECT * FROM data;`);
-                res.render("data", {
-                    layout: false,
-                    data: result.rows,
-            });
-        } catch (error) {
-                console.log(error);
-        } finally {
-                await client.end();
-                console.log(`Disconnected from Database`);
-        }
-}      
+	try {
+		console.log(`Connecting`);
+		await client.connect();
+		console.log(`Connected to database`);
+		const result = await client.query(`SELECT * FROM data ORDER BY date;`);
+		res.render("data", {
+			layout: false,
+			data: result.rows,
+		});
+	} catch (error) {
+		console.log(error);
+	} finally {
+		await client.end();
+		console.log(`Disconnected from Database`);
+	}
+}
 
-export const loadData = (req: Request, res: Response):void => {
-         readData(res);
+export async function loadJSON(req: Request, res: Response) {
+	const client = new Client({
+		connectionString: process.env.DB_URI,
+		ssl: {
+			rejectUnauthorized: false,
+		},
+	});
+
+	try {
+		console.log(`Connecting`);
+		await client.connect();
+		console.log(`Connected to database`);
+		const result = await client.query(`SELECT * FROM data ORDER BY date;`);
+		res.send(JSON.stringify(result));
+	} catch (error) {
+		console.log(error);
+	} finally {
+		await client.end();
+		console.log(`Disconnected from Database`);
+	}
+}
+
+export const loadData = (req: Request, res: Response): void => {
+	readData(res);
 };
-
