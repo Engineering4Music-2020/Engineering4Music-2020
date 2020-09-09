@@ -33,7 +33,6 @@ export let get_data_from_pi_and_update_DB = getData().then((data) => {
                 client.end();
             }
         }   
-        fillDataBase();
+        setInterval(fillDataBase, 5000);
 });
 
-export default DB_Update;
