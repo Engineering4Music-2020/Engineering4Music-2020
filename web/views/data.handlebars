@@ -4,16 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data</title>
     {{!-- <script src="https://d3js.org/d3.v6.min.js"></script> --}}
-
     <script src="js/d3.v6.min.js"></script>
     <script src="js/d3.js" defer></script>
-    <title>Data</title>
+    <link href="css/main.css" rel="stylesheet" title="Default Style" />
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
 </head>
 
 <body>
     <h1>Data from Database</h1>
-    <div id="my_dataviz"></div>
+    <div class="content">
+        <div class="data wrapper">
+            <div id="my_dataviz"></div>
+            {{!-- <p class="temperature">Temperature: °C</p>
+            <p class="humidity">Humidity: %</p> --}}
+        </div>
+    </div>
 </body>
 
 </html>

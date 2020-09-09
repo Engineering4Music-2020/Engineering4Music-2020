@@ -385,18 +385,18 @@ fetch("http://localhost:3000/dataJSON").then((result) =>
 			.domain([
 				0,
 				d3.max(data, function (d) {
-					return +d.humidity;
+					return +d.humidity + 10;
 				}),
 			])
 			.range([height, 0]);
 		svg.append("g").call(d3.axisLeft(y));
 
-		// ADD LINES
+		// ADD LINE (TEMPERATURE)
 		svg
 			.append("path")
 			.datum(data)
 			.attr("fill", "none")
-			.attr("stroke", "darkblue")
+			.attr("stroke", "#501215")
 			.attr("stroke-width", 1.5)
 			.attr(
 				"d",
@@ -409,12 +409,23 @@ fetch("http://localhost:3000/dataJSON").then((result) =>
 						return y(d.temperature);
 					})
 			);
+		// .attr("class", "serie_label")
+		// .datum(d.temperature.length - 1);
+		// .attr("transform", function (d) {
+		// 	return (
+		// 		"translate(" + (x(d.date) + 10) + "," + (y(d.temperature) + 5) + ")"
+		// 	);
+		// })
+		// .attr("x", 5)
+		// .text("Temperature (°C)");
+
+		// ADD LINE (HUMIDITY)
 
 		svg
 			.append("path")
 			.datum(data)
 			.attr("fill", "none")
-			.attr("stroke", "lightblue")
+			.attr("stroke", "#FECE80")
 			.attr("stroke-width", 1.5)
 			.attr(
 				"d",
@@ -427,5 +438,21 @@ fetch("http://localhost:3000/dataJSON").then((result) =>
 						return y(d.humidity);
 					})
 			);
+
+		// add label
+
+		svg
+			.append("text")
+			.attr("x", width - 150)
+			.attr("y", 5)
+			.text("Humidity (%)")
+			.attr("fill", "#FECE80");
+
+		svg
+			.append("text")
+			.attr("x", width - 150)
+			.attr("y", 30)
+			.text("Temperature (°C)")
+			.attr("fill", "#501215");
 	})
 );
