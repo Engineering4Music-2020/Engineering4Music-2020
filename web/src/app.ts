@@ -23,5 +23,6 @@ app.set("view engine", "handlebars");
 app.get("/", homeController.index);
 app.get("/main", dataOutputController.main);
 app.get("/data", downloadDataController.loadData);
+app.get("/dataJSON", downloadDataController.loadJSON);
 
 export default app;
