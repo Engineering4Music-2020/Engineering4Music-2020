@@ -1,5 +1,5 @@
 body {
-	background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 		url("/images/dolo-iglesias-z9z6u1rn7sY-unsplash.jpg");
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -43,3 +43,18 @@ h1 {
 	background: #fff;
 	overflow: hidden;
 }
+
+.data.wrapper {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: stretch;
+	width: fit-content;
+}
+
+/* .humidity {
+	color: #fece80;
+}
+.temperature {
+	color: #501215;
+} */
