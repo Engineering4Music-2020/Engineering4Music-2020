@@ -91,7 +91,7 @@ h1 {
 }
 
 #navbar li.active a {
-	color: #d67436;
+	color: #fece80;
 }
 
 #nav-links {
@@ -111,7 +111,7 @@ nav ul li:last-child a {
 }
 
 nav ul li a:hover {
-	color: #d67436;
+	color: #fece80;
 }
 
 /* FOOTER */
@@ -191,5 +191,5 @@ nav ul li a:hover {
 }
 
 #footer-top-middle i:hover {
-	color: #d67436;
+	color: #fece80;
 }
