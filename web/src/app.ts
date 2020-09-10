@@ -20,10 +20,9 @@ app.set("view engine", "handlebars");
 
 // Primary app routes.
 
-app.get("/", homeController.index);
+app.get("/home", homeController.index);
 app.get("/main", dataOutputController.main);
 app.get("/data", downloadDataController.loadData);
 app.get("/dataJSON", downloadDataController.loadJSON);
-
 
 export default app;

@@ -3,13 +3,22 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Engineering4Music</title>
+	<title>Engineering4Music: Main</title>
 	<link href="css/main.css" rel="stylesheet" title="Default Style" />
 	<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
 </head>
 
 <body>
-	<h1>Engineering4Music</h1>
+	<nav id="navbar">
+		<a href="/home">
+			<h1 id="logo"><img src="/images/logo.png" alt=""></h1>
+		</a>
+		<ul id="nav-links">
+			<li id="nav-item"><a href="./home">Home</a></li>
+			<li id="nav-item" class="active"><a href="./data">Data</a></li>
+			<li id="nav-item"><a href="#">About</a></li>
+		</ul>
+	</nav>
 	<div class="content">
 		<div class="date wrapper">
 			<p>Date: {{{date}}}</p>
@@ -21,6 +30,38 @@
 			<p>Humidity: {{{humidity}}}%.</p>
 		</div>
 	</div>
+
+	<footer class="footer" id="footer">
+
+		<div class="footer" id="footer-top">
+			<div class="footer" id="footer-top-left">
+				{{!-- <p>footer-bottom-left</p> --}}
+				<img id="logo" src="/images/logo.png" alt="">
+			</div>
+
+			<div class="footer" id="footer-top-middle">
+				<p>Social Media Icons</p>
+			</div>
+
+			<div class="footer" id="footer-top-right">
+				{{!-- <h2>Contact</h2> --}}
+				<a class="footer-button" href="mailto:example@gmail.com">Email Us</a>
+			</div>
+		</div>
+
+		<div class="footer" id="footer-bottom">
+			{{!-- <p>footer-bottom</p> --}}
+			<div class="footer" id="footer-bottom-left">
+				{{!-- <p>footer-bottom-left</p> --}}
+				<p>&copy; 2020 Engineering4Music. All rights reserved.</p>
+			</div>
+
+			<div class="footer" id="footer-bottom-right">
+				{{!-- <p>footer-bottom-right</p> --}}
+				<p>Made with <span class="heart">♥</span> in Winterthur</p>
+			</div>
+		</div>
+	</footer>
 </body>
 
 </html>

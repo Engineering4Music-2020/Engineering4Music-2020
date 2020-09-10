@@ -7,12 +7,22 @@ body {
 	background-size: 100% 100%;
 	background-size: cover;
 	/* height: 100%; */
+	margin: 0;
+	padding: 0;
 }
 
 h1 {
 	font-family: "Crimson Text";
-	font-size: 3rem;
+	font-size: 3em;
 	text-align: center;
+	color: #fff;
+	font-weight: bold;
+}
+
+.footer h2 {
+	font-family: "Crimson Text";
+	font-size: 1.5em;
+	font-weight: bold;
 	color: #fff;
 }
 
@@ -31,7 +41,7 @@ h1 {
 	padding: 1em;
 	margin: 0.5em;
 	border-radius: 0.4em;
-	width: 16em;
+	width: fit-content;
 	/* box-shadow: 1px 1px 0.3px #9c6c43; */
 	/* box-shadow: 1px 1px 0.3px #eee; */
 	box-shadow: inset 0 7em 10em -5em rgba(255, 255, 255, 0.6),
@@ -50,11 +60,124 @@ h1 {
 	justify-content: center;
 	align-items: stretch;
 	width: fit-content;
+	margin: 0;
 }
 
-/* .humidity {
-	color: #fece80;
+#data-table {
+	color: #fff;
 }
-.temperature {
-	color: #501215;
-} */
+
+/* NAVBAR */
+
+#logo img {
+	height: 1em;
+	margin-top: 0.5em;
+}
+
+#navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 1em 3em 3em 3em;
+}
+
+#navbar ul {
+	list-style-type: none;
+}
+
+#navbar li.active a {
+	color: #d67436;
+}
+
+#nav-links {
+	display: flex;
+}
+
+nav ul li a {
+	color: white;
+	text-decoration: none;
+	font-family: "Work Sans";
+	font-size: 1.3em;
+	margin: 0 1.5em;
+}
+
+nav ul li:last-child a {
+	margin-right: 0;
+}
+
+nav ul li a:hover {
+	color: #d67436;
+}
+
+/* FOOTER */
+
+.footer {
+	/* border: 1px solid red; */
+	/* margin: 2px 0;
+	padding: 2px; */
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: fit-content;
+	background: rgb(0, 0, 0, 0.5);
+	margin-top: 3em;
+	/* padding: 30px 30px 20px 30px; */
+
+	color: #fff;
+	font-family: "Work Sans";
+	font-size: 0.7em;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#footer-top {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+#footer-bottom {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.footer a {
+	text-decoration: none;
+}
+
+.footer-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 1.5em;
+	max-width: max-content;
+	/* background-color: rgb(33, 33, 33, 0.07); */
+	background-color: #fff;
+	border-radius: 100px;
+	/* color: #2f2f2f; */
+	color: #000;
+	line-height: 0;
+	margin: 0.6em 0;
+	font-size: 1rem;
+	padding: 0 1.3em;
+}
+
+.heart {
+	color: #d67436;
+	font-size: 150%;
+}
