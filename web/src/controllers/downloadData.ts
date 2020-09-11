@@ -50,7 +50,7 @@ export async function loadJSON(req: Request, res: Response) {
 		console.log(`Disconnected from Database`);
 	}
 }
-export async function loadJSONlast15(req: Request, res: Response) {
+export async function loadJSONlast24h(req: Request, res: Response) {
 	const client = new Client({
 		connectionString: process.env.DB_URI,
 		ssl: {
@@ -63,7 +63,7 @@ export async function loadJSONlast15(req: Request, res: Response) {
 		await client.connect();
 		console.log(`Connected to database`);
 		const result = await client.query(
-			`WITH t AS (SELECT * FROM data ORDER BY date DESC LIMIT 4) SELECT * FROM t ORDER BY date ASC;`
+			`SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '24 HOURS' AND NOW() ORDER BY date;`
 		);
 		res.send(JSON.stringify(result));
 	} catch (error) {
