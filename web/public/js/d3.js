@@ -4,344 +4,344 @@ fetch("http://localhost:3000/dataJSON").then((result) =>
 
 		// MOCK DATA
 
-		// data = [
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 8,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T00:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 10,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T01:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 11,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T02:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 10,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T03:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 10,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T04:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 13,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T05:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 12,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T06:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 14,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T07:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 18,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T08:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 20,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T09:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 25,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T10:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 75,
-		// 		temperature: 15,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T11:00:00.000Z",
-		// 		id: 2,
-		// 	},
-		// 	{
-		// 		humidity: 45,
-		// 		temperature: 20,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T12:00:00.000Z",
-		// 		id: 3,
-		// 	},
-		// 	{
-		// 		humidity: 65,
-		// 		temperature: 35,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T13:00:00.000Z",
-		// 		id: 4,
-		// 	},
-		// 	{
-		// 		humidity: 55,
-		// 		temperature: 23,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T14:00:00.000Z",
-		// 		id: 5,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 22,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T15:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 20,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T16:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 18,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T17:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 30,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T18:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 22,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T19:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 26,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T20:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 14,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T21:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 12,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T22:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 10,
-		// 		pressure: 1009,
-		// 		date: "2020-09-09T23:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 8,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T00:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 10,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T01:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 11,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T02:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 10,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T03:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 10,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T04:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 13,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T05:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 12,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T06:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 14,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T07:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 18,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T08:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 20,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T09:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 50,
-		// 		temperature: 25,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T10:00:00.000Z",
-		// 		id: 1,
-		// 	},
-		// 	{
-		// 		humidity: 75,
-		// 		temperature: 15,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T11:00:00.000Z",
-		// 		id: 2,
-		// 	},
-		// 	{
-		// 		humidity: 45,
-		// 		temperature: 20,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T12:00:00.000Z",
-		// 		id: 3,
-		// 	},
-		// 	{
-		// 		humidity: 65,
-		// 		temperature: 35,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T13:00:00.000Z",
-		// 		id: 4,
-		// 	},
-		// 	{
-		// 		humidity: 55,
-		// 		temperature: 23,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T14:00:00.000Z",
-		// 		id: 5,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 22,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T15:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 20,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T16:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 18,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T17:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 30,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T18:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 22,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T19:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 26,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T20:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 14,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T21:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 12,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T22:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// 	{
-		// 		humidity: 35,
-		// 		temperature: 10,
-		// 		pressure: 1009,
-		// 		date: "2020-09-10T23:00:00.000Z",
-		// 		id: 6,
-		// 	},
-		// ];
+		data = [
+			{
+				humidity: 50,
+				temperature: 8,
+				pressure: 1009,
+				date: "2020-09-09T00:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 10,
+				pressure: 1009,
+				date: "2020-09-09T01:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 11,
+				pressure: 1009,
+				date: "2020-09-09T02:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 10,
+				pressure: 1009,
+				date: "2020-09-09T03:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 10,
+				pressure: 1009,
+				date: "2020-09-09T04:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 13,
+				pressure: 1009,
+				date: "2020-09-09T05:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 12,
+				pressure: 1009,
+				date: "2020-09-09T06:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 14,
+				pressure: 1009,
+				date: "2020-09-09T07:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 18,
+				pressure: 1009,
+				date: "2020-09-09T08:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 20,
+				pressure: 1009,
+				date: "2020-09-09T09:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 25,
+				pressure: 1009,
+				date: "2020-09-09T10:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 75,
+				temperature: 15,
+				pressure: 1009,
+				date: "2020-09-09T11:00:00.000Z",
+				id: 2,
+			},
+			{
+				humidity: 45,
+				temperature: 20,
+				pressure: 1009,
+				date: "2020-09-09T12:00:00.000Z",
+				id: 3,
+			},
+			{
+				humidity: 65,
+				temperature: 35,
+				pressure: 1009,
+				date: "2020-09-09T13:00:00.000Z",
+				id: 4,
+			},
+			{
+				humidity: 55,
+				temperature: 23,
+				pressure: 1009,
+				date: "2020-09-09T14:00:00.000Z",
+				id: 5,
+			},
+			{
+				humidity: 35,
+				temperature: 22,
+				pressure: 1009,
+				date: "2020-09-09T15:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 20,
+				pressure: 1009,
+				date: "2020-09-09T16:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 18,
+				pressure: 1009,
+				date: "2020-09-09T17:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 30,
+				pressure: 1009,
+				date: "2020-09-09T18:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 22,
+				pressure: 1009,
+				date: "2020-09-09T19:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 26,
+				pressure: 1009,
+				date: "2020-09-09T20:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 14,
+				pressure: 1009,
+				date: "2020-09-09T21:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 12,
+				pressure: 1009,
+				date: "2020-09-09T22:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 10,
+				pressure: 1009,
+				date: "2020-09-09T23:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 50,
+				temperature: 8,
+				pressure: 1009,
+				date: "2020-09-10T00:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 10,
+				pressure: 1009,
+				date: "2020-09-10T01:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 11,
+				pressure: 1009,
+				date: "2020-09-10T02:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 10,
+				pressure: 1009,
+				date: "2020-09-10T03:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 10,
+				pressure: 1009,
+				date: "2020-09-10T04:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 13,
+				pressure: 1009,
+				date: "2020-09-10T05:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 12,
+				pressure: 1009,
+				date: "2020-09-10T06:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 14,
+				pressure: 1009,
+				date: "2020-09-10T07:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 18,
+				pressure: 1009,
+				date: "2020-09-10T08:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 20,
+				pressure: 1009,
+				date: "2020-09-10T09:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 50,
+				temperature: 25,
+				pressure: 1009,
+				date: "2020-09-10T10:00:00.000Z",
+				id: 1,
+			},
+			{
+				humidity: 75,
+				temperature: 15,
+				pressure: 1009,
+				date: "2020-09-10T11:00:00.000Z",
+				id: 2,
+			},
+			{
+				humidity: 45,
+				temperature: 20,
+				pressure: 1009,
+				date: "2020-09-10T12:00:00.000Z",
+				id: 3,
+			},
+			{
+				humidity: 65,
+				temperature: 35,
+				pressure: 1009,
+				date: "2020-09-10T13:00:00.000Z",
+				id: 4,
+			},
+			{
+				humidity: 55,
+				temperature: 23,
+				pressure: 1009,
+				date: "2020-09-10T14:00:00.000Z",
+				id: 5,
+			},
+			{
+				humidity: 35,
+				temperature: 22,
+				pressure: 1009,
+				date: "2020-09-10T15:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 20,
+				pressure: 1009,
+				date: "2020-09-10T16:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 18,
+				pressure: 1009,
+				date: "2020-09-10T17:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 30,
+				pressure: 1009,
+				date: "2020-09-10T18:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 22,
+				pressure: 1009,
+				date: "2020-09-10T19:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 26,
+				pressure: 1009,
+				date: "2020-09-10T20:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 14,
+				pressure: 1009,
+				date: "2020-09-10T21:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 12,
+				pressure: 1009,
+				date: "2020-09-10T22:00:00.000Z",
+				id: 6,
+			},
+			{
+				humidity: 35,
+				temperature: 10,
+				pressure: 1009,
+				date: "2020-09-10T23:00:00.000Z",
+				id: 6,
+			},
+		];
 
 		// TURN DATE-STRING INTO DATE-OBJECT
 
@@ -398,6 +398,7 @@ fetch("http://localhost:3000/dataJSON").then((result) =>
 			.attr("fill", "none")
 			.attr("stroke", "#501215")
 			.attr("stroke-width", 1.5)
+			.attr("id", "temperature-line")
 			.attr(
 				"d",
 				d3
@@ -409,15 +410,6 @@ fetch("http://localhost:3000/dataJSON").then((result) =>
 						return y(d.temperature);
 					})
 			);
-		// .attr("class", "serie_label")
-		// .datum(d.temperature.length - 1);
-		// .attr("transform", function (d) {
-		// 	return (
-		// 		"translate(" + (x(d.date) + 10) + "," + (y(d.temperature) + 5) + ")"
-		// 	);
-		// })
-		// .attr("x", 5)
-		// .text("Temperature (°C)");
 
 		// ADD LINE (HUMIDITY)
 
@@ -427,6 +419,7 @@ fetch("http://localhost:3000/dataJSON").then((result) =>
 			.attr("fill", "none")
 			.attr("stroke", "#FECE80")
 			.attr("stroke-width", 1.5)
+			.attr("id", "humidity-line")
 			.attr(
 				"d",
 				d3
@@ -446,6 +439,7 @@ fetch("http://localhost:3000/dataJSON").then((result) =>
 			.attr("x", width - 150)
 			.attr("y", 5)
 			.text("Humidity (%)")
+			.attr("id", "humidity-label")
 			.attr("fill", "#FECE80");
 
 		svg
@@ -453,6 +447,39 @@ fetch("http://localhost:3000/dataJSON").then((result) =>
 			.attr("x", width - 150)
 			.attr("y", 30)
 			.text("Temperature (°C)")
+			.attr("id", "temperature-label")
 			.attr("fill", "#501215");
+
+		// svg.append("text").text("Button");
 	})
 );
+
+function toggleTemperature() {
+	var temperature_line = document.getElementById("temperature-line");
+	var temperature_label = document.getElementById("temperature-label");
+	if (temperature_line.style.display === "none") {
+		temperature_line.style.display = "block";
+	} else {
+		temperature_line.style.display = "none";
+	}
+	if (temperature_label.style.display === "none") {
+		temperature_label.style.display = "block";
+	} else {
+		temperature_label.style.display = "none";
+	}
+}
+
+function toggleHumidity() {
+	var humidity_line = document.getElementById("humidity-line");
+	var humidity_label = document.getElementById("humidity-label");
+	if (humidity_line.style.display === "none") {
+		humidity_line.style.display = "block";
+	} else {
+		humidity_line.style.display = "none";
+	}
+	if (humidity_label.style.display === "none") {
+		humidity_label.style.display = "block";
+	} else {
+		humidity_label.style.display = "none";
+	}
+}

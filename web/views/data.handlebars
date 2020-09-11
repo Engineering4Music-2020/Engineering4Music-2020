@@ -30,10 +30,14 @@
             <div id="my_dataviz"></div>
             {{!-- <p class="temperature">Temperature: °C</p>
             <p class="humidity">Humidity: %</p> --}}
+            <div class="graph-control">
+                <button onclick="toggleTemperature()">Hide/Show Temperature</button>
+                <button onclick="toggleHumidity()">Hide/Show Humidity</button>
+            </div>
         </div>
     </div>
 
-    {{!-- <div id="data-table">
+    <div id="data-table">
         <table border>
             <tr>
                 <th>Temperature</th>
@@ -48,7 +52,7 @@
             </tr>
             {{/each}}
         </table>
-    </div> --}}
+    </div>
 
     <footer class="footer" id="footer">
 
