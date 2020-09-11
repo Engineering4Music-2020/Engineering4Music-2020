@@ -343,17 +343,27 @@ function loadDataDefault() {
 					id: 6,
 				},
 			];
+<<<<<<< HEAD
 
+=======
+			document
+				.getElementById("showAllData")
+				.setAttribute("class", "button-active");
+			document.getElementById("showLast24").removeAttribute("class");
+>>>>>>> a5e05e6b3d2dafffb4bd3a3cf3b6c940ba30c9a7
 			renderGraph(data);
 		})
 	);
 }
 
-function loadDataLast15() {
-	fetch("http://localhost:3000/dataJSONlast15").then((result) =>
+function loadDataLast24h() {
+	fetch("http://localhost:3000/dataJSONlast24h").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
-
+			document
+				.getElementById("showLast24")
+				.setAttribute("class", "button-active");
+			document.getElementById("showAllData").removeAttribute("class");
 			renderGraph(data);
 		})
 	);
@@ -375,8 +385,8 @@ function renderGraph(data) {
 	console.log(data);
 
 	// SET DIMENSIONS AND MARGINS OF GRAPH
-	var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-		width = 1200 - margin.left - margin.right,
+	var margin = { top: 10, right: 30, bottom: 50, left: 60 },
+		width = 800 - margin.left - margin.right,
 		height = 400 - margin.top - margin.bottom;
 
 	// APPEND SVG OBJECT TO BODY OF PAGE
@@ -481,8 +491,16 @@ function toggleTemperature() {
 	var temperature_label = document.getElementById("temperature-label");
 	if (temperature_line.style.display === "none") {
 		temperature_line.style.display = "block";
+		document.getElementById("toggleTemperature").innerHTML = "Hide Temperature";
+		document.getElementById("toggleTemperature").style.backgroundColor =
+			"#501215";
+		document.getElementById("toggleTemperature").style.color = "#fff";
 	} else {
 		temperature_line.style.display = "none";
+		document.getElementById("toggleTemperature").innerHTML = "Show Temperature";
+		document.getElementById("toggleTemperature").style.backgroundColor =
+			"rgb(239, 239, 239)";
+		document.getElementById("toggleTemperature").style.color = "#000";
 	}
 	if (temperature_label.style.display === "none") {
 		temperature_label.style.display = "block";
@@ -496,8 +514,13 @@ function toggleHumidity() {
 	var humidity_label = document.getElementById("humidity-label");
 	if (humidity_line.style.display === "none") {
 		humidity_line.style.display = "block";
+		document.getElementById("toggleHumidity").innerHTML = "Hide Humidity";
+		document.getElementById("toggleHumidity").style.backgroundColor = "#fece80";
 	} else {
 		humidity_line.style.display = "none";
+		document.getElementById("toggleHumidity").innerHTML = "Show Humidity";
+		document.getElementById("toggleHumidity").style.backgroundColor =
+			"rgb(239, 239, 239)";
 	}
 	if (humidity_label.style.display === "none") {
 		humidity_label.style.display = "block";
