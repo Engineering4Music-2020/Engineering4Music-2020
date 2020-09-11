@@ -50,6 +50,29 @@ export async function loadJSON(req: Request, res: Response) {
 		console.log(`Disconnected from Database`);
 	}
 }
+export async function loadJSONlast15(req: Request, res: Response) {
+	const client = new Client({
+		connectionString: process.env.DB_URI,
+		ssl: {
+			rejectUnauthorized: false,
+		},
+	});
+
+	try {
+		console.log(`Connecting`);
+		await client.connect();
+		console.log(`Connected to database`);
+		const result = await client.query(
+			`WITH t AS (SELECT * FROM data ORDER BY date DESC LIMIT 4) SELECT * FROM t ORDER BY date ASC;`
+		);
+		res.send(JSON.stringify(result));
+	} catch (error) {
+		console.log(error);
+	} finally {
+		await client.end();
+		console.log(`Disconnected from Database`);
+	}
+}
 
 export const loadData = (req: Request, res: Response): void => {
 	readData(res);
