@@ -17,6 +17,7 @@ async function readData(res: Response) {
 		await client.connect();
 		console.log(`Connected to database`);
 		const result = await client.query(`SELECT * FROM data ORDER BY date;`);
+		console.log(result);
 		res.render("data", {
 			layout: false,
 			data: result.rows,
