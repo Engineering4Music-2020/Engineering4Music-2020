@@ -26,5 +26,6 @@ app.get("/home", homeController.index);
 app.get("/main", dataOutputController.main);
 app.get("/data", downloadDataController.loadData);
 app.get("/dataJSON", downloadDataController.loadJSON);
+app.get("/dataJSONlast15", downloadDataController.loadJSONlast15);
 
 export default app;
