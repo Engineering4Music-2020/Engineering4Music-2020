@@ -30,10 +30,14 @@
             <div id="my_dataviz"></div>
             {{!-- <p class="temperature">Temperature: °C</p>
             <p class="humidity">Humidity: %</p> --}}
+            <div class="graph-control">
+                <button onclick="toggleTemperature()">Hide/Show Temperature</button>
+                <button onclick="toggleHumidity()">Hide/Show Humidity</button>
+            </div>
         </div>
     </div>
 
-    {{!-- <div id="data-table">
+    <div id="data-table">
         <table border>
             <tr>
                 <th>Temperature</th>
@@ -48,7 +52,7 @@
             </tr>
             {{/each}}
         </table>
-    </div> --}}
+    </div>
 
     <footer class="footer" id="footer">
 
@@ -57,15 +61,15 @@
 
         <div class="footer" id="footer-bottom">
 
-            <div class="footer" id="footer-top-left">
+            <div class="footer" id="footer-bottom-logo">
                 <img id="logo" src="/images/logo.png" alt="">
             </div>
 
-            <div class="footer" id="footer-bottom-left">
+            <div class="footer" id="footer-bottom-copy">
                 <p>&copy; 2020 Engineering4Music. All rights reserved.</p>
             </div>
 
-            <div class="footer" id="footer-top-middle">
+            <div class="footer" id="footer-bottom-sm-icons">
                 <a href="#"><i class="fa fa-twitter fa-4x icon-3d"></i></a>
                 <a href="#"><i class="fa fa-facebook fa-4x icon-3d"></i></a>
                 <a href="#"><i class="fa fa-instagram fa-4x icon-3d"></i></a>
