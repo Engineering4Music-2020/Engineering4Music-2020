@@ -63,7 +63,7 @@ export async function loadJSONlast15(req: Request, res: Response) {
 		await client.connect();
 		console.log(`Connected to database`);
 		const result = await client.query(
-			`SELECT * FROM data ORDER BY date LIMIT 15;`
+			`WITH t AS (SELECT * FROM data ORDER BY date DESC LIMIT 4) SELECT * FROM t ORDER BY date ASC;`
 		);
 		res.send(JSON.stringify(result));
 	} catch (error) {
