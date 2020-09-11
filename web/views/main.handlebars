@@ -3,13 +3,24 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Engineering4Music</title>
+	<title>Engineering4Music: Main</title>
 	<link href="css/main.css" rel="stylesheet" title="Default Style" />
 	<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-	<h1>Engineering4Music</h1>
+	<nav id="navbar">
+		<a href="/home">
+			<img id="logo" src="/images/logo.png" alt="">
+		</a>
+		<ul id="nav-links">
+			<li id="nav-item"><a href="/home">Home</a></li>
+			<li id="nav-item"><a href="/data">Data</a></li>
+			<li id="nav-item"><a href="/about">About</a></li>
+		</ul>
+	</nav>
+
 	<div class="content">
 		<div class="date wrapper">
 			<p>Date: {{{date}}}</p>
@@ -21,6 +32,34 @@
 			<p>Humidity: {{{humidity}}}%.</p>
 		</div>
 	</div>
+
+	<footer class="footer" id="footer">
+
+		<div class="footer" id="footer-top">
+		</div>
+
+		<div class="footer" id="footer-bottom">
+
+			<div class="footer" id="footer-bottom-logo">
+				<img id="logo" src="/images/logo.png" alt="">
+			</div>
+
+			<div class="footer" id="footer-bottom-copy">
+				<p>&copy; 2020 Engineering4Music. All rights reserved.</p>
+			</div>
+
+			<div class="footer" id="footer-bottom-sm-icons">
+				<a href="#"><i class="fa fa-twitter fa-4x icon-3d"></i></a>
+				<a href="#"><i class="fa fa-facebook fa-4x icon-3d"></i></a>
+				<a href="#"><i class="fa fa-instagram fa-4x icon-3d"></i></a>
+				<a href="#"><i class="fa fa-at fa-4x icon-3d"></i></a>
+			</div>
+
+			<div class="footer" id="footer-bottom-right">
+				<p>Made with <span class="heart">♥</span> in Winterthur</p>
+			</div>
+		</div>
+	</footer>
 </body>
 
 </html>

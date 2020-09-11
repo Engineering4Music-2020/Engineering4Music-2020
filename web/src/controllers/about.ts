@@ -5,8 +5,8 @@ import { Request, Response } from "express";
  * Home page.
  */
 export const index = (req: Request, res: Response) => {
-	res.render("home", {
+	res.render("about", {
 		layout: false,
-		title: "Home",
+		title: "About",
 	});
 };

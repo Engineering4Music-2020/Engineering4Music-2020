@@ -4,23 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data</title>
+    <title>Engineering4Music: Data</title>
     {{!-- <script src="https://d3js.org/d3.v6.min.js"></script> --}}
     <script src="js/d3.v6.min.js"></script>
-    <script src="js/d3.js" defer></script>
+    <script src="js/d3.js"></script>
     <link href="css/main.css" rel="stylesheet" title="Default Style" />
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body>
-    <h1>Data from Database</h1>
+<body onload="loadDataDefault()">
+    <nav id="navbar">
+        <a href="/home">
+            <img id="logo" src="/images/logo.png" alt="">
+        </a>
+        <ul id="nav-links">
+            <li id="nav-item"><a href="/home">Home</a></li>
+            <li id="nav-item" class="active"><a href="/data">Data</a></li>
+            <li id="nav-item"><a href="/about">About</a></li>
+        </ul>
+    </nav>
+
     <div class="content">
         <div class="data wrapper">
             <div id="my_dataviz"></div>
             {{!-- <p class="temperature">Temperature: °C</p>
             <p class="humidity">Humidity: %</p> --}}
+            <div class="graph-control">
+                <button onclick="toggleTemperature()">Hide/Show Temperature</button>
+                <button onclick="toggleHumidity()">Hide/Show Humidity</button>
+                <button onclick="loadDataLast15()">Show Last 15 Measurements</button>
+                <button onclick="loadDataDefault()">Show All Data</button>
+            </div>
         </div>
     </div>
+
+    <div id="data-table">
+        <table border>
+            <tr>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Date</th>
+            </tr>
+            {{#each data}}
+            <tr>
+                <td>{{temperature}}</td>
+                <td>{{humidity}}</td>
+                <td>{{date}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+    <footer class="footer" id="footer">
+
+        <div class="footer" id="footer-top">
+        </div>
+
+        <div class="footer" id="footer-bottom">
+
+            <div class="footer" id="footer-bottom-logo">
+                <img id="logo" src="/images/logo.png" alt="">
+            </div>
+
+            <div class="footer" id="footer-bottom-copy">
+                <p>&copy; 2020 Engineering4Music. All rights reserved.</p>
+            </div>
+
+            <div class="footer" id="footer-bottom-sm-icons">
+                <a href="#"><i class="fa fa-twitter fa-4x icon-3d"></i></a>
+                <a href="#"><i class="fa fa-facebook fa-4x icon-3d"></i></a>
+                <a href="#"><i class="fa fa-instagram fa-4x icon-3d"></i></a>
+                <a href="#"><i class="fa fa-at fa-4x icon-3d"></i></a>
+            </div>
+
+            <div class="footer" id="footer-bottom-right">
+                <p>Made with <span class="heart">♥</span> in Winterthur</p>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

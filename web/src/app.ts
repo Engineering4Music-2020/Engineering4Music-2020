@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import exphbs from "express-handlebars";
 
+import * as aboutController from "./controllers/about";
 import * as homeController from "./controllers/home";
 import * as dataOutputController from "./controllers/dataOutput";
 import * as downloadDataController from "./controllers/downloadData";
@@ -20,10 +21,11 @@ app.set("view engine", "handlebars");
 
 // Primary app routes.
 
-app.get("/", homeController.index);
+app.get("/about", aboutController.index);
+app.get("/home", homeController.index);
 app.get("/main", dataOutputController.main);
 app.get("/data", downloadDataController.loadData);
 app.get("/dataJSON", downloadDataController.loadJSON);
-
+app.get("/dataJSONlast15", downloadDataController.loadJSONlast15);
 
 export default app;
