@@ -26,7 +26,7 @@ const measure = () => {
             console.log(`date '${year}-${month}-${day}' + time '${hour}:${minutes}'`);
                 try {
                     await client.connect();
-                    const res = await client.query(`INSERT INTO data (humidity, temperature, pressure, date, time) VALUES(${humidity}, ${temperature}, 1009, date '${year}-${month}-${day}' + time '${hour}:${minutes}', '${hour}:${minutes}');`);
+                    const res = await client.query(`INSERT INTO data (humidity, temperature, date) VALUES(${humidity}, ${temperature}, LOCALTIMESTAMP);`);
                     console.log(res.rows);
                 } catch(error) {
                     console.log(error);
