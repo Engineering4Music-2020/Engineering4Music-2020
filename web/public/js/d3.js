@@ -5,7 +5,7 @@ function loadDataDefault() {
 
 			// MOCK DATA
 
-			data = [
+			/*data = [
 				{
 					humidity: 50,
 					temperature: 8,
@@ -342,15 +342,11 @@ function loadDataDefault() {
 					date: "2020-09-10T23:00:00.000Z",
 					id: 6,
 				},
-			];
-<<<<<<< HEAD
-
-=======
+			];*/
 			document
 				.getElementById("showAllData")
 				.setAttribute("class", "button-active");
 			document.getElementById("showLast24").removeAttribute("class");
->>>>>>> a5e05e6b3d2dafffb4bd3a3cf3b6c940ba30c9a7
 			renderGraph(data);
 		})
 	);
