@@ -1,29 +1,14 @@
-import nodemailer from "nodemailer";
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const main = async() => {
-    let testAccount = await nodemailer.createTestAccount();
-
-    let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-            user: "michael.schnyder.immer@gmail.com",
-            pass: "IwadWStrasse31",
-        },
-    });
-
-    let info = await transporter.sendMail({
-        from: '"Michael Schnyder" michael.schnyder.immer@gmail.com',
-        to: "michael@schnyder.cc",
-        subject: "Hello",
-        text: "Hello world",
-        html: "<b>Hello world</b>",
-    });
-
-    console.log("Message sent %s", info.messageId);
-
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-}
-
-main().catch(console.error);
+const msg = {
+  to: 'michael.schnyder.immer@gmail.com',
+  from: 'michael@schnyder.cc',
+  subject: 'Sending with Twilio SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+};
+sgMail.send(msg).then(console.log("success"))
+.catch((error:any) => {
+    console.log(error);
+});

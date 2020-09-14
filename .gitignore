@@ -15,3 +15,5 @@ junit.xml
 Thumbs.db
 .idea
 *.iml
+sendgrid.env
+sendgrid.env
