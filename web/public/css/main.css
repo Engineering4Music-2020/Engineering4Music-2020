@@ -24,13 +24,6 @@ h1 {
 	font-weight: bold;
 }
 
-.footer h2 {
-	font-family: "Crimson Text";
-	font-size: 1.5em;
-	font-weight: bold;
-	color: #fff;
-}
-
 .content {
 	font-family: "Work Sans";
 	color: black;
@@ -59,7 +52,7 @@ h1 {
 
 .data.wrapper {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: column wrap;
 	justify-content: center;
 	align-items: stretch;
 	width: fit-content;
@@ -194,4 +187,35 @@ nav ul li a:hover {
 
 #footer-bottom-sm-icons i:hover {
 	color: #fece80;
+}
+
+/* GRAPH-BUTTONS */
+
+.graph-control {
+	display: flex;
+	justify-content: space-evenly;
+}
+.graph-control button {
+	font-family: "Work Sans";
+	width: 150px;
+	padding: 1em;
+	border-radius: 0.4em;
+}
+.graph-control button:hover {
+	cursor: pointer;
+}
+.graph-control .button-active {
+	background-color: #000;
+	color: #fff;
+}
+.graph-control .button-active:hover {
+	cursor: auto;
+}
+.graph-control #toggleTemperature {
+	background-color: #501215;
+	color: #fff;
+}
+.graph-control #toggleHumidity {
+	background-color: #fece80;
+	color: #000;
 }

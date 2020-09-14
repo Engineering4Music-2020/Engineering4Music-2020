@@ -10,7 +10,7 @@
     <script src="js/d3.js"></script>
     <link href="css/main.css" rel="stylesheet" title="Default Style" />
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body onload="loadDataDefault()">
@@ -31,15 +31,15 @@
             {{!-- <p class="temperature">Temperature: °C</p>
             <p class="humidity">Humidity: %</p> --}}
             <div class="graph-control">
-                <button onclick="toggleTemperature()">Hide/Show Temperature</button>
-                <button onclick="toggleHumidity()">Hide/Show Humidity</button>
-                <button onclick="loadDataLast15()">Show Last 15 Measurements</button>
-                <button onclick="loadDataDefault()">Show All Data</button>
+                <button id="toggleTemperature" onclick="toggleTemperature()">Hide Temperature</button>
+                <button id="toggleHumidity" onclick="toggleHumidity()">Hide Humidity</button>
+                <button id="showLast24" onclick="loadDataLast24h()">Show Last 24 Hours</button>
+                <button id="showAllData" class="button-active" onclick="loadDataDefault()">Show All Data</button>
             </div>
         </div>
     </div>
 
-    <div id="data-table">
+    {{!-- <div id="data-table">
         <table border>
             <tr>
                 <th>Temperature</th>
@@ -54,7 +54,7 @@
             </tr>
             {{/each}}
         </table>
-    </div>
+    </div> --}}
 
     <footer class="footer" id="footer">
 
