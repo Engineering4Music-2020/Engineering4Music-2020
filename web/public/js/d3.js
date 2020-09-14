@@ -9,7 +9,7 @@ function loadDataDefault() {
 			document
 				.getElementById("showAllData")
 				.setAttribute("class", "button-active");
-			document.getElementById("showLast24").removeAttribute("class");
+			document.getElementById("showLast24h").removeAttribute("class");
 			renderGraph(data);
 		})
 	);
@@ -20,7 +20,7 @@ function loadDataLast24h() {
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
 			document
-				.getElementById("showLast24")
+				.getElementById("showLast24h")
 				.setAttribute("class", "button-active");
 			document.getElementById("showAllData").removeAttribute("class");
 			renderGraph(data);
@@ -28,12 +28,16 @@ function loadDataLast24h() {
 	);
 }
 
-function renderGraph(data) {
-	// REMOVE ALL DATA
-	const parent = document.getElementById("my_dataviz");
+function emptyGraph() {
+	const parent = document.getElementById("graph-graph");
 	while (parent.firstChild) {
 		parent.firstChild.remove();
 	}
+}
+
+function renderGraph(data) {
+	// REMOVE ALL DATA
+	emptyGraph();
 
 	// TURN DATE-STRING INTO DATE-OBJECT
 
@@ -50,7 +54,7 @@ function renderGraph(data) {
 
 	// APPEND SVG OBJECT TO BODY OF PAGE
 	var svg = d3
-		.select("#my_dataviz")
+		.select("#graph-graph")
 		.append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
