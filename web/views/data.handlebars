@@ -11,6 +11,7 @@
     <link href="css/main.css" rel="stylesheet" title="Default Style" />
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/45e20ca475.js" crossorigin="anonymous"></script>
 </head>
 
 <body onload="loadDataDefault()">
@@ -26,10 +27,40 @@
     </nav>
 
     <div class="content">
+        <div id="graph-content">
+            <div id="graph-top">
+                <div id="graph-header">
+                    7. - 13. September 2020
+                </div>
+            </div>
+
+            <div id="graph-middle">
+                <div id="graph-icons">
+                    {{!-- <i id="toggle-temperature-icon" class="fas fa-thermometer-full fa-4x"
+                        onclick="toggleTemperature()"></i> --}}
+                    <button id="toggleTemperature" onclick="toggleTemperature()">Hide Temperature</button>
+                    <button id="toggleHumidity" onclick="toggleHumidity()">Hide Humidity</button>
+                </div>
+                <div id="graph-graph">
+                    <div id="graph-graph"></div>
+                </div>
+                <div id="graph-control">
+                    <button id="showAllData" class="button-active" onclick="loadDataDefault()">All Data</button>
+                    <button id="showLast24h" onclick="loadDataLast24h()">24 Hours</button>
+                    <button id="showLast7d" onclick="loadDataLast7d()">7 Days</button>
+                    <button id="showLast24" onclick="loadDataLast1m()">1 Month</button>
+                </div>
+            </div>
+
+            <div id="graph-bottom">
+                <div id="graph-info">Info</div>
+            </div>
+        </div>
+    </div>
+
+    {{!-- <div class="content">
         <div class="data wrapper">
-            <div id="my_dataviz"></div>
-            {{!-- <p class="temperature">Temperature: °C</p>
-            <p class="humidity">Humidity: %</p> --}}
+            <div id="graph-graph"></div>
             <div class="graph-control">
                 <button id="toggleTemperature" onclick="toggleTemperature()">Hide Temperature</button>
                 <button id="toggleHumidity" onclick="toggleHumidity()">Hide Humidity</button>
@@ -37,9 +68,9 @@
                 <button id="showAllData" class="button-active" onclick="loadDataDefault()">Show All Data</button>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div id="data-table">
+    {{!-- <div id="data-table">
         <table border>
             <tr>
                 <th>Temperature</th>
@@ -54,7 +85,7 @@
             </tr>
             {{/each}}
         </table>
-    </div>
+    </div> --}}
 
     <footer class="footer" id="footer">
 

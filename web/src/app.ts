@@ -28,4 +28,8 @@ app.get("/data", downloadDataController.loadData);
 app.get("/dataJSON", downloadDataController.loadJSON);
 app.get("/dataJSONlast24h", downloadDataController.loadJSONlast24h);
 
+// Login and Registration routes
+
+
+
 export default app;
