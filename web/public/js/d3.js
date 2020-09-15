@@ -1,5 +1,5 @@
 function loadDataDefault() {
-	fetch("http://localhost:3000/dataJSON").then((result) =>
+	fetch("http://localhost:3000/dataJSONAll").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
 
@@ -10,8 +10,10 @@ function loadDataDefault() {
 
 			document
 				.getElementById("showAllData")
-				.setAttribute("class", "button-active");
-			document.getElementById("showLast24h").removeAttribute("class");
+				.setAttribute("class", "button active");
+			document.getElementById("showLast24h").setAttribute("class", "button");
+			document.getElementById("showLast7d").setAttribute("class", "button");
+			document.getElementById("showLast1m").setAttribute("class", "button");
 
 			renderGraph(data);
 		})
@@ -27,8 +29,46 @@ function loadDataLast24h() {
 
 			document
 				.getElementById("showLast24h")
-				.setAttribute("class", "button-active");
-			document.getElementById("showAllData").removeAttribute("class");
+				.setAttribute("class", "button active");
+			document.getElementById("showAllData").setAttribute("class", "button");
+			document.getElementById("showLast7d").setAttribute("class", "button");
+			document.getElementById("showLast1m").setAttribute("class", "button");
+
+			renderGraph(data);
+		})
+	);
+}
+function loadDataLast7d() {
+	fetch("http://localhost:3000/dataJSONlast7d").then((result) =>
+		result.json().then(function (fetch_result) {
+			let data = fetch_result.rows;
+
+			console.log(data);
+
+			document
+				.getElementById("showLast7d")
+				.setAttribute("class", "button active");
+			document.getElementById("showAllData").setAttribute("class", "button");
+			document.getElementById("showLast24h").setAttribute("class", "button");
+			document.getElementById("showLast1m").setAttribute("class", "button");
+
+			renderGraph(data);
+		})
+	);
+}
+function loadDataLast1m() {
+	fetch("http://localhost:3000/dataJSONlast1m").then((result) =>
+		result.json().then(function (fetch_result) {
+			let data = fetch_result.rows;
+
+			console.log(data);
+
+			document
+				.getElementById("showLast1m")
+				.setAttribute("class", "button active");
+			document.getElementById("showAllData").setAttribute("class", "button");
+			document.getElementById("showLast24h").setAttribute("class", "button");
+			document.getElementById("showLast7d").setAttribute("class", "button");
 
 			renderGraph(data);
 		})
@@ -153,8 +193,8 @@ function renderGraph(data) {
 		.append("path")
 		.datum(data)
 		.attr("fill", "none")
-		.attr("stroke", "#501215")
-		.attr("stroke-width", 1.5)
+		.attr("stroke", "#cb464a")
+		.attr("stroke-width", 2.5)
 		.attr("id", "temperature-line")
 		.attr(
 			"d",
@@ -174,8 +214,8 @@ function renderGraph(data) {
 		.append("path")
 		.datum(data)
 		.attr("fill", "none")
-		.attr("stroke", "#FECE80")
-		.attr("stroke-width", 1.5)
+		.attr("stroke", "#248bcc")
+		.attr("stroke-width", 2.5)
 		.attr("id", "humidity-line")
 		.attr(
 			"d",
@@ -191,21 +231,21 @@ function renderGraph(data) {
 
 	// ADD LABEL
 
-	svg
-		.append("text")
-		.attr("x", width - 150)
-		.attr("y", 5)
-		.text("Humidity (%)")
-		.attr("id", "humidity-label")
-		.attr("fill", "#FECE80");
+	// svg
+	// 	.append("text")
+	// 	.attr("x", width - 150)
+	// 	.attr("y", 5)
+	// 	.text("Humidity (%)")
+	// 	.attr("id", "humidity-label")
+	// 	.attr("fill", "#FECE80");
 
-	svg
-		.append("text")
-		.attr("x", width - 150)
-		.attr("y", 30)
-		.text("Temperature (°C)")
-		.attr("id", "temperature-label")
-		.attr("fill", "#501215");
+	// svg
+	// 	.append("text")
+	// 	.attr("x", width - 150)
+	// 	.attr("y", 30)
+	// 	.text("Temperature (°C)")
+	// 	.attr("id", "temperature-label")
+	// 	.attr("fill", "#501215");
 }
 
 function toggleTemperature() {
