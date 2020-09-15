@@ -10,6 +10,7 @@ function loadDataDefault() {
 				.getElementById("showAllData")
 				.setAttribute("class", "button-active");
 			document.getElementById("showLast24h").removeAttribute("class");
+
 			renderGraph(data);
 		})
 	);
@@ -33,6 +34,8 @@ function emptyGraph() {
 	while (parent.firstChild) {
 		parent.firstChild.remove();
 	}
+	d3.select("#date-min").html("");
+	d3.select("#date-max").html("");
 }
 
 function renderGraph(data) {
@@ -45,7 +48,35 @@ function renderGraph(data) {
 		data[index].date = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ")(item.date);
 	});
 
-	console.log(data);
+	// HEADER
+
+	d3.select("#date-min")
+		.append("text")
+		.attr("id", "date-min")
+		.text(
+			d3.min(data, function (d) {
+				return (
+					d.date.toLocaleDateString().toString() +
+					", " +
+					d.date.getHours().toString() +
+					":" +
+					d.date.getMinutes().toString()
+				);
+			})
+		);
+	d3.select("#date-max")
+		.append("text")
+		.text(
+			d3.max(data, function (d) {
+				return (
+					d.date.toLocaleDateString().toString() +
+					", " +
+					d.date.getHours().toString() +
+					":" +
+					d.date.getMinutes().toString()
+				);
+			})
+		);
 
 	// SET DIMENSIONS AND MARGINS OF GRAPH
 	var margin = { top: 10, right: 30, bottom: 50, left: 60 },
@@ -70,6 +101,7 @@ function renderGraph(data) {
 			})
 		)
 		.range([0, width]);
+
 	svg
 		.append("g")
 		.attr("transform", "translate(0," + height + ")")
@@ -85,6 +117,7 @@ function renderGraph(data) {
 			}),
 		])
 		.range([height, 0]);
+
 	svg.append("g").call(d3.axisLeft(y));
 
 	// ADD LINE (TEMPERATURE)
@@ -145,8 +178,6 @@ function renderGraph(data) {
 		.text("Temperature (°C)")
 		.attr("id", "temperature-label")
 		.attr("fill", "#501215");
-
-	// svg.append("text").text("Button");
 }
 
 function toggleTemperature() {
