@@ -30,7 +30,9 @@
         <div id="graph-content">
             <div id="graph-top">
                 <div id="graph-header">
-                    7. - 13. September 2020
+                    <span class="date" id="date-min"></span>
+                    <span> to </span>
+                    <span class="date" id="date-max"></span>
                 </div>
             </div>
 
@@ -38,22 +40,39 @@
                 <div id="graph-icons">
                     {{!-- <i id="toggle-temperature-icon" class="fas fa-thermometer-full fa-4x"
                         onclick="toggleTemperature()"></i> --}}
-                    <button id="toggleTemperature" onclick="toggleTemperature()">Hide Temperature</button>
-                    <button id="toggleHumidity" onclick="toggleHumidity()">Hide Humidity</button>
+                    {{!-- <button id="toggleHumidity" onclick="toggleHumidity()">Hide Humidity</button> --}}
+                    {{!-- <button id="toggleTemperature" onclick="toggleTemperature()">Hide Temperature</button> --}}
                 </div>
                 <div id="graph-graph">
                     <div id="graph-graph"></div>
                 </div>
                 <div id="graph-control">
-                    <button id="showAllData" class="button-active" onclick="loadDataDefault()">All Data</button>
-                    <button id="showLast24h" onclick="loadDataLast24h()">24 Hours</button>
-                    <button id="showLast7d" onclick="loadDataLast7d()">7 Days</button>
-                    <button id="showLast24" onclick="loadDataLast1m()">1 Month</button>
+                    <button id="showAllData" class="button active" onclick="loadDataDefault()">All Data</button>
+                    <button id="showLast24h" class="button" onclick="loadDataLast24h()">24 Hours</button>
+                    <button id="showLast7d" class="button" onclick="loadDataLast7d()">7 Days</button>
+                    <button id="showLast1m" class="button" onclick="loadDataLast1m()">1 Month</button>
                 </div>
             </div>
 
             <div id="graph-bottom">
-                <div id="graph-info">Info</div>
+                <div id="graph-info-humidity">
+                    <div id="humidity-info">Humidity </div>
+                    <div id="humidity-min-max">
+                        <div class="humidity-min-max-div"><span>Min: </span><span
+                                id="humidity-min"></span><span>%</span></div>
+                        <div class="humidity-min-max-div"><span>Max: </span><span
+                                id="humidity-max"></span><span>%</span></div>
+                    </div>
+                </div>
+                <div id="graph-info-temperature">
+                    <div id="temperature-info">Temperature </div>
+                    <div id="temperature-min-max">
+                        <div class="temperature-min-max-div"><span>Min: </span><span
+                                id="temperature-min"></span><span>°C</span></div>
+                        <div class="temperature-min-max-div"><span>Max: </span><span
+                                id="temperature-max"></span><span>°C</span></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -106,7 +125,7 @@
                 <a href="#"><i class="fa fa-twitter fa-4x icon-3d"></i></a>
                 <a href="#"><i class="fa fa-facebook fa-4x icon-3d"></i></a>
                 <a href="#"><i class="fa fa-instagram fa-4x icon-3d"></i></a>
-                <a href="#"><i class="fa fa-at fa-4x icon-3d"></i></a>
+                <a href="#"><i class="fa fa-envelope fa-4x icon-3d"></i></a>
             </div>
 
             <div class="footer" id="footer-bottom-right">
