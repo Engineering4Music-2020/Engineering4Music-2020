@@ -3,6 +3,8 @@ function loadDataDefault() {
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
 
+			console.log(data);
+
 			// MOCK DATA
 			// let data = mock_data;
 
@@ -20,10 +22,14 @@ function loadDataLast24h() {
 	fetch("http://localhost:3000/dataJSONlast24h").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
+
+			console.log(data);
+
 			document
 				.getElementById("showLast24h")
 				.setAttribute("class", "button-active");
 			document.getElementById("showAllData").removeAttribute("class");
+
 			renderGraph(data);
 		})
 	);
@@ -36,6 +42,10 @@ function emptyGraph() {
 	}
 	d3.select("#date-min").html("");
 	d3.select("#date-max").html("");
+	d3.select("#temperature-min").html("");
+	d3.select("#temperature-max").html("");
+	d3.select("#humidity-min").html("");
+	d3.select("#humidity-max").html("");
 }
 
 function renderGraph(data) {
@@ -50,33 +60,51 @@ function renderGraph(data) {
 
 	// HEADER
 
-	d3.select("#date-min")
-		.append("text")
-		.attr("id", "date-min")
-		.text(
-			d3.min(data, function (d) {
-				return (
-					d.date.toLocaleDateString().toString() +
-					", " +
-					d.date.getHours().toString() +
-					":" +
-					d.date.getMinutes().toString()
-				);
-			})
-		);
-	d3.select("#date-max")
-		.append("text")
-		.text(
-			d3.max(data, function (d) {
-				return (
-					d.date.toLocaleDateString().toString() +
-					", " +
-					d.date.getHours().toString() +
-					":" +
-					d.date.getMinutes().toString()
-				);
-			})
-		);
+	d3.select("#date-min").html(
+		d3.min(data, function (d) {
+			return (
+				d.date.toLocaleDateString().toString() +
+				", " +
+				d.date.getHours().toString() +
+				":" +
+				d.date.getMinutes().toString()
+			);
+		})
+	);
+	d3.select("#date-max").html(
+		d3.max(data, function (d) {
+			return (
+				d.date.toLocaleDateString().toString() +
+				", " +
+				d.date.getHours().toString() +
+				":" +
+				d.date.getMinutes().toString()
+			);
+		})
+	);
+
+	// FOOTER
+
+	d3.select("#temperature-min").html(
+		d3.min(data, function (d) {
+			return d.temperature;
+		})
+	);
+	d3.select("#temperature-max").html(
+		d3.max(data, function (d) {
+			return d.temperature;
+		})
+	);
+	d3.select("#humidity-min").html(
+		d3.min(data, function (d) {
+			return d.humidity;
+		})
+	);
+	d3.select("#humidity-max").html(
+		d3.max(data, function (d) {
+			return d.humidity;
+		})
+	);
 
 	// SET DIMENSIONS AND MARGINS OF GRAPH
 	var margin = { top: 10, right: 30, bottom: 50, left: 60 },
