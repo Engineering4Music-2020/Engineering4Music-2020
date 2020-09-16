@@ -301,3 +301,18 @@ nav ul li a:hover {
 	font-weight: bold;
 	padding-right: 1.2em;
 }
+
+/* GRAPH POINTS */
+
+.dot-temperature {
+	fill: rgba(203, 70, 74, 0);
+}
+.dot-temperature:hover {
+	fill: rgba(203, 70, 74, 1);
+}
+.dot-humidity {
+	fill: rgba(36, 139, 204, 0);
+}
+.dot-humidity:hover {
+	fill: rgba(36, 139, 204, 1);
+}

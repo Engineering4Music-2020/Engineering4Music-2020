@@ -102,23 +102,27 @@ function renderGraph(data) {
 
 	d3.select("#date-min").html(
 		d3.min(data, function (d) {
+			const datum = d.date;
 			return (
-				d.date.toLocaleDateString().toString() +
-				", " +
-				d.date.getHours().toString() +
-				":" +
-				d.date.getMinutes().toString()
+				// d.date.toLocaleDateString().toString() +
+				// ", " +
+				// d.date.getHours().toString() +
+				// ":" +
+				// d.date.getMinutes().toString()
+				`${datum.toLocaleDateString()}, ${datum.toLocaleTimeString()}`
 			);
 		})
 	);
 	d3.select("#date-max").html(
 		d3.max(data, function (d) {
+			const datum = d.date;
 			return (
-				d.date.toLocaleDateString().toString() +
-				", " +
-				d.date.getHours().toString() +
-				":" +
-				d.date.getMinutes().toString()
+				// d.date.toLocaleDateString().toString() +
+				// ", " +
+				// d.date.getHours().toString() +
+				// ":" +
+				// d.date.getMinutes().toString()
+				`${datum.toLocaleDateString()}, ${datum.toLocaleTimeString()}`
 			);
 		})
 	);
@@ -229,23 +233,42 @@ function renderGraph(data) {
 				})
 		);
 
-	// ADD LABEL
+	// ADD POINTS (TEMPERATURE)
 
-	// svg
-	// 	.append("text")
-	// 	.attr("x", width - 150)
-	// 	.attr("y", 5)
-	// 	.text("Humidity (%)")
-	// 	.attr("id", "humidity-label")
-	// 	.attr("fill", "#FECE80");
+	svg
+		.selectAll(".dot-temperature")
+		.data(data)
+		.enter()
+		.append("circle")
+		.attr("class", "dot-temperature")
+		.attr("cx", function (d) {
+			return x(d.date);
+		})
+		.attr("cy", function (d) {
+			return y(d.temperature);
+		})
+		.attr("r", 5);
 
-	// svg
-	// 	.append("text")
-	// 	.attr("x", width - 150)
-	// 	.attr("y", 30)
-	// 	.text("Temperature (°C)")
-	// 	.attr("id", "temperature-label")
-	// 	.attr("fill", "#501215");
+	// ADD POINTS (HUMIDITY)
+
+	svg
+		.selectAll(".dot-humidity")
+		.data(data)
+		.enter()
+		.append("circle")
+		.attr("class", "dot-humidity")
+		.attr("cx", function (d) {
+			return x(d.date);
+		})
+		.attr("cy", function (d) {
+			return y(d.humidity);
+		})
+		.attr("r", 5);
+	// .on("mouseover", function (a, b, c) {
+	// 	console.log(a, b, c);
+	// 	this.attr("class", "focus");
+	// })
+	// .on("mouseout", function () {});
 }
 
 function toggleTemperature() {
