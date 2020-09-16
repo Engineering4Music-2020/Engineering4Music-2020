@@ -31,7 +31,11 @@ async function readData(res: Response) {
 }
 
 export const loadData = (req: Request, res: Response): void => {
-	readData(res);
+	if(req.session !== undefined) {
+		readData(res);
+	} else {
+		res.redirect("loginForm");
+	}
 };
 
 export async function loadJSONAll(req: Request, res: Response) {
