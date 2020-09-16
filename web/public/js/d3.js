@@ -192,6 +192,13 @@ function renderGraph(data) {
 
 	svg.append("g").call(d3.axisLeft(y));
 
+	// TOOLTIP
+
+	d3.select("body")
+		.append("div")
+		.attr("id", "tooltip")
+		.attr("style", "position: absolute; opacity: 0;");
+
 	// ADD LINE (TEMPERATURE)
 	svg
 		.append("path")
@@ -238,8 +245,7 @@ function renderGraph(data) {
 	svg
 		.selectAll(".dot-temperature")
 		.data(data)
-		.enter()
-		.append("circle")
+		.join("circle")
 		.attr("class", "dot-temperature")
 		.attr("cx", function (d) {
 			return x(d.date);
@@ -247,15 +253,41 @@ function renderGraph(data) {
 		.attr("cy", function (d) {
 			return y(d.temperature);
 		})
-		.attr("r", 5);
+		.attr("r", 5)
+		.on("mouseover", function (event, datapoint) {
+			// console.log(d);
+			// console.log(i);
+			// console.log(i.humidity);
+			// // console.log(d.toElement.__data__.humidity);
+			// console.log(this.humidity);
+			d3.select("#tooltip")
+				.transition()
+				.duration(200)
+				.style("opacity", 1)
+				// .style("background-color: #000")
+				// .style("color: #fff")
+				.text(datapoint.temperature);
+		})
+		.on("mouseout", function () {
+			d3.select("#tooltip").style("opacity", 0);
+		})
+		.on("mousemove", function () {
+			d3.select("#tooltip")
+				.style("left", event.pageX + 10 + "px")
+				.style("top", event.pageY + 10 + "px");
+		});
+	// .append("span")
+	// .attr("class", "tooltiptext")
+	// .text(function (d) {
+	// 	return d.temperature + " °C";
+	// });
 
 	// ADD POINTS (HUMIDITY)
 
 	svg
 		.selectAll(".dot-humidity")
 		.data(data)
-		.enter()
-		.append("circle")
+		.join("circle")
 		.attr("class", "dot-humidity")
 		.attr("cx", function (d) {
 			return x(d.date);
@@ -263,11 +295,82 @@ function renderGraph(data) {
 		.attr("cy", function (d) {
 			return y(d.humidity);
 		})
-		.attr("r", 5);
-	// .on("mouseover", function (a, b, c) {
-	// 	console.log(a, b, c);
-	// 	this.attr("class", "focus");
+		.attr("r", 5)
+		.on("mouseover", function (event, datapoint) {
+			// console.log(d);
+			// console.log(i);
+			// console.log(i.humidity);
+			// // console.log(d.toElement.__data__.humidity);
+			// console.log(this.humidity);
+			d3.select("#tooltip")
+				.transition()
+				.duration(200)
+				.style("opacity", 1)
+				// .style("background-color: #000")
+				// .style("color: #fff")
+				.text(datapoint.humidity);
+		})
+		.on("mouseout", function () {
+			d3.select("#tooltip").style("opacity", 0);
+		})
+		.on("mousemove", function () {
+			d3.select("#tooltip")
+				.style("left", event.pageX + 10 + "px")
+				.style("top", event.pageY + 10 + "px");
+		});
+	// .on("mouseover", function (d) {
+	// 	d3.select("#tooltip")
+	// 		.transition()
+	// 		.duration(200)
+	// 		.style("opacity", 1)
+	// 		// .style("background-color: #000")
+	// 		// .style("color: #fff")
+	// 		.text(d.humidity);
 	// })
+	// .on("mouseout", function () {
+	// 	d3.select("#tooltip").style("opacity", 0);
+	// })
+	// .on("mousemove", function () {
+	// 	d3.select("#tooltip")
+	// 		.style("left", d3.event.pageX + 10 + "px")
+	// 		.style("top", d3.event.pageY + 10 + "px");
+	// });
+	// .append("title")
+	// .text(function (d) {
+	// 	return d.humidity + " %";
+	// });
+
+	// svg
+	// 	.selectAll("circle")
+	// 	.data(data)
+	// 	// .join("circle")
+	// 	.on("mouseover", function (event, datapoint) {
+	// 		// console.log(d);
+	// 		// console.log(i);
+	// 		// console.log(i.humidity);
+	// 		// // console.log(d.toElement.__data__.humidity);
+	// 		// console.log(this.humidity);
+	// 		d3.select("#tooltip")
+	// 			.transition()
+	// 			.duration(200)
+	// 			.style("opacity", 1)
+	// 			// .style("background-color: #000")
+	// 			// .style("color: #fff")
+	// 			.text(datapoint.temperature);
+	// 	})
+	// 	.on("mouseout", function () {
+	// 		d3.select("#tooltip").style("opacity", 0);
+	// 	})
+	// 	.on("mousemove", function () {
+	// 		d3.select("#tooltip")
+	// 			.style("left", event.pageX + 10 + "px")
+	// 			.style("top", event.pageY + 10 + "px");
+	// 	});
+
+	// .on("mouseover", function (a, b, c) {
+	// 	console.log(a);
+	// 	this.attr("class", "dot-focus");
+	// });
 	// .on("mouseout", function () {});
 }
 
