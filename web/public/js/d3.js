@@ -102,23 +102,27 @@ function renderGraph(data) {
 
 	d3.select("#date-min").html(
 		d3.min(data, function (d) {
+			const datum = d.date;
 			return (
-				d.date.toLocaleDateString().toString() +
-				", " +
-				d.date.getHours().toString() +
-				":" +
-				d.date.getMinutes().toString()
+				// d.date.toLocaleDateString().toString() +
+				// ", " +
+				// d.date.getHours().toString() +
+				// ":" +
+				// d.date.getMinutes().toString()
+				`${datum.toLocaleDateString()}, ${datum.toLocaleTimeString()}`
 			);
 		})
 	);
 	d3.select("#date-max").html(
 		d3.max(data, function (d) {
+			const datum = d.date;
 			return (
-				d.date.toLocaleDateString().toString() +
-				", " +
-				d.date.getHours().toString() +
-				":" +
-				d.date.getMinutes().toString()
+				// d.date.toLocaleDateString().toString() +
+				// ", " +
+				// d.date.getHours().toString() +
+				// ":" +
+				// d.date.getMinutes().toString()
+				`${datum.toLocaleDateString()}, ${datum.toLocaleTimeString()}`
 			);
 		})
 	);
@@ -188,6 +192,13 @@ function renderGraph(data) {
 
 	svg.append("g").call(d3.axisLeft(y));
 
+	// TOOLTIP
+
+	d3.select("body")
+		.append("div")
+		.attr("id", "tooltip")
+		.attr("style", "position: absolute; opacity: 0;");
+
 	// ADD LINE (TEMPERATURE)
 	svg
 		.append("path")
@@ -229,23 +240,138 @@ function renderGraph(data) {
 				})
 		);
 
-	// ADD LABEL
+	// ADD POINTS (TEMPERATURE)
+
+	svg
+		.selectAll(".dot-temperature")
+		.data(data)
+		.join("circle")
+		.attr("class", "dot-temperature")
+		.attr("cx", function (d) {
+			return x(d.date);
+		})
+		.attr("cy", function (d) {
+			return y(d.temperature);
+		})
+		.attr("r", 5)
+		.on("mouseover", function (event, datapoint) {
+			// console.log(d);
+			// console.log(i);
+			// console.log(i.humidity);
+			// // console.log(d.toElement.__data__.humidity);
+			// console.log(this.humidity);
+			d3.select("#tooltip")
+				.transition()
+				.duration(200)
+				.style("opacity", 1)
+				// .style("background-color: #000")
+				// .style("color: #fff")
+				.text(datapoint.temperature);
+		})
+		.on("mouseout", function () {
+			d3.select("#tooltip").style("opacity", 0);
+		})
+		.on("mousemove", function () {
+			d3.select("#tooltip")
+				.style("left", event.pageX + 10 + "px")
+				.style("top", event.pageY + 10 + "px");
+		});
+	// .append("span")
+	// .attr("class", "tooltiptext")
+	// .text(function (d) {
+	// 	return d.temperature + " °C";
+	// });
+
+	// ADD POINTS (HUMIDITY)
+
+	svg
+		.selectAll(".dot-humidity")
+		.data(data)
+		.join("circle")
+		.attr("class", "dot-humidity")
+		.attr("cx", function (d) {
+			return x(d.date);
+		})
+		.attr("cy", function (d) {
+			return y(d.humidity);
+		})
+		.attr("r", 5)
+		.on("mouseover", function (event, datapoint) {
+			// console.log(d);
+			// console.log(i);
+			// console.log(i.humidity);
+			// // console.log(d.toElement.__data__.humidity);
+			// console.log(this.humidity);
+			d3.select("#tooltip")
+				.transition()
+				.duration(200)
+				.style("opacity", 1)
+				// .style("background-color: #000")
+				// .style("color: #fff")
+				.text(datapoint.humidity);
+		})
+		.on("mouseout", function () {
+			d3.select("#tooltip").style("opacity", 0);
+		})
+		.on("mousemove", function () {
+			d3.select("#tooltip")
+				.style("left", event.pageX + 10 + "px")
+				.style("top", event.pageY + 10 + "px");
+		});
+	// .on("mouseover", function (d) {
+	// 	d3.select("#tooltip")
+	// 		.transition()
+	// 		.duration(200)
+	// 		.style("opacity", 1)
+	// 		// .style("background-color: #000")
+	// 		// .style("color: #fff")
+	// 		.text(d.humidity);
+	// })
+	// .on("mouseout", function () {
+	// 	d3.select("#tooltip").style("opacity", 0);
+	// })
+	// .on("mousemove", function () {
+	// 	d3.select("#tooltip")
+	// 		.style("left", d3.event.pageX + 10 + "px")
+	// 		.style("top", d3.event.pageY + 10 + "px");
+	// });
+	// .append("title")
+	// .text(function (d) {
+	// 	return d.humidity + " %";
+	// });
 
 	// svg
-	// 	.append("text")
-	// 	.attr("x", width - 150)
-	// 	.attr("y", 5)
-	// 	.text("Humidity (%)")
-	// 	.attr("id", "humidity-label")
-	// 	.attr("fill", "#FECE80");
+	// 	.selectAll("circle")
+	// 	.data(data)
+	// 	// .join("circle")
+	// 	.on("mouseover", function (event, datapoint) {
+	// 		// console.log(d);
+	// 		// console.log(i);
+	// 		// console.log(i.humidity);
+	// 		// // console.log(d.toElement.__data__.humidity);
+	// 		// console.log(this.humidity);
+	// 		d3.select("#tooltip")
+	// 			.transition()
+	// 			.duration(200)
+	// 			.style("opacity", 1)
+	// 			// .style("background-color: #000")
+	// 			// .style("color: #fff")
+	// 			.text(datapoint.temperature);
+	// 	})
+	// 	.on("mouseout", function () {
+	// 		d3.select("#tooltip").style("opacity", 0);
+	// 	})
+	// 	.on("mousemove", function () {
+	// 		d3.select("#tooltip")
+	// 			.style("left", event.pageX + 10 + "px")
+	// 			.style("top", event.pageY + 10 + "px");
+	// 	});
 
-	// svg
-	// 	.append("text")
-	// 	.attr("x", width - 150)
-	// 	.attr("y", 30)
-	// 	.text("Temperature (°C)")
-	// 	.attr("id", "temperature-label")
-	// 	.attr("fill", "#501215");
+	// .on("mouseover", function (a, b, c) {
+	// 	console.log(a);
+	// 	this.attr("class", "dot-focus");
+	// });
+	// .on("mouseout", function () {});
 }
 
 function toggleTemperature() {

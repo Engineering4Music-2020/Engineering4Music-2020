@@ -301,3 +301,60 @@ nav ul li a:hover {
 	font-weight: bold;
 	padding-right: 1.2em;
 }
+
+/* GRAPH POINTS */
+
+.dot-temperature {
+	fill: rgba(203, 70, 74, 0);
+}
+.dot-temperature:hover {
+	fill: rgba(203, 70, 74, 1);
+}
+.dot-humidity {
+	fill: rgba(36, 139, 204, 0);
+}
+.dot-humidity:hover {
+	fill: rgba(36, 139, 204, 1);
+}
+.dot-focus {
+	fill: #000;
+}
+
+/* TOOLTIP */
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: fit-content;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
+/* .tooltip.bottom:after {
+	bottom: auto;
+	top: 0;
+}
+.tooltip.bottom:hover:after {
+	top: 28px;
+}
+.tooltip.bottom:before {
+	border-width: 0 5px 8.7px 5px;
+	border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
+	top: 0px;
+} */
