@@ -240,7 +240,7 @@ function renderGraph(data) {
 				})
 		);
 
-	// ADD POINTS (TEMPERATURE)
+	// ADD POINTS & TOOLTIP (TEMPERATURE)
 
 	svg
 		.selectAll(".dot-temperature")
@@ -255,18 +255,11 @@ function renderGraph(data) {
 		})
 		.attr("r", 5)
 		.on("mouseover", function (event, datapoint) {
-			// console.log(d);
-			// console.log(i);
-			// console.log(i.humidity);
-			// // console.log(d.toElement.__data__.humidity);
-			// console.log(this.humidity);
 			d3.select("#tooltip")
 				.transition()
-				.duration(200)
+				.duration(300)
 				.style("opacity", 1)
-				// .style("background-color: #000")
-				// .style("color: #fff")
-				.text(datapoint.temperature);
+				.text(datapoint.temperature + "°C");
 		})
 		.on("mouseout", function () {
 			d3.select("#tooltip").style("opacity", 0);
@@ -276,13 +269,8 @@ function renderGraph(data) {
 				.style("left", event.pageX + 10 + "px")
 				.style("top", event.pageY + 10 + "px");
 		});
-	// .append("span")
-	// .attr("class", "tooltiptext")
-	// .text(function (d) {
-	// 	return d.temperature + " °C";
-	// });
 
-	// ADD POINTS (HUMIDITY)
+	// ADD POINTS & TOOLTIP (HUMIDITY)
 
 	svg
 		.selectAll(".dot-humidity")
@@ -297,18 +285,11 @@ function renderGraph(data) {
 		})
 		.attr("r", 5)
 		.on("mouseover", function (event, datapoint) {
-			// console.log(d);
-			// console.log(i);
-			// console.log(i.humidity);
-			// // console.log(d.toElement.__data__.humidity);
-			// console.log(this.humidity);
 			d3.select("#tooltip")
 				.transition()
-				.duration(200)
+				.duration(300)
 				.style("opacity", 1)
-				// .style("background-color: #000")
-				// .style("color: #fff")
-				.text(datapoint.humidity);
+				.text(datapoint.humidity + "%");
 		})
 		.on("mouseout", function () {
 			d3.select("#tooltip").style("opacity", 0);
@@ -318,60 +299,6 @@ function renderGraph(data) {
 				.style("left", event.pageX + 10 + "px")
 				.style("top", event.pageY + 10 + "px");
 		});
-	// .on("mouseover", function (d) {
-	// 	d3.select("#tooltip")
-	// 		.transition()
-	// 		.duration(200)
-	// 		.style("opacity", 1)
-	// 		// .style("background-color: #000")
-	// 		// .style("color: #fff")
-	// 		.text(d.humidity);
-	// })
-	// .on("mouseout", function () {
-	// 	d3.select("#tooltip").style("opacity", 0);
-	// })
-	// .on("mousemove", function () {
-	// 	d3.select("#tooltip")
-	// 		.style("left", d3.event.pageX + 10 + "px")
-	// 		.style("top", d3.event.pageY + 10 + "px");
-	// });
-	// .append("title")
-	// .text(function (d) {
-	// 	return d.humidity + " %";
-	// });
-
-	// svg
-	// 	.selectAll("circle")
-	// 	.data(data)
-	// 	// .join("circle")
-	// 	.on("mouseover", function (event, datapoint) {
-	// 		// console.log(d);
-	// 		// console.log(i);
-	// 		// console.log(i.humidity);
-	// 		// // console.log(d.toElement.__data__.humidity);
-	// 		// console.log(this.humidity);
-	// 		d3.select("#tooltip")
-	// 			.transition()
-	// 			.duration(200)
-	// 			.style("opacity", 1)
-	// 			// .style("background-color: #000")
-	// 			// .style("color: #fff")
-	// 			.text(datapoint.temperature);
-	// 	})
-	// 	.on("mouseout", function () {
-	// 		d3.select("#tooltip").style("opacity", 0);
-	// 	})
-	// 	.on("mousemove", function () {
-	// 		d3.select("#tooltip")
-	// 			.style("left", event.pageX + 10 + "px")
-	// 			.style("top", event.pageY + 10 + "px");
-	// 	});
-
-	// .on("mouseover", function (a, b, c) {
-	// 	console.log(a);
-	// 	this.attr("class", "dot-focus");
-	// });
-	// .on("mouseout", function () {});
 }
 
 function toggleTemperature() {

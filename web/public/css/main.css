@@ -322,10 +322,11 @@ nav ul li a:hover {
 
 /* TOOLTIP */
 
-.tooltip {
-	position: relative;
-	display: inline-block;
-	border-bottom: 1px dotted black;
+#tooltip {
+	/* position: relative; */
+	/* display: inline-block; */
+	/* border: 1px solid black; */
+	font-family: "Work Sans";
 }
 
 .tooltip .tooltiptext {
@@ -345,16 +346,3 @@ nav ul li a:hover {
 .tooltip:hover .tooltiptext {
 	visibility: visible;
 }
-
-/* .tooltip.bottom:after {
-	bottom: auto;
-	top: 0;
-}
-.tooltip.bottom:hover:after {
-	top: 28px;
-}
-.tooltip.bottom:before {
-	border-width: 0 5px 8.7px 5px;
-	border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
-	top: 0px;
-} */
