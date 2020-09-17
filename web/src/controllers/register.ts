@@ -47,7 +47,9 @@ export const register = (req: Request, res: Response) => {
                 const result = await client.query(`SELECT id FROM login WHERE email LIKE '${email}';`);
                 if(result.rows[0]) {
                     req.flash('warning', "This email address is already registered. <a href='/loginForm'>Log in!</a>");
-                    res.redirect("/");                    
+                    res.render("/", {
+                        message: req.flash('warning', "This email address is already registered.")
+                    });                    
                 } else {
                     client.query(`INSERT INTO login VALUES('${email}', '${password}', ${raspiId}, '${name}');`, (err, result) => {
                         if(err) {
