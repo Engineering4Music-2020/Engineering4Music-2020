@@ -16,16 +16,6 @@ import * as downloadDataController from "./controllers/downloadData";
 import * as registerController from "./controllers/register";
 import * as loginController from "./controllers/login";
 
-/*const RedisStore = connectRedis(session);
-const redisOptions = {
-    url: "redis://localhost/"
-};
-
-const logUrlMiddleware = (req: Request, res: Response, next: () => void) => {
-    console.log(req.url);
-    next();
-}
-*/
 
 // Create Express server
 const app = express();
@@ -43,7 +33,7 @@ app.use(session({
         console.log(req.sessionID);
         return uuid();
     },
-    store: new FileStore(),
+    // store: new FileStore(),
     secret: 'Bruno',
     saveUninitialized: true,
     resave: false,
@@ -66,7 +56,6 @@ app.post("/auth", registerController.register);
 app.get("/loginForm", loginController.loginForm);
 app.get("/join", registerController.form);
 app.get("/login", loginController.loginForm);
-app.post("/login", loginController.login)
 app.get("/about", aboutController.index);
 app.get("/", homeController.index);
 app.get("/main", dataOutputController.main);
@@ -75,6 +64,5 @@ app.get("/dataJSONAll", downloadDataController.loadJSONAll);
 app.get("/dataJSONlast24h", downloadDataController.loadJSONlast24h);
 app.get("/dataJSONlast7d", downloadDataController.loadJSONlast7d);
 app.get("/dataJSONlast1m", downloadDataController.loadJSONlast1m);
-app.post("/logout", loginController.logout);
 
 export default app;
