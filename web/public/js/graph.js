@@ -94,7 +94,7 @@ function renderGraph(data) {
 
 	// TURN DATE-STRING INTO DATE-OBJECT
 	data.forEach(function (item, index) {
-		data[index].date = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ")(item.date);
+		data[index].date = d3.timeParse("%Y-%m-%dT%H:%M:%S.%L%Z")(item.date);
 	});
 
 	// HEADER: MIN-DATE & MAX-DATE

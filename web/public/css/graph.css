@@ -129,4 +129,8 @@
 	position: absolute;
 	opacity: 0;
 	font-family: "Work Sans";
+	background-color: rgba(255, 255, 255, 0.7);
+	padding: 0.35em;
+	border: 1px solid black;
+	border-radius: 0.4em;
 }
