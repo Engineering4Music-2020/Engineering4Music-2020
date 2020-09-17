@@ -17,3 +17,7 @@ Thumbs.db
 *.iml
 sendgrid.env
 sendgrid.env
+
+# package-lock.json
+
+package-lock.json

@@ -2,16 +2,14 @@ import errorHandler from "errorhandler";
 
 import app from "./app";
 
-/**
- * Error handler that outputs full stacktraces is active when developing.
- */
+// Error handler that outputs full stacktraces is active when developing.
+
 if (app.get("env") == "development") {
 	app.use(errorHandler());
 }
 
-/**
- * Start Express server.
- */
+// Start Express server.
+
 const server = app.listen(app.get("port"), () => {
 	console.log(
 		"  App is running at http://localhost:%d in %s mode",

@@ -1,4 +1,6 @@
-import express, { Request, response, Response} from "express";
+
+import express, { Request, response, Response } from "express";
+import session from "express-session";
 import bodyParser from "body-parser";
 import { Client } from "pg";
 import dotenv from "dotenv";
@@ -8,6 +10,7 @@ import flash from "connect-flash";
 const app = express();
 
 export const form = (req: Request, res: Response) => {
+
     res.render("signUp", {
         layout: false,
         title: "Register",
@@ -21,7 +24,6 @@ export const form = (req: Request, res: Response) => {
 dotenv.config();
 
 export const register = (req: Request, res: Response) => {
-    
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use(flash());
@@ -72,4 +74,3 @@ export const register = (req: Request, res: Response) => {
         console.log(error);
     });    
 }
-
