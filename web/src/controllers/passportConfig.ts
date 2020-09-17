@@ -1,27 +1,16 @@
 import passport from "passport";
 import passportLocal from "passport-local";
-import { Client } from "pg";
+import { Pool } from "pg";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import { Request, Response, NextFunction } from "express";
 
 dotenv.config();
 
-
-const client = new Client({
-    connectionString: process.env.DB_URI,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
-
-
 const LocalStrategy = passportLocal.Strategy;
 
-
-
 export const initialize = async(passport:any) => {
-    const client = new Client({
+    const client = new Pool({
         connectionString: process.env.DB_URI,
         ssl: {
             rejectUnauthorized: false
@@ -90,4 +79,9 @@ export const checkNotAuthenticated = (req: Request, res: Response, next: NextFun
     res.redirect("/loginForm");
 }
     
+export const logout = (req: Request, res: Response) => {
+    req.logout();
+    res.redirect("/");
+    req.flash('info', "You have logged out successfully.");
+}
 export default initialize;

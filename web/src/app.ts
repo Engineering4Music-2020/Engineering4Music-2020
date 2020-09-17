@@ -61,6 +61,7 @@ app.post("/login", passport.authenticate("local", {
       failureFlash: true
     })
   );
+app.get("/logout", passportConfig.logout);
 app.get("/about", aboutController.index);
 app.get("/", homeController.index);
 app.get("/main", dataOutputController.main);
