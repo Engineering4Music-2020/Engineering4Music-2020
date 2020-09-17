@@ -1,7 +1,6 @@
 import passportLocal from "passport-local";
 import { Client } from "pg";
 import bcrypt from "bcrypt";
-import passport from "passport";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -17,7 +16,7 @@ const client = new Client({
 
 const LocalStrategy = passportLocal.Strategy;
 
-const initialize = (passport:any) => {
+const initialize = (passport = require("passport")) => {
     passport.use(new LocalStrategy({
         usernameField: "email",
         passwordField: "password"
@@ -45,5 +44,15 @@ const initialize = (passport:any) => {
             }
         });
     }));
-    passport.serializeuser((user:any, done:any) => done(user.id));
+    passport.serializeUser((user:any, done:any) => done(user.id));
+    passport.deserializeUser((id:any, done:any) => {
+        client.query(`SELECT * FROM login WHERE id = $1;`, [id], (err, result) => {
+            if(err) {
+                throw err;
+            } 
+            return done(null, result.rows[0]);
+        })
+    })
 };
+
+export default initialize;
