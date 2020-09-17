@@ -51,7 +51,7 @@ app.set("view engine", "handlebars");
 // Primary app routes.
 
 app.post("/auth", registerController.register);
-app.get("/loginForm", loginController.loginForm);
+app.get("/loginForm", passportConfig.checkAuthenticated, loginController.loginForm);
 app.get("/join", registerController.form);
 // app.post("/login", loginController.postLogin);
 // app.post("/login", passportConfig.initialize);
@@ -64,7 +64,7 @@ app.post("/login", passport.authenticate("local", {
 app.get("/about", aboutController.index);
 app.get("/", homeController.index);
 app.get("/main", dataOutputController.main);
-app.get("/data", downloadDataController.loadData);
+app.get("/data", passportConfig.checkNotAuthenticated, downloadDataController.loadData);
 app.get("/dataJSONAll", downloadDataController.loadJSONAll);
 app.get("/dataJSONlast24h", downloadDataController.loadJSONlast24h);
 app.get("/dataJSONlast7d", downloadDataController.loadJSONlast7d);

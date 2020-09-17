@@ -3,8 +3,7 @@ import passportLocal from "passport-local";
 import { Client } from "pg";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import { request } from "express";
-import express, { Request } from "express";
+import { Request, Response, NextFunction } from "express";
 
 dotenv.config();
 
@@ -75,6 +74,20 @@ export const initialize = async(passport:any) => {
             return done(null, result.rows[0]);
         })
     })
+}
+
+export const checkAuthenticated = (req: Request, res: Response, next: NextFunction) => {
+    if(req.isAuthenticated()) {
+        return res.redirect("/data");
+    }
+    next();
+}
+
+export const checkNotAuthenticated = (req: Request, res: Response, next: NextFunction) => {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/loginForm");
 }
     
 export default initialize;
