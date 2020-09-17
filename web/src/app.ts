@@ -5,7 +5,6 @@ import session, { MemoryStore } from "express-session";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import { v4 as uuid } from "uuid";
-const FileStore = require("session-file-store")(session);
 
 dotenv.config();
 
