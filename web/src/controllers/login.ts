@@ -57,7 +57,10 @@ export const initialise = () => {
             } else {
                 return done(null, false, { message: "Email is not registered." });
             }
-        })
-    }))
+        });
+    }));
+    passport.serializeUser<any, any>((user, done) => {
+        done(null, user.id);
+    });
 }
     
