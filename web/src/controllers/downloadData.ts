@@ -1,6 +1,6 @@
 import { Client } from "pg";
 import dotenv from "dotenv";
-import { Request, Response } from "express";
+import { request, Request, Response } from "express";
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ async function readData(res: Response) {
 		console.log(`Connecting`);
 		await client.connect();
 		console.log(`Connected to database`);
-		const result = await client.query(`SELECT * FROM data ORDER BY date;`);
+		const result = await client.query(`SELECT * FROM data WHERE id = ${id} ORDER BY date;`);
 		console.log(result);
 		res.render("data", {
 			layout: false,
@@ -31,11 +31,8 @@ async function readData(res: Response) {
 }
 
 export const loadData = (req: Request, res: Response): void => {
-	if(req.session !== undefined) {
-		readData(res);
-	} else {
-		res.redirect("loginForm");
-	}
+	readData(res);
+	console.log(id);
 };
 
 export async function loadJSONAll(req: Request, res: Response) {
@@ -50,7 +47,7 @@ export async function loadJSONAll(req: Request, res: Response) {
 		console.log(`Connecting`);
 		await client.connect();
 		console.log(`Connected to database`);
-		const result = await client.query(`SELECT * FROM data ORDER BY date;`);
+		const result = await client.query(`SELECT * FROM data WHERE raspiid = ${id} ORDER BY date;`);
 		res.send(JSON.stringify(result));
 	} catch (error) {
 		console.log(error);
@@ -72,7 +69,7 @@ export async function loadJSONlast24h(req: Request, res: Response) {
 		await client.connect();
 		console.log(`Connected to database`);
 		const result = await client.query(
-			`SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '24 HOURS' AND NOW() ORDER BY date;`
+			`SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '24 HOURS' AND NOW() AND raspiid = ${id} ORDER BY date;`
 		);
 		res.send(JSON.stringify(result));
 	} catch (error) {
@@ -95,7 +92,7 @@ export async function loadJSONlast7d(req: Request, res: Response) {
 		await client.connect();
 		console.log(`Connected to database`);
 		const result = await client.query(
-			`SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '7 DAYS' AND NOW() ORDER BY date;`
+			`SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '7 DAYS' AND NOW() AND raspiid = ${id} ORDER BY date;`
 		);
 		res.send(JSON.stringify(result));
 	} catch (error) {
@@ -118,7 +115,7 @@ export async function loadJSONlast1m(req: Request, res: Response) {
 		await client.connect();
 		console.log(`Connected to database`);
 		const result = await client.query(
-			`SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '1 MONTH' AND NOW() ORDER BY date;`
+			`SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '1 MONTH' AND NOW() AND raspiid = ${id} ORDER BY date;`
 		);
 		res.send(JSON.stringify(result));
 	} catch (error) {

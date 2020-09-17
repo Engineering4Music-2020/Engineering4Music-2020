@@ -5,15 +5,10 @@ import { Request, Response, NextFunction } from "express";
  * Home page.
  */
 export const index = (req: Request, res: Response, next: NextFunction) => {
-	if(req.session !== undefined) {
 		res.render("home", {
 			layout: false,
 			title: "Home",
-			userData: req.user,
 		});
-	} else {
-		res.redirect("/loginForm");
-	}
 
 	/*res.render("home", {
 		layout: false,

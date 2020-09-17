@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction, request } from "express";
 import path from "path";
 import exphbs from "express-handlebars";
-import session, { MemoryStore } from "express-session";
+import session from "express-session";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import passport from "passport";
@@ -18,6 +18,7 @@ import * as downloadDataController from "./controllers/downloadData";
 import * as registerController from "./controllers/register";
 import * as loginController from "./controllers/login"; 
 import * as passportConfig from "./controllers/passportConfig";
+import { userInfo } from "os";
 
 
 
@@ -36,6 +37,7 @@ app.use(session({
     secret: 'Bruno',
     saveUninitialized: false,
     resave: false,
+    name: 'Hansbruno',
 }));
 
 app.use(passport.initialize());
@@ -59,8 +61,7 @@ app.post("/login", passport.authenticate("local", {
       successRedirect: "/data",
       failureRedirect: "/loginform",
       failureFlash: true
-    })
-  );
+    }));
 app.get("/logout", passportConfig.logout);
 app.get("/about", aboutController.index);
 app.get("/", homeController.index);

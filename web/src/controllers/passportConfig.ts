@@ -9,6 +9,7 @@ dotenv.config();
 
 const LocalStrategy = passportLocal.Strategy;
 
+
 export const initialize = async(passport:any) => {
     const client = new Pool({
         connectionString: process.env.DB_URI,
@@ -22,18 +23,14 @@ export const initialize = async(passport:any) => {
     passport.use(new LocalStrategy({
         usernameField: "email",
         passwordField: "password"
-    }, (email, password, done) => {
-        console.log("bis da");
-        
+    }, (email, password, done) => {        
         client.query(`SELECT * FROM login WHERE email LIKE '${email}';`, (err, result) => {
             if(err) {
                 throw err;
             } 
-            console.log(result.rows[0]);
             if(result.rowCount > 0) {
                 const user = result.rows[0];
-                console.log("jetzt");
-                console.log(user.password);
+                global.id = user.id;
                 bcrypt.compare(password, user.password, (err, isMatch) => {
                     if(err) {
                         throw err;
@@ -50,8 +47,6 @@ export const initialize = async(passport:any) => {
         });
         
     }));
-    // await client.end();
-    console.log("End");
     passport.serializeUser((user:any, done:any) => {
         done(null, user.id);
     });
@@ -67,7 +62,7 @@ export const initialize = async(passport:any) => {
 
 export const checkAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     if(req.isAuthenticated()) {
-        return res.redirect("/data");
+        return res.redirect("data" + { user: req.user } + { id });
     }
     next();
 }
