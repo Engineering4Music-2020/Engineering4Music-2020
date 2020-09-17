@@ -34,7 +34,6 @@ export class Humidity {
 		if (value < 0 || value > 100) {
 			throw new Error(`Humidity must be in range [0, 100], but is: ${value}`);
 		}
-
 		this.value = value;
 	}
 
@@ -73,19 +72,13 @@ export class AirQuality {
 }
 
 export enum AirQualityRange {
-	/**
-	 * Less than 300.
-	 */
+	// Less than 300
 	FRESH,
 
-	/**
-	 * Between 300 and 700.
-	 */
+	// Between 300 and 700
 	LOW_POLLUTION,
 
-	/**
-	 * Higher than 700.
-	 */
+	// Higher than 700
 	HIGH_POLLUTION,
 }
 
@@ -112,39 +105,24 @@ export class BarometricPressure {
 
 export interface Sensor {
 	measureTemperature(): Promise<Temperature>;
-
 	measureHumidity(): Promise<Humidity>;
-
 	measureAirQuality(): Promise<AirQuality>;
-
 	measureBarometricPressure(altitude: number): Promise<BarometricPressure>;
 }
 
 export class GrovePi implements Sensor {
 	private static readonly GROVEPI_ADDRESS = 0x04;
-
 	private static readonly GROVEPI_DHT_PIN = 0x04;
-
 	private static readonly GROVEPI_DHT_REGISTER = 0x28;
-
 	private static readonly GROVEPI_AIRQUALITY_PIN = 0x01;
-
 	private static readonly GROVEPI_AIRQUALITY_REGISTER = 0x03;
-
 	private static readonly GROVEPI_DATA_REGISTER = 0x01;
-
 	private static readonly BMP280_ADDRESS = 0x77;
-
 	private static readonly BMP280_CALIBRATION_REGISTER = 0x88;
-
 	private static readonly BMP280_CONTROL_REGISTER = 0xf4;
-
 	private static readonly BMP280_CONFIGURATION_REGISTER = 0xf5;
-
 	private static readonly BMP280_DATA_REGISTER = 0xf7;
-
 	private readonly busNumber: number;
-
 	constructor(busNumber: number) {
 		this.busNumber = busNumber;
 	}

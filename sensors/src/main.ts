@@ -1,15 +1,10 @@
-// import { GrovePi } from "./sensors";
-// import * as Sensors_Module from "./sensors";
 import dotenv from "dotenv";
 import { Temperature, Humidity } from "./sensors";
 import { MeasureData } from "./measureData";
 
 dotenv.config();
 
-// console.log(getData().then((value) => console.log(value.temperature)));
-
 export async function getData(): Promise<MeasureData> {
-	// console.log(process.env.RASPBERRY_AVAILABLE);
 	let sensors_m: any;
 	let sensor: any;
 	if (process.env.RASPBERRY_AVAILABLE === "true") {
@@ -20,21 +15,6 @@ export async function getData(): Promise<MeasureData> {
 		const temperature: Temperature = await sensor.measureTemperature();
 		const measureData = new MeasureData(temperature.value, humidity.value);
 		return measureData;
-
-		// sensor
-		// 	.measureTemperature()
-		// 	.then((temp: any) => console.log(`Temperature is ${temp}`));
-		// sensor
-		// 	.measureHumidity()
-		// 	.then((humidity: any) => console.log(`Humidity is ${humidity}`));
-		// new Promise((resolve) => setTimeout(() => resolve(), 1000))
-		// 	.then(() => sensor.measureAirQuality())
-		// 	.then((quality) => console.log(`Air qualitiy is ${quality}`));
-		// sensor
-		// 	.measureBarometricPressure(438.0)
-		// 	.then((pressure: any) =>
-		// 		console.log(`Barometric pressure is ${pressure}`)
-		// 	);
 	} else {
 		console.log("Sensors are not available. Sending mock data:");
 		class Temperature {
@@ -175,23 +155,5 @@ export async function getData(): Promise<MeasureData> {
 		const temperature: Temperature = await sensor.measureTemperature();
 		const measureData = new MeasureData(temperature.value, humidity.value);
 		return measureData;
-
-		// sensor
-		// 	.measureTemperature()
-		// 	.then((temp: any) => console.log(`Temperature is ${temp}`));
-
-		// sensor
-		// 	.measureHumidity()
-		// 	.then((humidity: any) => console.log(`Humidity is ${humidity}`));
-
-		// new Promise((resolve) => setTimeout(() => resolve(), 1000))
-		// 	.then(() => sensor.measureAirQuality())
-		// 	.then((quality) => console.log(`Air qualitiy is ${quality}`));
-
-		// sensor
-		// 	.measureBarometricPressure(438.0)
-		// 	.then((pressure: any) =>
-		// 		console.log(`Barometric pressure is ${pressure}`)
-		// 	);
 	}
 }

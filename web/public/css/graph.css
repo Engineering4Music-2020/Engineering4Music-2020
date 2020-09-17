@@ -1,0 +1,132 @@
+/* GRAPH-FLEX */
+
+#graph-content {
+	background-color: #fff;
+	border-radius: 0.4em;
+	width: fit-content;
+	height: fit-content;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: stretch;
+}
+#graph-top {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+#graph-middle {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: stretch;
+	min-height: fit-content;
+}
+#graph-bottom {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+#graph-control,
+#graph-icons {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+#graph-info-temperature,
+#graph-info-humidity {
+	padding: 0.5em;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+#temperature-min-max,
+#temperature-min-max {
+	display: flex;
+	flex-direction: column;
+}
+.temperature-min-max-div,
+.humidity-min-max-div {
+	padding: 0.3em;
+}
+
+/* GRAPH-BUTTONS */
+
+#graph-icons button,
+#graph-control button {
+	font-family: "Work Sans";
+	font-weight: bold;
+	width: 8em;
+	padding: 1em;
+	margin: 1em;
+	border-radius: 0.4em;
+}
+#graph-icons button:hover,
+#graph-control button:hover {
+	cursor: pointer;
+}
+#graph-icons .button.active,
+#graph-control .button.active {
+	background-color: #000;
+	color: #fff;
+}
+#graph-icons .button .active:hover,
+#graph-control .button .active:hover {
+	cursor: auto;
+}
+#graph-icons #toggleTemperature {
+	background-color: #501215;
+	color: #fff;
+}
+#graph-icons #toggleHumidity {
+	background-color: #fece80;
+	color: #000;
+}
+
+/* GRAPH-HEADER */
+
+.date {
+	font-weight: bold;
+}
+
+/* GRAPH-INFO */
+
+#temperature-info {
+	color: #cb464a;
+	font-weight: bold;
+	padding-right: 1.2em;
+}
+#humidity-info {
+	color: #248bcc;
+	font-weight: bold;
+	padding-right: 1.2em;
+}
+
+/* GRAPH-POINTS */
+
+.dot-temperature {
+	fill: rgba(203, 70, 74, 0);
+}
+.dot-temperature:hover {
+	fill: rgba(203, 70, 74, 1);
+}
+.dot-humidity {
+	fill: rgba(36, 139, 204, 0);
+}
+.dot-humidity:hover {
+	fill: rgba(36, 139, 204, 1);
+}
+.dot-focus {
+	fill: #000;
+}
+
+/* GRAPH-TOOLTIP */
+
+#tooltip {
+	position: absolute;
+	opacity: 0;
+	font-family: "Work Sans";
+}
