@@ -1,13 +1,14 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response, NextFunction, request } from "express";
 import path from "path";
 import exphbs from "express-handlebars";
 import session, { MemoryStore } from "express-session";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import { v4 as uuid } from "uuid";
 import passport from "passport";
-
+import initialize from "./controllers/passportConfig";
+import flash from "connect-flash";
 dotenv.config();
+
 
 
 import * as aboutController from "./controllers/about";
@@ -15,14 +16,14 @@ import * as homeController from "./controllers/home";
 import * as dataOutputController from "./controllers/dataOutput";
 import * as downloadDataController from "./controllers/downloadData";
 import * as registerController from "./controllers/register";
-import * as loginController from "./controllers/login";
-import initialize from "../../login/passportConfig";
+import * as loginController from "./controllers/login"; 
+import * as passportConfig from "./controllers/passportConfig";
 
-initialize(passport);
+
 
 // Create Express server
 const app = express();
-
+initialize(passport);
 
 // Express configuration
 const public_path = path.join(__dirname, "../public");
@@ -33,12 +34,14 @@ app.use(bodyParser.json());
 app.use(session({
     // store: new FileStore(),
     secret: 'Bruno',
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: false,
 }));
 
-app.use(passport.initialize);
-app.use(passport.session);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
 
 app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "../views"));
@@ -50,11 +53,14 @@ app.set("view engine", "handlebars");
 app.post("/auth", registerController.register);
 app.get("/loginForm", loginController.loginForm);
 app.get("/join", registerController.form);
-app.get("/login", passport.authenticate('local', {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true
-}));
+// app.post("/login", loginController.postLogin);
+// app.post("/login", passportConfig.initialize);
+app.post("/login", passport.authenticate("local", {
+      successRedirect: "/data",
+      failureRedirect: "/loginform",
+      failureFlash: true
+    })
+  );
 app.get("/about", aboutController.index);
 app.get("/", homeController.index);
 app.get("/main", dataOutputController.main);

@@ -1,11 +1,10 @@
 import express, { Request, Response, NextFunction } from "express";
 import { Client } from "pg";
-import bodyParser from "body-parser";
-import bcrypt from "bcrypt";
+import "./passportConfig";
 import passport from "passport";
 import * as passportLocal from "passport-local";
+import request from "request";
 const app = express();
-const LocalStrategy = passportLocal.Strategy;
 /*
 passport.serializeUser<any, any>((user, done) => {
     done(undefined, user.id);
@@ -21,10 +20,8 @@ export const loginForm = (req: Request, res: Response, next: NextFunction) => {
         res.render("login", {
             layout: false,
             title: "Login",
-            loginActive: true,
-            loginFailed: req.body.loginFailed
     });
-    console.log(req.body);
+    // console.log(req.body);
 };    
     
 const client = new Client({
@@ -34,33 +31,23 @@ const client = new Client({
     }
 });
 
-export const initialise = () => {
-    passport.use(new LocalStrategy({
-        usernameField: "email"
-    }, (email, password, done) => {
-        client.query(`SELECT * FROM login WHERE email = $1`, [email], (err, result) => {
+/*export const postLogin = (res: Response, req: Request) => {
+
+    passport.authenticate("local", (err: Error,  user) => {
+        if(err) {
+            return err;
+        }
+        if(!user) {
+            req.flash("errors", "Nicht erkannt");
+            return res.redirect("/loginForm");
+        }
+        req.logIn(user, (err) => {
             if(err) {
-                throw err;
-            } 
-            if(result.rows[0] > 0) {
-                const user = result.rows[0];
-                bcrypt.compare(password, user.password, (err, isMatch) => {
-                    if(err) {
-                        throw err;
-                    }
-                    if(isMatch) {
-                        return done(null, user)
-                    } else {
-                        return done(null, false, { message: "Wrong Password!" });
-                    }
-                })
-            } else {
-                return done(null, false, { message: "Email is not registered." });
+                return err;
             }
-        });
-    }));
-    passport.serializeUser<any, any>((user, done) => {
-        done(null, user.id);
-    });
+            req.flash('success', "Logged in successfully");
+            res.redirect("/home");
+        })
+    })(req, res);
 }
-    
+*/
