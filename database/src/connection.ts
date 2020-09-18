@@ -42,5 +42,5 @@ const measure = () => {
             fillDataBase();
     });
 }
-setInterval(measure, 5000);
+setInterval(measure, 900000);
 
