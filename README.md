@@ -17,7 +17,7 @@ This project was created by Michael Schnyder and Lars Schmid in September 2020 a
 - CSS
 - PostgreSQL
 
-# Modules
+### Modules
 
 ## Contents
 
