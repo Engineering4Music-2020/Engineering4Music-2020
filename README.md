@@ -11,15 +11,13 @@ This project was created by Michael Schnyder and Lars Schmid in September 2020 a
 
 ## Technologies
 
-- TypeScript
-- JavaScript / Node.js
-- HTML
 - CSS
+- d3.js
+- HTML
+- JavaScript
+- Node.js
 - PostgreSQL
-
-### Modules
-
-- [d3.js](https://d3js.org)
+- TypeScript
 
 ## Contents
 
