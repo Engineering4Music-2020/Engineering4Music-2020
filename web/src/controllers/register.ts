@@ -49,7 +49,7 @@ export const register = (req: Request, res: Response) => {
                     req.flash('warning', "This email address is already registered. <a href='/loginForm'>Log in!</a>");
                     res.redirect("/join");
                 } else {
-                    client.query(`INSERT INTO login VALUES('${email}', '${password}', ${raspiId}, '${name}');`, (err, result) => {
+                    client.query(`WITH raspberrypi AS (INSERT INTO login VALUES ('${email}', '${password}', ${raspiId}, '${name}')) INSERT INTO raspberrypi VALUES (${raspiId}, '${name}');`, (err, result) => {
                         if(err) {
                             console.log(err);
                         } else {
