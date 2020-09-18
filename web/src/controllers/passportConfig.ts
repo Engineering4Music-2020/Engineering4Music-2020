@@ -72,6 +72,7 @@ export const checkAuthenticated = (
 	next: NextFunction
 ) => {
 	if (req.isAuthenticated()) {
+		// document.getElementById("logout").setAttribute("class") = "visible";
 		return res.redirect("data" + { user: req.user } + { id });
 	}
 	next();
