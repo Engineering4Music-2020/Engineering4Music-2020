@@ -19,7 +19,7 @@ This project was created by Michael Schnyder and Lars Schmid in September 2020 a
 
 ### Modules
 
-- d3.js https://d3js.org
+- [d3.js](https://d3js.org)
 
 ## Contents
 
