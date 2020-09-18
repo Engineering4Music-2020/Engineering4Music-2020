@@ -1,6 +1,4 @@
-
-import express, { Request, response, Response } from "express";
-import session from "express-session";
+import express, { Request, response, Response} from "express";
 import bodyParser from "body-parser";
 import { Client } from "pg";
 import dotenv from "dotenv";
@@ -10,7 +8,6 @@ import flash from "connect-flash";
 const app = express();
 
 export const form = (req: Request, res: Response) => {
-
     res.render("signUp", {
         layout: false,
         title: "Register",
@@ -24,6 +21,7 @@ export const form = (req: Request, res: Response) => {
 dotenv.config();
 
 export const register = (req: Request, res: Response) => {
+    
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use(flash());
@@ -49,9 +47,9 @@ export const register = (req: Request, res: Response) => {
                 const result = await client.query(`SELECT id FROM login WHERE email LIKE '${email}';`);
                 if(result.rows[0]) {
                     req.flash('warning', "This email address is already registered. <a href='/loginForm'>Log in!</a>");
-                    res.redirect("/");                    
+                    res.redirect("/join");
                 } else {
-                    client.query(`INSERT INTO login VALUES('${email}', '${password}', ${raspiId}, '${name}');`, (err, result) => {
+                    client.query(`WITH raspberrypi AS (INSERT INTO login VALUES ('${email}', '${password}', ${raspiId}, '${name}')) INSERT INTO raspberrypi VALUES (${raspiId}, '${name}');`, (err, result) => {
                         if(err) {
                             console.log(err);
                         } else {

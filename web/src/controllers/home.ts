@@ -1,15 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 
+/**
+ * GET /
+ * Home page.
+ */
 export const index = (req: Request, res: Response, next: NextFunction) => {
-	if (req.session !== undefined) {
 		res.render("home", {
 			layout: false,
 			title: "Home",
-			userData: req.user,
 		});
-	} else {
-		res.redirect("/loginForm");
-	}
 
 	/*res.render("home", {
 		layout: false,
@@ -22,4 +21,4 @@ export const index = (req: Request, res: Response, next: NextFunction) => {
 		}
 	});
 	console.log(req.user);*/
-};
+}
