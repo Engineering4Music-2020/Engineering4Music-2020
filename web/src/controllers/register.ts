@@ -72,4 +72,3 @@ export const register = (req: Request, res: Response) => {
         console.log(error);
     });    
 }
-

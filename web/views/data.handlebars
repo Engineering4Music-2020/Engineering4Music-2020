@@ -7,8 +7,9 @@
     <title>Engineering4Music: Data</title>
     {{!-- <script src="https://d3js.org/d3.v6.min.js"></script> --}}
     <script src="js/d3.v6.min.js"></script>
-    <script src="js/d3.js"></script>
+    <script src="js/graph.js"></script>
     <link href="css/main.css" rel="stylesheet" title="Default Style" />
+    <link href="css/graph.css" rel="stylesheet" title="Default Style" />
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/45e20ca475.js" crossorigin="anonymous"></script>
@@ -20,9 +21,9 @@
             <img id="logo" src="/images/logo.png" alt="">
         </a>
         <ul id="nav-links">
-            <li id="nav-item"><a href="/">Home</a></li>
-            <li id="nav-item" class="active"><a href="/data">Data</a></li>
-            <li id="nav-item"><a href="/about">About</a></li>
+            <li class="nav-item"><a href="/home">Home</a></li>
+            <li class="nav-item active"><a href="/data">Data</a></li>
+            <li class="nav-item"><a href="/about">About</a></li>
         </ul>
     </nav>
     <form action="/logout" method="GET">
@@ -79,39 +80,7 @@
         </div>
     </div>
 
-    {{!-- <div class="content">
-        <div class="data wrapper">
-            <div id="graph-graph"></div>
-            <div class="graph-control">
-                <button id="toggleTemperature" onclick="toggleTemperature()">Hide Temperature</button>
-                <button id="toggleHumidity" onclick="toggleHumidity()">Hide Humidity</button>
-                <button id="showLast24" onclick="loadDataLast24h()">Show Last 24 Hours</button>
-                <button id="showAllData" class="button-active" onclick="loadDataDefault()">Show All Data</button>
-            </div>
-        </div>
-    </div> --}}
-
-    {{!-- <div id="data-table">
-        <table border>
-            <tr>
-                <th>Temperature</th>
-                <th>Humidity</th>
-                <th>Date</th>
-            </tr>
-            {{#each data}}
-            <tr>
-                <td>{{temperature}}</td>
-                <td>{{humidity}}</td>
-                <td>{{date}}</td>
-            </tr>
-            {{/each}}
-        </table>
-    </div> --}}
-
     <footer class="footer" id="footer">
-
-        <div class="footer" id="footer-top">
-        </div>
 
         <div class="footer" id="footer-bottom">
 

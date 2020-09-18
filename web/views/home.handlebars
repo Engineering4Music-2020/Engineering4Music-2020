@@ -15,18 +15,34 @@
             <img id="logo" src="/images/logo.png" alt="">
         </a>
         <ul id="nav-links">
-            <li id="nav-item" class="active"><a href="/">Home</a></li>
-            <li id="nav-item"><a href="/data">Data</a></li>
-            <li id="nav-item"><a href="/about">About</a></li>
+            <li class="nav-item active"><a href="/home">Home</a></li>
+            <li class="nav-item"><a href="/data">Data</a></li>
+            <li class="nav-item"><a href="/about">About</a></li>
         </ul>
     </nav>
 
-    <p>{{welcome}}</p>
+    {{!-- <p>{{welcome}}</p> --}}
+    <div class="content">
+        <div id="home-content">
+            <div>
+                This is the website of a simple weather station using Raspberry Pi's that allows musicians to keep an
+                eye on
+                the temperature and humidity in their rehearsal rooms and studios. This serves as an essential tool for
+                the
+                maintenance of acoustic instruments. This project was created by Michael Schnyder and Lars Schmid in
+                September 2020 as part of the course "Youth2Engineers".
+            </div>
+            <div>
+                If you are a registered user, you can <a href="/data">login here</a> in order to see your data.
+            </div>
+            <div>
+                If you have bought our product and want to sign up, you can <a href="/join">register here</a> with the
+                id of your Raspberry Pi and your email.
+            </div>
+        </div>
+    </div>
 
     <footer class="footer" id="footer">
-
-        <div class="footer" id="footer-top">
-        </div>
 
         <div class="footer" id="footer-bottom">
 

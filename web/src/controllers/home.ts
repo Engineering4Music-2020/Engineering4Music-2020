@@ -21,4 +21,4 @@ export const index = (req: Request, res: Response, next: NextFunction) => {
 		}
 	});
 	console.log(req.user);*/
-};
+}

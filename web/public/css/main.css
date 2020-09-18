@@ -1,8 +1,9 @@
+/* BASIC LAYOUT */
+
 html {
 	position: relative;
 	min-height: 100%;
 }
-
 body {
 	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 		url("/images/dolo-iglesias-z9z6u1rn7sY-unsplash.jpg");
@@ -11,19 +12,9 @@ body {
 	background-position: center;
 	background-size: 100% 100%;
 	background-size: cover;
-	min-height: 100%;
 	margin: 0 0 80px 0;
 	padding: 0 0 10px 0;
 }
-
-h1 {
-	font-family: "Crimson Text";
-	font-size: 3em;
-	text-align: center;
-	color: #fff;
-	font-weight: bold;
-}
-
 .content {
 	font-family: "Work Sans";
 	color: black;
@@ -33,35 +24,23 @@ h1 {
 	align-items: stretch;
 	text-align: center;
 }
-
-.wrapper {
-	border: 1px solid #eee;
-	margin: 0.5em;
-	padding: 1em;
+#home-content {
+	background-color: #fff;
 	border-radius: 0.4em;
+	font-family: "Work Sans";
+	color: black;
 	width: fit-content;
-	box-shadow: inset 0 7em 10em -5em rgba(255, 255, 255, 0.6),
-		0 0.3em 0.5em -0.2em rgba(100, 100, 100, 1),
-		0 1em 2em -0.75em rgba(100, 100, 100, 0.75),
-		0 1em 3em -0.5em rgba(100, 100, 100, 0.5),
-		0 3em 3em -0.25em rgba(100, 100, 100, 0.2);
-	max-height: fit-content;
-	background: #fff;
-	overflow: hidden;
-}
-
-.data.wrapper {
+	height: fit-content;
+	padding: 1em;
 	display: flex;
-	flex-flow: column wrap;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: space-evenly;
 	align-items: stretch;
-	width: fit-content;
-	margin: 0;
-	margin-bottom: 2em;
+	width: 800px;
+	text-align: left;
 }
-
-#data-table {
-	color: #fff;
+#home-content div {
+	margin: 1em;
 }
 
 /* NAVBAR */
@@ -69,7 +48,6 @@ h1 {
 #logo img {
 	height: 1em;
 }
-
 #navbar {
 	display: flex;
 	justify-content: space-between;
@@ -79,19 +57,15 @@ h1 {
 	margin: 0 3em 3em 3em;
 	padding-top: 1em;
 }
-
 #navbar ul {
 	list-style-type: none;
 }
-
 #navbar li.active a {
 	color: #fece80;
 }
-
 #nav-links {
 	display: flex;
 }
-
 nav ul li a {
 	color: white;
 	text-decoration: none;
@@ -99,11 +73,9 @@ nav ul li a {
 	font-size: 1.3em;
 	margin: 0 1.5em;
 }
-
 nav ul li:last-child a {
 	margin-right: 0;
 }
-
 nav ul li a:hover {
 	color: #fece80;
 }
@@ -115,13 +87,11 @@ nav ul li a:hover {
 	display: flex;
 	align-items: center;
 }
-
 #footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	/* height: fit-content; */
-	height: 80px;
+	height: fit-content;
 	background: rgb(0, 0, 0);
 	margin-top: 3em;
 	padding: 10px 30px 20px 30px;
@@ -134,16 +104,6 @@ nav ul li a:hover {
 	flex-direction: column;
 	justify-content: space-around;
 }
-
-#footer-top {
-	width: 100%;
-	height: 100px;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-}
-
 #footer-bottom {
 	width: 100%;
 	display: flex;
@@ -151,210 +111,18 @@ nav ul li a:hover {
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
-
-.footer a {
-	text-decoration: none;
-}
-
-.footer-button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 1.5em;
-	max-width: max-content;
-	/* background-color: rgb(33, 33, 33, 0.07); */
-	background-color: #fff;
-	border-radius: 100px;
-	/* color: #2f2f2f; */
-	color: #000;
-	line-height: 0;
-	margin: 0.6em 0;
-	font-size: 1rem;
-	padding: 0 1.3em;
-}
-
 .heart {
 	color: #d67436;
 	font-size: 125%;
 }
 
-/* SOCIAL MEDIA ICONS */
+/* FOOTER: SOCIAL MEDIA ICONS */
+
 #footer-bottom-sm-icons i {
 	margin: 0.5em;
 	font-size: 2em;
 	color: #fff;
 }
-
 #footer-bottom-sm-icons i:hover {
 	color: #fece80;
 }
-
-/* GRAPH-FLEX */
-
-#graph-content {
-	background-color: #fff;
-	border-radius: 0.4em;
-	width: fit-content;
-	height: fit-content;
-	padding: 1em;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	/* align-items: center; */
-	align-items: stretch;
-}
-#graph-top {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: center;
-}
-#graph-middle {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: stretch;
-	min-height: fit-content;
-}
-#graph-bottom {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: center;
-}
-#graph-control,
-#graph-icons {
-	display: flex;
-	flex-direction: column;
-	/* justify-content: space-evenly; */
-	align-items: stretch;
-	/* width: fit-content; */
-}
-
-#graph-info-temperature,
-#graph-info-humidity {
-	padding: 0.5em;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-
-#temperature-min-max,
-#temperature-min-max {
-	display: flex;
-	flex-direction: column;
-}
-
-.temperature-min-max-div,
-.humidity-min-max-div {
-	padding: 0.3em;
-}
-
-/* GRAPH-BUTTONS */
-
-#graph-icons button,
-#graph-control button {
-	font-family: "Work Sans";
-	font-weight: bold;
-	width: 8em;
-	padding: 1em;
-	margin: 1em;
-	border-radius: 0.4em;
-}
-#graph-icons button:hover,
-#graph-control button:hover {
-	cursor: pointer;
-}
-#graph-icons .button.active,
-#graph-control .button.active {
-	background-color: #000;
-	color: #fff;
-}
-#graph-icons .button .active:hover,
-#graph-control .button .active:hover {
-	cursor: auto;
-}
-#graph-icons #toggleTemperature {
-	background-color: #501215;
-	color: #fff;
-}
-#graph-icons #toggleHumidity {
-	background-color: #fece80;
-	color: #000;
-}
-
-/* GRAPH HEADER */
-
-.date {
-	font-weight: bold;
-}
-
-/* GRAPH INFO */
-
-#temperature-info {
-	color: #cb464a;
-	font-weight: bold;
-	padding-right: 1.2em;
-}
-#humidity-info {
-	color: #248bcc;
-	font-weight: bold;
-	padding-right: 1.2em;
-}
-
-/* GRAPH POINTS */
-
-.dot-temperature {
-	fill: rgba(203, 70, 74, 0);
-}
-.dot-temperature:hover {
-	fill: rgba(203, 70, 74, 1);
-}
-.dot-humidity {
-	fill: rgba(36, 139, 204, 0);
-}
-.dot-humidity:hover {
-	fill: rgba(36, 139, 204, 1);
-}
-.dot-focus {
-	fill: #000;
-}
-
-/* TOOLTIP */
-
-.tooltip {
-	position: relative;
-	display: inline-block;
-	border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-	visibility: hidden;
-	width: fit-content;
-	background-color: black;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 5px 0;
-
-	/* Position the tooltip */
-	position: absolute;
-	z-index: 1;
-}
-
-.tooltip:hover .tooltiptext {
-	visibility: visible;
-}
-
-/* .tooltip.bottom:after {
-	bottom: auto;
-	top: 0;
-}
-.tooltip.bottom:hover:after {
-	top: 28px;
-}
-.tooltip.bottom:before {
-	border-width: 0 5px 8.7px 5px;
-	border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent;
-	top: 0px;
-} */
