@@ -17,6 +17,8 @@ This project was created by Michael Schnyder and Lars Schmid in September 2020 a
 - CSS
 - PostgreSQL
 
+# Modules
+
 ## Contents
 
 - `sensors` : Part of the weather station that controls the sensors.
