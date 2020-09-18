@@ -17,21 +17,18 @@ passport.deserializeUser((id, done) => {
 })
 */
 export const loginForm = (req: Request, res: Response, next: NextFunction) => {
-        res.render("login", {
-            layout: false,
-            title: "Login",
-            loginActive: true,
-            loginFailed: req.body.loginFailed
-    });
-    console.log(req.body);
-};    
-    /*res.render("login", {
+	res.render("login", {
+		layout: false,
+		title: "Login",
+		loginActive: true,
+		loginFailed: req.body.loginFailed,
+	});
+	console.log(req.body);
+};
+/*res.render("login", {
         layout: false,
         title: "Login Form"
     });*/
-
-
-
 
 /*export const login = (req: Request, res: Response) => {
     const lookUpCredentials = async () =>{
