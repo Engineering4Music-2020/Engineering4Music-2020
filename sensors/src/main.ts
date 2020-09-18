@@ -132,7 +132,7 @@ export async function getData(): Promise<MeasureData> {
 
 			measureHumidity(): Promise<Humidity> {
 				return new Promise((resolve, reject) => {
-					resolve(new Humidity(50));
+					resolve(new Humidity(0));
 				});
 			}
 

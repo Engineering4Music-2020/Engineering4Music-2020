@@ -1,11 +1,14 @@
 import { Client } from "pg";
 import dotenv from "dotenv";
 import { getData } from "../../sensors/src/main";
+import { preventZero } from "./preventZero";
 
 const measure = () => {
-    let get_data_from_pi_and_update_DB = getData().then((data) => {
+    preventZero();
+    getData().then((data) => {
         let humidity = data.humidity;
         let temperature = data.temperature;
+        console.log(humidity);
 
         dotenv.config();
         
@@ -37,5 +40,5 @@ const measure = () => {
             fillDataBase();
     });
 }
-setInterval(measure, 900000);
+setInterval(measure, 5000);
 
