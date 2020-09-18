@@ -70,6 +70,7 @@ app.post(
 app.get("/logout", passportConfig.logout);
 app.get("/about", aboutController.index);
 app.get("/", homeController.index);
+app.get("/home", homeController.index);
 app.get("/main", dataOutputController.main);
 app.get(
 	"/data",

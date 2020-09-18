@@ -11,6 +11,8 @@ const measure = () => {
         console.log(humidity);
 
         dotenv.config();
+
+        const raspiid = process.env.RASPI_ID;
         
         async function fillDataBase() {
             const client = new Client({
@@ -29,7 +31,7 @@ const measure = () => {
             console.log(`date '${year}-${month}-${day}' + time '${hour}:${minutes}'`);
                 try {
                     await client.connect();
-                    const res = await client.query(`INSERT INTO data (humidity, temperature, date) VALUES(${humidity}, ${temperature}, LOCALTIMESTAMP);`);
+                    const res = await client.query(`INSERT INTO data (humidity, temperature, date, raspiid) VALUES(${humidity}, ${temperature}, LOCALTIMESTAMP, ${raspiid});`);
                     console.log(res.rows);
                 } catch(error) {
                     console.log(error);
