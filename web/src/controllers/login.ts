@@ -7,15 +7,15 @@ import request from "request";
 const app = express();
 
 export const loginForm = (req: Request, res: Response, next: NextFunction) => {
-        res.render("login", {
-            layout: false,
-            title: "Login",
-    });
-};    
-    
+	res.render("login", {
+		layout: false,
+		title: "Login",
+	});
+};
+
 const client = new Client({
-    connectionString: process.env.DB_URI,
-    ssl: {
-        rejectUnauthorized: false
-    }
+	connectionString: process.env.DB_URI,
+	ssl: {
+		rejectUnauthorized: false,
+	},
 });
