@@ -5,16 +5,20 @@ This project was created by Michael Schnyder and Lars Schmid in September 2020 a
 
 ## Features
 
-- Show temperature on a website within a local network
-- If Raspberry is not available, show mock data
+- Raspberry Pi measures temperature and humidity every 15 minutes and sends the data to a database
+- Data from database is displayed on a website. Different timeframes can be selected (all data, last 24 hours / 7 days / 1 month)
+- Users can sign up and log in so that they can see the data of their registered Raspberry Pi
 - Scripts for running the webserver and for compiling/transpiling
 
 ## Technologies
 
+### Frontend
 - CSS
 - d3.js
 - HTML
 - JavaScript
+
+### Backend
 - Node.js
 - PostgreSQL
 - TypeScript
