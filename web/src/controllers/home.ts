@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 export const index = (req: Request, res: Response, next: NextFunction) => {
-	if(req.session !== undefined) {
+	if (req.session !== undefined) {
 		res.render("home", {
 			layout: false,
 			title: "Home",

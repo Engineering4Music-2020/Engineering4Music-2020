@@ -24,6 +24,24 @@ body {
 	align-items: stretch;
 	text-align: center;
 }
+#home-content {
+	background-color: #fff;
+	border-radius: 0.4em;
+	font-family: "Work Sans";
+	color: black;
+	width: fit-content;
+	height: fit-content;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: stretch;
+	width: 800px;
+	text-align: left;
+}
+#home-content div {
+	margin: 1em;
+}
 
 /* NAVBAR */
 
