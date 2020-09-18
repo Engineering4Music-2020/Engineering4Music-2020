@@ -71,13 +71,23 @@ nav ul li a {
 	text-decoration: none;
 	font-family: "Work Sans";
 	font-size: 1.3em;
-	margin: 0 1.5em;
+	margin: 0 0 0 1.5em;
 }
 nav ul li:last-child a {
 	margin-right: 0;
 }
 nav ul li a:hover {
 	color: #fece80;
+}
+#logout.nav-item.false {
+	display: none;
+}
+#login.nav-item.true {
+	display: none;
+}
+.fa-lock-open,
+.fa-lock {
+	margin-right: 0.2em;
 }
 
 /* FOOTER */
