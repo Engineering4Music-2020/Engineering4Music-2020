@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const apiKey = process.env.SENDGRID;
+const apiKey:any = process.env.SENDGRID;
 
 sgMail.setApiKey(apiKey);
 
