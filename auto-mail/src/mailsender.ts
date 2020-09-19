@@ -7,13 +7,13 @@ const apiKey:any = process.env.SENDGRID;
 
 sgMail.setApiKey(apiKey);
 
-export const sendMail = () => {
-    const mg = {
+export const sendMail = (temperature:number, humidity:number) => {
+    const msg = {
         to: 'michael.schnyder.immer@gmail.com',
     from: 'michael@schnyder.cc',
-    subject: 'Sending with Twilio SendGrid is Fun',
+    subject: 'Watch out!',
     text: 'and easy to do anywhere, even with Node.js',
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    html: `<strong>The Humidity in your room is ${humidity}, and the temperature is ${temperature}</strong>`,
     };
 
 sgMail.send(msg).then(() => {
@@ -23,3 +23,4 @@ sgMail.send(msg).then(() => {
     console.log(error);
 });
 }
+
