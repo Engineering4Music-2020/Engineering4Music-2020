@@ -8,6 +8,7 @@ This project was created by Michael Schnyder and Lars Schmid in September 2020 a
 - Show temperature on a website within a local network
 - If Raspberry is not available, show mock data
 - Scripts for running the webserver and for compiling/transpiling
+- User can register with the ID of his RaspberryPi and when he logs in, he will only see the data that belong to this Account
 
 ## Technologies
 
