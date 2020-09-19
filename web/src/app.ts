@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction, request } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import exphbs from "express-handlebars";
 import session from "express-session";
@@ -34,7 +34,7 @@ app.use(
 		secret: "Bruno",
 		saveUninitialized: false,
 		resave: false,
-		name: "Hansbruno",
+		name: "Engineering4Music",
 	})
 );
 
