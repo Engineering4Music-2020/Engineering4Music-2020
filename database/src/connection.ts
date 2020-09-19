@@ -2,6 +2,7 @@ import { Client } from "pg";
 import dotenv from "dotenv";
 import { getData } from "../../sensors/src/main";
 import { preventZero } from "./preventZero";
+import { warnUser } from "./warnUser";
 
 const fillDataBase = async (humidity:number, temperature:number, raspiid:any) => {
     const client = new Client({
@@ -34,14 +35,12 @@ const measure = () => {
     getData().then((data) => {
         let humidity = data.humidity;
         let temperature = data.temperature;
-        console.log(humidity);
 
         dotenv.config();
 
         const raspiid = process.env.RASPI_ID;
-        
-        
-            fillDataBase(humidity, temperature, raspiid);
+        fillDataBase(humidity, temperature, raspiid);
+        warnUser(humidity, temperature);
     });
 }
 

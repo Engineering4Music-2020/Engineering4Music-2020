@@ -5,9 +5,10 @@ dotenv.config();
 
 const apiKey:any = process.env.SENDGRID;
 
-sgMail.setApiKey(apiKey);
-
 export const sendMail = (temperature:number, humidity:number) => {
+
+    sgMail.setApiKey(apiKey);
+
     const msg = {
         to: 'michael.schnyder.immer@gmail.com',
     from: 'michael@schnyder.cc',

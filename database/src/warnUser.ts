@@ -4,8 +4,10 @@ import { sendMail } from "../../auto-mail/src/mailsender";
 
 dotenv.config();
 
+const raspiId = process.env.RASPI_ID;
+
 const checkData = (latestHumidity: number, latestTemperature:number):boolean => {
-    if(latestHumidity > 50 || latestHumidity < 40 || latestTemperature > 25 || latestTemperature < 15) {
+    if(latestHumidity > 45 || latestHumidity < 40 || latestTemperature > 25 || latestTemperature < 15) {
         return true;
     } else {
         return false;
@@ -27,9 +29,7 @@ const connectToDataBaseAndCheckData = async (query:string) => {
         const data = await result.rows[rowNumber];
         const latestHumidity = await data.humidity;
         const latestTemperature = await data.temperature;
-        let [temp, humid] = [latestHumidity, latestTemperature];
         let datas:number[] = [latestHumidity, latestTemperature];
-        const response = checkData(latestTemperature, latestHumidity);
         return datas;
     } catch(err) {
         console.log(err);
@@ -38,7 +38,7 @@ const connectToDataBaseAndCheckData = async (query:string) => {
     }
 }; 
 
-const query = `SELECT * FROM data ORDER BY date;`;
+const query = `SELECT * FROM data WHERE raspiid = ${raspiId} ORDER BY date;`;
 
 
 export const warnUser = (humidity:number, temperature:number) => {
@@ -61,6 +61,7 @@ export const warnUser = (humidity:number, temperature:number) => {
             let [humidity, temperature] = datas;
             switch(checkData(humidity, temperature)) {
                 case true:
+                    sendMail(temperature, humidity);
                     console.log("Mail sent");
                     break;
                 case false:
@@ -69,5 +70,3 @@ export const warnUser = (humidity:number, temperature:number) => {
         })
     }
 }
-
-warnUser(45, 20);
