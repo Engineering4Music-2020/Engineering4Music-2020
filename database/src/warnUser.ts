@@ -12,7 +12,7 @@ const checkData = (latestHumidity: number, latestTemperature:number):boolean => 
     } else {
         return false;
     }
-}
+};
 
 
 const connectToDataBaseAndCheckData = async (query:string) => {
@@ -54,7 +54,7 @@ export const warnUser = (humidity:number, temperature:number) => {
                     console.log("Mail sent");
                     break;
             }
-        });
+        })
     } else {
         console.log("Good again");
         connectToDataBaseAndCheckData(query).then((datas:any) => {
@@ -66,7 +66,8 @@ export const warnUser = (humidity:number, temperature:number) => {
                     break;
                 case false:
                     console.log("No Mail sent");
+                    break;
             }
         })
     }
-}
+};
