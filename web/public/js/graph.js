@@ -144,12 +144,6 @@ function renderGraph(data) {
 		.append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
-		// .attr(
-		// 	"viewBox",
-		// 	`0 0 ${height + margin.top + margin.bottom} ${
-		// 		width + margin.left + margin.right
-		// 	}`
-		// )
 		.append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 

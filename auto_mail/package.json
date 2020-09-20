@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sendgrid/mail": "^7.2.5",
+    "@sendgrid/mail": "^7.2.6",
     "@types/dotenv": "^8.2.0",
     "@types/mailgun-js": "^0.22.10",
     "@types/node": "^14.10.0",
