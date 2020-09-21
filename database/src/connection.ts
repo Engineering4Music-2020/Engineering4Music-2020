@@ -1,20 +1,27 @@
 import { Client } from "pg";
 import dotenv from "dotenv";
 import { getData } from "../../sensors/src/main";
-import { preventZero } from "./preventZero";
 import { warnUser } from "./warnUser";
+import { pool } from "./pool";
+
+const deleteRows = async (query: string) => {
+	try{
+		await pool.connect()
+		await pool.query(``)
+	}
+} 
 
 const fillDataBase = async (
 	humidity: number,
 	temperature: number,
 	raspiid: any
 ) => {
-	const client = new Client({
+	/*const client = new Client({
 		connectionString: process.env.DB_URI,
 		ssl: {
 			rejectUnauthorized: false,
 		},
-	});
+	});*/
 
 	let d = new Date();
 	let year = d.getFullYear();
@@ -24,15 +31,21 @@ const fillDataBase = async (
 	let minutes = d.getMinutes();
 	console.log(`date '${year}-${month}-${day}' + time '${hour}:${minutes}'`);
 	try {
-		await client.connect();
-		const res = await client.query(
+		await pool.connect();
+		await pool.query(`SELECT * FROM data ORDER BY date;`).then((result) => {
+			const rowNumber = result.rowCount;
+			if(rowNumber === 1000) {
+				
+			}
+		})
+		const res = await pool.query(
 			`INSERT INTO data (humidity, temperature, date, raspiid) VALUES(${humidity}, ${temperature}, LOCALTIMESTAMP, ${raspiid});`
 		);
 		console.log(res.rows);
 	} catch (error) {
 		console.log(error);
 	} finally {
-		client.end();
+		console.log("done");
 	}
 };
 
