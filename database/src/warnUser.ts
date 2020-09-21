@@ -77,5 +77,3 @@ export const warnUser = (humidity: number, temperature: number) => {
         })
     }
 };
-
-warnUser(50, 20);
