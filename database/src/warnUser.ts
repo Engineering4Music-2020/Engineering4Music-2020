@@ -30,8 +30,9 @@ const connectToDataBaseAndCheckData = async (query: string) => {
         const rowNumber = result.rowCount - 1;
         const data = await result.rows[rowNumber];
         const latestHumidity = await data.humidity;
+        const email = await data.email;
         const latestTemperature = await data.temperature;
-        let datas: number[] = [latestHumidity, latestTemperature];
+        let datas: number[] = [latestHumidity, latestTemperature, email];
         return datas;
     } catch (err) {
         console.log(err);
@@ -40,19 +41,19 @@ const connectToDataBaseAndCheckData = async (query: string) => {
     }
 };
 
-const query = `SELECT * FROM data WHERE raspiid = ${raspiId} ORDER BY date;`;
+const query = `SELECT humidity, temperature, raspiid, email FROM data INNER JOIN login ON data.raspiid = login.id WHERE raspiid = ${raspiId} ORDER BY date ASC;`;
 
 
 export const warnUser = (humidity: number, temperature: number) => {
     if (humidity > 60 || humidity < 40 || temperature > 25 || temperature < 15) {
         connectToDataBaseAndCheckData(query).then((datas: any) => {
-            let [humidity, temperature] = datas;
+            let [humidity, temperature, email] = datas;
             switch (checkData(humidity, temperature)) {
                 case true:
                     console.log("No Mail sent");
                     break;
                 case false:
-                    sendMail(temperature, humidity);
+                    sendMail(temperature, humidity, email);
                     console.log("Mail sent");
                     break;
             }
@@ -60,10 +61,10 @@ export const warnUser = (humidity: number, temperature: number) => {
     } else {
         console.log("Good again");
         connectToDataBaseAndCheckData(query).then((datas: any) => {
-            let [humidity, temperature] = datas;
+            let [humidity, temperature, email] = datas;
             switch (checkData(humidity, temperature)) {
                 case true:
-                    sendMail(temperature, humidity);
+                    sendMail(temperature, humidity, email);
                     console.log("Mail sent");
                     break;
                 case false:
