@@ -18,7 +18,7 @@ export const initialize = async (passport: any) => {
 		},
 	});
 	await client.connect();
-	console.log("connected");
+	console.log("connected passport");
 
 	passport.use(
 		new LocalStrategy(

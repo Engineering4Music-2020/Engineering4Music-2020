@@ -234,7 +234,11 @@ function renderGraph(data) {
 				.transition()
 				.duration(300)
 				.style("opacity", 1)
-				.text(datapoint.temperature + "°C");
+				.text(
+					`${datapoint.date.toLocaleDateString()}, ${datapoint.date.toLocaleTimeString()}: ${
+						datapoint.temperature
+					}°C`
+				);
 		})
 		.on("mouseout", function () {
 			d3.select("#tooltip").style("opacity", 0);
@@ -263,7 +267,11 @@ function renderGraph(data) {
 				.transition()
 				.duration(300)
 				.style("opacity", 1)
-				.text(datapoint.humidity + "%");
+				.text(
+					`${datapoint.date.toLocaleDateString()}, ${datapoint.date.toLocaleTimeString()}: ${
+						datapoint.humidity
+					}%`
+				);
 		})
 		.on("mouseout", function () {
 			d3.select("#tooltip").style("opacity", 0);

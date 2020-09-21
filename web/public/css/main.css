@@ -24,7 +24,35 @@ body {
 	align-items: stretch;
 	text-align: center;
 }
+
+/* HOME */
+
 #home-content {
+	background-color: #fff;
+	border-radius: 0.4em;
+	font-family: "Work Sans";
+	color: black;
+	width: 800px;
+	height: fit-content;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: stretch;
+	text-align: left;
+}
+#home-content div {
+	margin: 1em;
+}
+#home-content h1 {
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* LOGIN & SIGNUP FORMS */
+
+.login-form {
 	background-color: #fff;
 	border-radius: 0.4em;
 	font-family: "Work Sans";
@@ -36,14 +64,51 @@ body {
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: stretch;
-	width: 800px;
-	text-align: left;
 }
-#home-content div {
-	margin: 1em;
+.login-form * {
+	background-color: #fff;
+	border-radius: 0.4em;
+	font-family: "Work Sans";
+	color: black;
+	align-items: center;
+	margin: 0;
+	padding: 1em 0;
+}
+.login-form a {
+	margin: 0;
+	padding: 0;
+}
+.login-form h1 {
+	padding-top: 0;
+	padding-bottom: 0;
+	text-align: center;
+}
+.login-form input {
+	width: 100%;
+	text-align: center;
+}
+.login-input {
+	padding: 0.5em 0;
+}
+#login-button {
+	font-family: "Work Sans";
+	font-weight: bold;
+	border-radius: 0.4em;
+	background-color: #000;
+	color: #fff;
+	padding: 1em;
+	margin-top: 2em;
+	cursor: pointer;
+}
+#login-signup {
+	padding-left: 2em;
+	padding-right: 2em;
+}
+#register-form {
+	width: 800px;
 }
 
-/* NAVBAR */
+/* NAVIGATION TOP */
 
 #logo img {
 	height: 1em;
