@@ -44,7 +44,7 @@ const query = `SELECT * FROM data WHERE raspiid = ${raspiId} ORDER BY date;`;
 
 
 export const warnUser = (humidity: number, temperature: number) => {
-    if (humidity > 50 || humidity < 40 || temperature > 25 || temperature < 15) {
+    if (humidity > 60 || humidity < 40 || temperature > 25 || temperature < 15) {
         connectToDataBaseAndCheckData(query).then((datas: any) => {
             let [humidity, temperature] = datas;
             switch (checkData(humidity, temperature)) {
