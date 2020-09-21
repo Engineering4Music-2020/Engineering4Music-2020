@@ -1,13 +1,13 @@
 import { Client } from "pg";
 import dotenv from "dotenv";
-import { sendMail } from "../../auto-mail/src/mailsender";
+import { sendWarning, sendAllClear } from "../../auto-mail/src/mailsender";
 
 dotenv.config();
 
 const raspiId = process.env.RASPI_ID;
 
 const checkData = (latestHumidity: number, latestTemperature:number):boolean => {
-    if(latestHumidity > 45 || latestHumidity < 40 || latestTemperature > 25 || latestTemperature < 15) {
+    if(latestHumidity > 80 || latestHumidity < 70 || latestTemperature > 25 || latestTemperature < 15) {
         return true;
     } else {
         return false;
@@ -42,7 +42,7 @@ const query = `SELECT * FROM data WHERE raspiid = ${raspiId} ORDER BY date;`;
 
 
 export const warnUser = (humidity:number, temperature:number) => {
-    if(humidity > 50 || humidity < 40 || temperature > 25 || temperature < 15) {
+    if(humidity > 80 || humidity < 70 || temperature > 25 || temperature < 15) {
         connectToDataBaseAndCheckData(query).then((datas:any) => {
             let [humidity, temperature] = datas;
             switch(checkData(humidity, temperature)) {
@@ -50,7 +50,7 @@ export const warnUser = (humidity:number, temperature:number) => {
                     console.log("No Mail sent");
                     break;
                 case false:
-                    sendMail(temperature, humidity);
+                    sendWarning(temperature, humidity);
                     console.log("Mail sent");
                     break;
             }
@@ -61,7 +61,7 @@ export const warnUser = (humidity:number, temperature:number) => {
             let [humidity, temperature] = datas;
             switch(checkData(humidity, temperature)) {
                 case true:
-                    sendMail(temperature, humidity);
+                    sendAllClear(temperature, humidity);
                     console.log("Mail sent");
                     break;
                 case false:

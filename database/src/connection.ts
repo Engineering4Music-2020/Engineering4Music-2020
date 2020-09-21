@@ -31,7 +31,7 @@ const fillDataBase = async (humidity:number, temperature:number, raspiid:any) =>
     }   
 
 const measure = () => {
-    preventZero();
+    // preventZero();
     getData().then((data) => {
         let humidity = data.humidity;
         let temperature = data.temperature;
