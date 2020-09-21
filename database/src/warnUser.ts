@@ -7,10 +7,8 @@ dotenv.config();
 const raspiId = process.env.RASPI_ID;
 
 const checkData = (latestHumidity: number, latestTemperature: number): boolean => {
-    if (latestHumidity > 45 || latestHumidity < 40 || latestTemperature > 25 || latestTemperature < 15) {
+    if (latestHumidity > 60 || latestHumidity < 40 || latestTemperature > 25 || latestTemperature < 15) {
         return true;
-    } else if (latestHumidity < 50 && latestHumidity > 40 || latestHumidity === undefined || latestTemperature < 25 && latestTemperature > 15 || latestTemperature === undefined) {
-        return false;
     } else {
         return false;
     }
