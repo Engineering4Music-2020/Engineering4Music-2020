@@ -57,13 +57,14 @@ const measure = () => {
 		// PREVENT ZEROS
 		if (humidity === 0) {
 			measure();
-		}
+		} else {
 
 		dotenv.config();
 
 		const raspiid = process.env.RASPI_ID;
 		fillDataBase(humidity, temperature, raspiid);
 		warnUser(humidity, temperature);
+		}
 	});
 };
 
