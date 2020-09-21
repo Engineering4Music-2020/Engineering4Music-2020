@@ -20,19 +20,25 @@ dotenv.config();
 
 const uploadToDB = async (raspiId: number, name: string, email: string, password: string, res: Response) => {
 	await pool.connect();
-	pool.query(`SELECT * FROM login WHERE id = ${raspiId};`).then((result) => {
-		if (result.rows[0]) {
-			res.redirect("/join");
-		} else {
-			pool.query(`WITH raspberrypi AS (INSERT INTO login VALUES ('${email}', '${password}', ${raspiId}, '${name}')) INSERT INTO raspberrypi VALUES (${raspiId}, '${name}');`).then((result) => {
-				res.redirect("/loginForm");
-			}).catch((err) => {
-				throw err;
-			})
-		}
-	}).catch((err) => {
+	try {
+		pool.query(`SELECT * FROM login WHERE id = ${raspiId};`).then((result) => {
+			if (result.rows[0]) {
+				res.redirect("/join");
+			} else {
+				pool.query(`WITH raspberrypi AS (INSERT INTO login VALUES ('${email}', '${password}', ${raspiId}, '${name}')) INSERT INTO raspberrypi VALUES (${raspiId}, '${name}');`).then((result) => {
+					res.redirect("/loginForm");
+				}).catch((err) => {
+					throw err;
+				})
+			}
+		}).catch((err) => {
+			throw err;
+		})
+	} catch (err) {
 		throw err;
-	})
+	} finally {
+		console.log("Pool drained");
+	}
 }
 
 
