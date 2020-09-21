@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const apiKey:any = process.env.SENDGRID;
+const apiKey:any = process.env.API_KEY;
 
 export const sendMail = (temperature:number, humidity:number) => {
 
