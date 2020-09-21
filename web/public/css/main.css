@@ -46,6 +46,8 @@ body {
 }
 #home-content h1 {
 	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 /* LOGIN & SIGNUP FORMS */
@@ -86,16 +88,17 @@ body {
 	text-align: center;
 }
 .login-input {
-	padding: 0.5em;
+	padding: 0.5em 0;
 }
 #login-button {
 	font-family: "Work Sans";
 	font-weight: bold;
-	padding: 1em;
 	border-radius: 0.4em;
-	cursor: pointer;
 	background-color: #000;
 	color: #fff;
+	padding: 1em;
+	margin-top: 2em;
+	cursor: pointer;
 }
 #login-signup {
 	padding-left: 2em;
