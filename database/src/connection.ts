@@ -1,4 +1,3 @@
-import { Client } from "pg";
 import dotenv from "dotenv";
 import { getData } from "../../sensors/src/main";
 import { warnUser } from "./warnUser";
