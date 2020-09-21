@@ -5,7 +5,7 @@ dotenv.config();
 
 const apiKey: any = process.env.API_KEY;
 
-export const sendMail = (temperature: number, humidity: number, email: string) => {
+export const sendWarning = (temperature: number, humidity: number, email: string) => {
 
     sgMail.setApiKey(apiKey);
 
@@ -25,3 +25,21 @@ export const sendMail = (temperature: number, humidity: number, email: string) =
         });
 }
 
+export const sendAllClear = (temperature: number, humidity: number, email: string) => {
+    sgMail.setApiKey(apiKey);
+
+    const msg = {
+        to: email,
+        from: 'michael@schnyder.cc',
+        subject: 'All-Clear',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: `<strong>The Humidity in your room has gone back to ${humidity}, and the temperature is now ${temperature}.</strong>`,
+    };
+
+    sgMail.send(msg).then(() => {
+        console.log("Success");
+    })
+        .catch((error: any) => {
+            console.log(error);
+        });
+};

@@ -1,6 +1,6 @@
 import { Client } from "pg";
 import dotenv from "dotenv";
-import { sendMail } from "../../auto-mail/src/mailsender";
+import { sendWarning, sendAllClear } from "../../auto-mail/src/mailsender";
 
 dotenv.config();
 
@@ -41,7 +41,12 @@ const connectToDataBaseAndCheckData = async (query: string) => {
     }
 };
 
-const query = `SELECT humidity, temperature, raspiid, email FROM data INNER JOIN login ON data.raspiid = login.id WHERE raspiid = ${raspiId} ORDER BY date ASC;`;
+const query = `SELECT humidity, temperature, raspiid, email 
+FROM data 
+INNER JOIN login 
+ON data.raspiid = login.id 
+WHERE raspiid = ${raspiId} 
+ORDER BY date ASC;`;
 
 
 export const warnUser = (humidity: number, temperature: number) => {
@@ -53,7 +58,7 @@ export const warnUser = (humidity: number, temperature: number) => {
                     console.log("No Mail sent");
                     break;
                 case false:
-                    sendMail(temperature, humidity, email);
+                    sendWarning(temperature, humidity, email);
                     console.log("Mail sent");
                     break;
             }
@@ -64,7 +69,7 @@ export const warnUser = (humidity: number, temperature: number) => {
             let [humidity, temperature, email] = datas;
             switch (checkData(humidity, temperature)) {
                 case true:
-                    sendMail(temperature, humidity, email);
+                    sendAllClear(temperature, humidity, email);
                     console.log("Mail sent");
                     break;
                 case false:
