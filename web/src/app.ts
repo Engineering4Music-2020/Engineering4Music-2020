@@ -21,6 +21,7 @@ import { userInfo } from "os";
 // Create Express server
 const app = express();
 initialize(passport);
+const sessionSecret: any = process.env.SESSION_SECRET;
 
 // Express configuration
 const public_path = path.join(__dirname, "../public");
@@ -30,8 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
 	session({
-		// store: new FileStore(),
-		secret: "Bruno",
+		secret: sessionSecret,
 		saveUninitialized: false,
 		resave: false,
 		name: "Engineering4Music",
