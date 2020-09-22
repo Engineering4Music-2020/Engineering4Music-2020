@@ -12,13 +12,7 @@ const LocalStrategy = passportLocal.Strategy;
 
 
 export const initialize = async (passport: any) => {
-	/*const client = new Pool({
-		connectionString: process.env.DB_URI,
-		ssl: {
-			rejectUnauthorized: false,
-		},
-	});*/
-	await pool.connect().then((client) => {
+	pool.connect().then((client) => {
 		console.log("connected passport");
 
 	passport.use(
