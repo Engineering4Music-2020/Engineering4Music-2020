@@ -16,7 +16,7 @@
     "create_views": "cd ./web && mkdir ../dist/web/views && echo 'successfully created ./web/dist/web/views' || echo '.dist/web/views already exists'",
     "delete_dist": "rm -r ./dist && echo 'successfully deleted ./web/dist' && cd ./sensors && rm -r ./dist && echo 'successfully deleted ./sensors/dist'",
     "start": "cd ./web && node dist/web/src/server.js",
-    "transpile": "npm run tsc && echo 'successfully transpiled'"
+    "transpile": "cd ./web && npm run tsc && echo 'successfully transpiled web' && cd ../sensors && npm run tsc && echo 'successfully transpiled sensors'"
   },
   "repository": {
     "type": "git",
