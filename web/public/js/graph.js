@@ -1,5 +1,5 @@
 function loadDataDefault() {
-	fetch("http://localhost:3000/dataJSONAll").then((result) =>
+	fetch("https://engineering4music.herokuapp.com/dataJSONAll").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
 			console.log(data);
