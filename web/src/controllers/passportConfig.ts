@@ -1,6 +1,4 @@
-import passport, { serializeUser } from "passport";
 import passportLocal from "passport-local";
-import { Pool } from "pg";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import { Request, Response, NextFunction } from "express";

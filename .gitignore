@@ -2,7 +2,15 @@
 coverage
 node_modules
 bower_components
-**/dist/
+/auto-mail/
+/database/
+/login/
+/sensors/
+/web/src/
+/web/public/
+/web/sessions/
+/web/views/
+/web/dist/sensors/
 yarn.lock
 junit.xml
 

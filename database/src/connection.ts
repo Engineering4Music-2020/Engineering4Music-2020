@@ -25,7 +25,7 @@ const checkHowManyRowsThereAreAndIfNecessaryDeleteSome = (
 		}
 	});
 };
-const fillDataBase = async (
+const fillDataBase = (
 	humidity: number,
 	temperature: number,
 	raspiid: any
