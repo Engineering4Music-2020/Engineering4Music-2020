@@ -31,7 +31,7 @@
     "@types/dotenv": "6.1.1",
     "@types/i2c-bus": "1.0.23",
     "@types/jest": "24.0.15",
-    "@types/node": "10.14.12",
+    
     "@types/shelljs": "0.8.5",
     "chai": "4.2.0",
     "concurrently": "4.1.1",
@@ -43,6 +43,9 @@
     "ts-node": "8.3.0",
     "tslint": "5.18.0",
     "typescript": "3.5.3"
+  },
+  "peerDependencies": {
+    "@types/node": "14.x"
   },
   "main": "jest.config.js"
 }

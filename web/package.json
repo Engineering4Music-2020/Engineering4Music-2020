@@ -77,5 +77,8 @@
     "tslint": "5.18.0",
     "typescript": "3.5.3"
   },
+  "peerDependencies": {
+    "@types/node": "14.x"
+  },
   "main": "jest.config.js"
 }
