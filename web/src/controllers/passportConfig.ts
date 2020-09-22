@@ -10,9 +10,6 @@ const LocalStrategy = passportLocal.Strategy;
 
 
 export const initialize = async (passport: any) => {
-	pool.connect().then((client) => {
-		console.log("connected passport");
-
 	passport.use(
 		new LocalStrategy(
 			{
@@ -20,7 +17,7 @@ export const initialize = async (passport: any) => {
 				passwordField: "password",
 			},
 			(email, password, done) => {
-				client.query(
+				pool.query(
 					`SELECT * FROM login WHERE email LIKE '${email}';`,
 					(err, result) => {
 						if (err) {
@@ -51,14 +48,13 @@ export const initialize = async (passport: any) => {
 		done(null, user.id);
 	});
 	passport.deserializeUser((id: any, done: any) => {
-		client.query(`SELECT * FROM login WHERE id = ${id};`, (err, result) => {
+		pool.query(`SELECT * FROM login WHERE id = ${id};`, (err, result) => {
 			if (err) {
 				throw err;
 			}
 			return done(null, result.rows[0]);
 		});
 	});
-	})
 	
 };
 

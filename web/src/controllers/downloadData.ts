@@ -4,28 +4,22 @@ import { pool } from "../../../database/src/pool";
 
 dotenv.config();
 
-const createNewClientAndConnectToDatabase = (
+const createNewClientAndConnectToDatabase = async (
 	req: Request,
 	res: Response,
 	query: string
 ) => {
-	pool.connect().then(async (client) => {
-		try {
-			const result = await client.query(query);
-			res.send(JSON.stringify(result));
-		} catch (err) {
-			client.release();
-			throw err;
-		} finally {
-			client.release();
-		}
-	})
+	try {
+		const result = await pool.query(query);
+		res.send(JSON.stringify(result));
+	} catch (err) {
+		throw err;
+	}
 }
 
-const readData = (res: Response) => {
-	pool.connect().then(async (client) => {
+const readData = async (res: Response) => {
 		try {
-			const result = await client.query(`SELECT * FROM data WHERE id = ${id} ORDER BY date;`);
+			const result = await pool.query(`SELECT * FROM data WHERE id = ${id} ORDER BY date;`);
 			console.log(result);
 			res.render("data", {
 				layout: false,
@@ -33,10 +27,7 @@ const readData = (res: Response) => {
 			});
 		} catch (err) {
 			throw err;
-		} finally {
-			client.release();
 		}
-	})
 }
 
 export const loadData = (req: Request, res: Response): void => {

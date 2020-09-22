@@ -18,46 +18,43 @@ const pool_1 = require("../../../database/src/pool");
 dotenv_1.default.config();
 const LocalStrategy = passport_local_1.default.Strategy;
 exports.initialize = (passport) => __awaiter(this, void 0, void 0, function* () {
-    pool_1.pool.connect().then((client) => {
-        console.log("connected passport");
-        passport.use(new LocalStrategy({
-            usernameField: "email",
-            passwordField: "password",
-        }, (email, password, done) => {
-            client.query(`SELECT * FROM login WHERE email LIKE '${email}';`, (err, result) => {
-                if (err) {
-                    throw err;
-                }
-                if (result.rowCount > 0) {
-                    const user = result.rows[0];
-                    global.id = user.id;
-                    bcrypt_1.default.compare(password, user.password, (err, isMatch) => {
-                        if (err) {
-                            throw err;
-                        }
-                        if (isMatch) {
-                            return done(null, user);
-                        }
-                        else {
-                            return done(null, false, { message: "Wrong Password!" });
-                        }
-                    });
-                }
-                else {
-                    return done(null, false, { message: "Email is not registered." });
-                }
-            });
-        }));
-        passport.serializeUser((user, done) => {
-            done(null, user.id);
+    passport.use(new LocalStrategy({
+        usernameField: "email",
+        passwordField: "password",
+    }, (email, password, done) => {
+        pool_1.pool.query(`SELECT * FROM login WHERE email LIKE '${email}';`, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            if (result.rowCount > 0) {
+                const user = result.rows[0];
+                global.id = user.id;
+                bcrypt_1.default.compare(password, user.password, (err, isMatch) => {
+                    if (err) {
+                        throw err;
+                    }
+                    if (isMatch) {
+                        return done(null, user);
+                    }
+                    else {
+                        return done(null, false, { message: "Wrong Password!" });
+                    }
+                });
+            }
+            else {
+                return done(null, false, { message: "Email is not registered." });
+            }
         });
-        passport.deserializeUser((id, done) => {
-            client.query(`SELECT * FROM login WHERE id = ${id};`, (err, result) => {
-                if (err) {
-                    throw err;
-                }
-                return done(null, result.rows[0]);
-            });
+    }));
+    passport.serializeUser((user, done) => {
+        done(null, user.id);
+    });
+    passport.deserializeUser((id, done) => {
+        pool_1.pool.query(`SELECT * FROM login WHERE id = ${id};`, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            return done(null, result.rows[0]);
         });
     });
 });

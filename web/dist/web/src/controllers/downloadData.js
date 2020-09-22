@@ -14,39 +14,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 const pool_1 = require("../../../database/src/pool");
 dotenv_1.default.config();
-const createNewClientAndConnectToDatabase = (req, res, query) => {
-    pool_1.pool.connect().then((client) => __awaiter(this, void 0, void 0, function* () {
-        try {
-            const result = yield client.query(query);
-            res.send(JSON.stringify(result));
-        }
-        catch (err) {
-            client.release();
-            throw err;
-        }
-        finally {
-            client.release();
-        }
-    }));
-};
-const readData = (res) => {
-    pool_1.pool.connect().then((client) => __awaiter(this, void 0, void 0, function* () {
-        try {
-            const result = yield client.query(`SELECT * FROM data WHERE id = ${id} ORDER BY date;`);
-            console.log(result);
-            res.render("data", {
-                layout: false,
-                data: result.rows,
-            });
-        }
-        catch (err) {
-            throw err;
-        }
-        finally {
-            client.release();
-        }
-    }));
-};
+const createNewClientAndConnectToDatabase = (req, res, query) => __awaiter(this, void 0, void 0, function* () {
+    try {
+        const result = yield pool_1.pool.query(query);
+        res.send(JSON.stringify(result));
+    }
+    catch (err) {
+        throw err;
+    }
+});
+const readData = (res) => __awaiter(this, void 0, void 0, function* () {
+    try {
+        const result = yield pool_1.pool.query(`SELECT * FROM data WHERE id = ${id} ORDER BY date;`);
+        console.log(result);
+        res.render("data", {
+            layout: false,
+            data: result.rows,
+        });
+    }
+    catch (err) {
+        throw err;
+    }
+});
 exports.loadData = (req, res) => {
     readData(res);
     console.log(id);
