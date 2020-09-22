@@ -7,6 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
+    "tsc": "tsc",
     "build": "npm run clean && npm run transpile && npm run create_views && npm run create_public && npm run copy_views && npm run copy_public",
     "clean": "[ -d ./web/dist ] && echo 'web/dist exists' && npm run delete_dist || echo 'ERROR: web/dist does not exist'",
     "copy_public": "cp -r ./web/public/* ./web/dist/web/public && echo 'successfully copied ./web/public into ./web/dist/web/public'",
@@ -15,7 +16,7 @@
     "create_views": "mkdir ./web/dist/web/views && echo 'successfully created ./web/dist/web/views' || echo '.dist/web/views already exists'",
     "delete_dist": "rm -r ./web/dist && echo 'successfully deleted ./web/dist' && rm -r ./sensors/dist && echo 'successfully deleted ./sensors/dist'",
     "start": "node web/dist/web/src/server.js",
-    "transpile": "cd ./web && tsc && echo 'successfully transpiled web' && cd ../sensors && tsc && echo 'successfully transpiled sensors'"
+    "transpile": "cd ./web && npm run tsc && echo 'successfully transpiled web' && cd ../sensors && npm run tsc && echo 'successfully transpiled sensors'"
   },
   "repository": {
     "type": "git",
