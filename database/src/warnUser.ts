@@ -14,7 +14,7 @@ WHERE raspiid = ${raspiId}
 ORDER BY date ASC;`;
 
 export const temperature_threshold = [24, 26];
-export const humidity_threshold = [43, 45];
+export const humidity_threshold = [40, 50];
 
 const checkLatestMeasurement = async (query: string) => {
 	const client = new Client({
