@@ -13,6 +13,8 @@ bower_components
 /web/dist/sensors/
 yarn.lock
 junit.xml
+copyStaticAssets.ts 
+express.d.ts
 
 # Secrets, local configuration
 .env
