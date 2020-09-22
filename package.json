@@ -1,0 +1,15 @@
+{
+  "name": "engineering4music_2020_deployed",
+  "version": "1.0.0",
+  "description": "Simple weather station using a Raspberry Pi that allows musicians to keep an eye on the temperature and humidity in their rehearsal rooms / studios. This serves as an essential tool for the maintenance of acoustic instruments.\r This project was created by Michael Schnyder and Lars Schmid in September 2020 as part of the course \"Youth2Engineers\".",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.zhaw.ch/Vorpraktikum-IT/Engineering4Music_2020.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
