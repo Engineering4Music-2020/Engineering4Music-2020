@@ -1,9 +1,10 @@
-import passport from "passport";
+import passport, { serializeUser } from "passport";
 import passportLocal from "passport-local";
 import { Pool } from "pg";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import { Request, Response, NextFunction } from "express";
+import { pool } from "../../../database/src/pool";
 
 dotenv.config();
 
@@ -11,14 +12,8 @@ const LocalStrategy = passportLocal.Strategy;
 
 
 export const initialize = async (passport: any) => {
-	const client = new Pool({
-		connectionString: process.env.DB_URI,
-		ssl: {
-			rejectUnauthorized: false,
-		},
-	});
-	await client.connect();
-	console.log("connected passport");
+	pool.connect().then((client) => {
+		console.log("connected passport");
 
 	passport.use(
 		new LocalStrategy(
@@ -65,6 +60,8 @@ export const initialize = async (passport: any) => {
 			return done(null, result.rows[0]);
 		});
 	});
+	})
+	
 };
 
 export const checkAuthenticated = (

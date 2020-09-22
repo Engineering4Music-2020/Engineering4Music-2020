@@ -1,61 +1,42 @@
-import { Client } from "pg";
 import dotenv from "dotenv";
-import { request, Request, Response } from "express";
+import { Request, Response } from "express";
+import { pool } from "../../../database/src/pool";
 
 dotenv.config();
 
-async function createNewClientAndConnectToDatabase(
+const createNewClientAndConnectToDatabase = (
 	req: Request,
 	res: Response,
 	query: string
-) {
-	const client = new Client({
-		connectionString: process.env.DB_URI,
-		ssl: {
-			rejectUnauthorized: false,
-		},
-	});
-
-	try {
-		console.log(`Connecting`);
-		await client.connect();
-		console.log(`Connected to database`);
-		const result = await client.query(query);
-		res.send(JSON.stringify(result));
-	} catch (error) {
-		console.log(error);
-	} finally {
-		await client.end();
-		console.log(`Disconnected from Database`);
-	}
+) => {
+	pool.connect().then(async (client) => {
+		try {
+			const result = await client.query(query);
+			res.send(JSON.stringify(result));
+		} catch (err) {
+			client.release();
+			throw err;
+		} finally {
+			client.release();
+		}
+	})
 }
 
-async function readData(res: Response) {
-	const client = new Client({
-		connectionString: process.env.DB_URI,
-		ssl: {
-			rejectUnauthorized: false,
-		},
-	});
-
-	try {
-		console.log(`Connecting`);
-		await client.connect();
-		console.log(`Connected to database`);
-		const result = await client.query(
-			`SELECT * FROM data WHERE id = ${id} ORDER BY date;`
-		);
-		console.log(result);
-		res.render("data", {
-			layout: false,
-			data: result.rows,
-		});
-	} catch (error) {
-		console.log(error);
-	} finally {
-		await client.end();
-		console.log(`Disconnected from Database`);
-	}
+const readData = (res: Response) => {
+	pool.connect().then(async (client) => {
+		try {
+			const result = await client.query(`SELECT * FROM data WHERE id = ${id} ORDER BY date;`);
+			console.log(result);
+			res.render("data", {
+				layout: false,
+				data: result.rows,
+			});
+		} catch (err) {
+			throw err;
+		} finally {
+			client.release();
+		}
+	})
 }
 
 export const loadData = (req: Request, res: Response): void => {

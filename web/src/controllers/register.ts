@@ -18,7 +18,7 @@ export const form = (req: Request, res: Response) => {
 
 dotenv.config();
 
-const uploadToDB = async (raspiId: number, name: string, email: string, password: string, res: Response) => {
+/*const uploadToDB = async (raspiId: number, name: string, email: string, password: string, res: Response) => {
 	await pool.connect();
 	try {
 		pool.query(`SELECT * FROM login WHERE id = ${raspiId};`).then((result) => {
@@ -39,6 +39,24 @@ const uploadToDB = async (raspiId: number, name: string, email: string, password
 	} finally {
 		console.log("Pool drained");
 	}
+}*/
+
+const uploadToDB = (raspiId: number, name: string, email: string, password: string, res: Response) => {
+	pool.connect().then(async (client) => {
+		try {
+			const result = await client.query(`SELECT * FROM login WHERE id = ${raspiId};`);
+			if (result.rows[0]) {
+				res.redirect("/loginForm");
+				// Message: This email is already registered.
+			} else {
+				await client.query(`WITH raspberrypi AS (INSERT INTO login VALUES ('${email}', '${password}', ${raspiId}, '${name}')) INSERT INTO raspberrypi VALUES (${raspiId}, '${name}');`);
+			}
+		} catch (err) {
+			throw err;
+		} finally {
+			client.release();
+		}
+	})
 }
 
 
