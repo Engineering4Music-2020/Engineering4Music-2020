@@ -28,6 +28,7 @@
     "@types/connect-flash": "0.0.35",
     "@types/connect-redis": "0.0.14",
     "@types/cookie-parser": "1.4.2",
+    "@types/d3": "^5.7.2",
     "@types/ejs": "3.0.4",
     "@types/express-ejs-layouts": "2.3.2",
     "@types/express-session": "1.17.0",
