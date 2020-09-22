@@ -20,7 +20,7 @@ export const sendMail = (
 	const msg = {
 		to: email,
 		from: `michael@schnyder.cc`,
-		subject: `<strong>${type}</strong> is <strong>${subject}</strong>.`,
+		subject: `${type} is ${subject}.`,
 		html: `The <strong>${type}</strong> in your room is <strong>${value}</strong>. The optimal range for temperature is between <strong>${temperature_threshold[0]}</strong> and <strong>${temperature_threshold[1]}</strong>. The optimal range for humidity is between <strong>${humidity_threshold[0]}</strong> and <strong>${humidity_threshold[1]}</strong>.`,
 	};
 
