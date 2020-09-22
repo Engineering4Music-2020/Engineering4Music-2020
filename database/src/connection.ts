@@ -11,7 +11,7 @@ const checkHowManyRowsThereAreAndIfNecessaryDeleteSome = (
 		try {
 			const result = await client.query(checkForRows);
 			const rowNumber = result.rowCount;
-			if (rowNumber === 1000) {
+			if (rowNumber >= 1000) {
 				await client.query(deleteRows);
 				client.release();
 				console.log("Rows deleted");
@@ -79,4 +79,4 @@ const measure = () => {
 	});
 };
 
-setInterval(measure, 900000);
+setInterval(measure, 5000);
