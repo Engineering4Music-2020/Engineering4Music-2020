@@ -20,15 +20,21 @@ export const sendMail = (
 	const msg = {
 		to: email,
 		from: `michael@schnyder.cc`,
-		subject: `${type} is ${subject}.`,
-		// text: `and easy to do anywhere, even with Node.js`,
-		html: `The ${type} in your room is ${value}. The optimal range for temperature is between ${temperature_threshold[0]} and ${temperature_threshold[1]}. The optimal range for humidity is between ${humidity_threshold[0]} and ${humidity_threshold[1]}.`,
+		subject: `<strong>${type}</strong> is <strong>${subject}</strong>.`,
+		html: `The <strong>${type}</strong> in your room is <strong>${value}</strong>. The optimal range for temperature is between <strong>${temperature_threshold[0]}</strong> and <strong>${temperature_threshold[1]}</strong>. The optimal range for humidity is between <strong>${humidity_threshold[0]}</strong> and <strong>${humidity_threshold[1]}</strong>.`,
 	};
+
+	if (type === "humidity") {
+		msg.html = `The ${type} in your room is ${value}. The optimal range for humidity is set between ${humidity_threshold[0]} and ${humidity_threshold[1]}.`;
+	}
+	if (type === "temperature") {
+		msg.html = `The ${type} in your room is <strong>${value}</strong>. The optimal range for temperature is set between <strong>${temperature_threshold[0]}</strong> and <strong>${temperature_threshold[1]}</strong>.`;
+	}
 
 	sgMail
 		.send(msg)
 		.then(() => {
-			console.log(`Mail with subject ${msg.subject} has been sent.`);
+			console.log(`Mail with subject "${msg.subject}" has been sent.`);
 		})
 		.catch((error: any) => {
 			console.log(error);
