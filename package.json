@@ -3,8 +3,19 @@
   "version": "1.0.0",
   "description": "Simple weather station using a Raspberry Pi that allows musicians to keep an eye on the temperature and humidity in their rehearsal rooms / studios. This serves as an essential tool for the maintenance of acoustic instruments.\r This project was created by Michael Schnyder and Lars Schmid in September 2020 as part of the course \"Youth2Engineers\".",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run clean && npm run transpile && npm run create_views && npm run create_public && npm run copy_views && npm run copy_public",
+    "clean": "[ -d ./dist ] && echo 'web/dist exists' && npm run delete_dist || echo 'ERROR: web/dist does not exist'",
+    "copy_public": "cp -r ./public/* ./dist/web/public && echo 'successfully copied ./web/public into ./web/dist/web/public'",
+    "copy_views": "cp -r ./views/* ./dist/web/views && echo 'successfully copied ./web/views into ./web/dist/web/src/views'",
+    "create_public": "mkdir ./dist/web/public && echo 'successfully created ./web/dist/web/public' || echo './dist/web/public already exists'",
+    "create_views": "mkdir ./dist/web/views && echo 'successfully created ./web/dist/web/views' || echo '.dist/web/views already exists'",
+    "delete_dist": "rm -r ./dist && echo 'successfully deleted ./web/dist' && cd ../sensors && rm -r ./dist && echo 'successfully deleted ./sensors/dist'",
+    "start": "node dist/web/src/server.js",
+    "transpile": "tsc && echo 'successfully transpiled web' && cd ../sensors && tsc && echo 'successfully transpiled sensors'"
   },
   "repository": {
     "type": "git",
@@ -12,4 +23,5 @@
   },
   "author": "",
   "license": "ISC"
+  
 }
