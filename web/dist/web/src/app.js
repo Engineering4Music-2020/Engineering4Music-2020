@@ -31,6 +31,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const passport_1 = __importDefault(require("passport"));
 const passportConfig_1 = __importDefault(require("./controllers/passportConfig"));
 const express_flash_1 = __importDefault(require("express-flash"));
+const http_1 = __importDefault(require("http"));
 dotenv_1.default.config();
 const aboutController = __importStar(require("./controllers/about"));
 const homeController = __importStar(require("./controllers/home"));
@@ -41,6 +42,7 @@ const loginController = __importStar(require("./controllers/login"));
 const passportConfig = __importStar(require("./controllers/passportConfig"));
 // Create Express server
 const app = express_1.default();
+const redirectServer = http_1.default.createServer(app);
 passportConfig_1.default(passport_1.default);
 const sessionSecret = process.env.SESSION_SECRET;
 // Express configuration
@@ -54,9 +56,18 @@ app.use(express_session_1.default({
     saveUninitialized: false,
     resave: false,
     name: "Engineering4Music",
+    cookie: {
+        secure: true
+    }
 }));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
+app.use(function requireHTTPS(req, res, next) {
+    if (!req.secure) {
+        return res.redirect('https://' + req.headers.host + req.url);
+    }
+    next();
+});
 app.use(express_flash_1.default());
 /*app.use((req: Request, res: Response, next: NextFunction) => {
     res.locals.sessionFlash = req.session?.sessionFlash;
