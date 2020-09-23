@@ -50,6 +50,9 @@ app.set("view engine", "handlebars");
 
 // Primary app routes.
 
+app.get("*", (req: Request, res: Response) => {
+	res.redirect("https://" + req.headers.host + req.url);
+})
 app.post("/auth", registerController.register);
 app.get(
 	"/loginForm",
