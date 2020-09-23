@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.loadJSONlast1m = exports.loadJSONlast7d = exports.loadJSONlast24h = exports.loadJSONAll = exports.loadData = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const pool_1 = require("../../../database/src/pool");
 dotenv_1.default.config();

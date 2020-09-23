@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MeasureData = void 0;
 class MeasureData {
     constructor(temperature, humidity) {
         this.temperature = temperature;

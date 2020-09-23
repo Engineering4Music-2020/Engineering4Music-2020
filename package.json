@@ -7,7 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "tsc": "mkdir ./web/dist && tsc ./web/dist",
+    "tsc": "tsc",
     "build": "npm run clean && npm run transpile && npm run create_views && npm run create_public && npm run copy_views && npm run copy_public",
     "clean": "cd ./web && [ -d ./dist ] && echo 'web/dist exists' && npm run delete_dist || echo 'ERROR: web/dist does not exist'",
     "copy_public": "cd ./web && cp -r ./public/* ./dist/web/public && echo 'successfully copied ./web/public into ./web/dist/web/public'",
@@ -17,7 +17,7 @@
     "create_dist": "cd ./web && mkdir ./dist && echo 'successfully created ./dist' || echo './dist already exists'",
     "delete_dist": "rm -r ./dist && echo 'successfully deleted ./web/dist' && cd ./sensors && rm -r ./dist && echo 'successfully deleted ./sensors/dist'",
     "start": "cd ./web && node dist/web/src/server.js",
-    "transpile": "cd ./web && npm run tsc && echo 'successfully transpiled web' && cd ../sensors && npm run tsc && echo 'successfully transpiled sensors'"
+    "transpile": "cd ./web && tsc && echo 'successfully transpiled web' && cd ../sensors && tsc && echo 'successfully transpiled sensors'"
   },
   "repository": {
     "type": "git",
