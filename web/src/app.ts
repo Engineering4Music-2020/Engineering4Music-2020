@@ -7,9 +7,6 @@ import dotenv from "dotenv";
 import passport from "passport";
 import initialize from "./controllers/passportConfig";
 import flash from "express-flash";
-
-
-
 dotenv.config();
 
 import * as aboutController from "./controllers/about";
@@ -38,13 +35,12 @@ app.use(
 		saveUninitialized: false,
 		resave: false,
 		name: "Engineering4Music",
-		cookie: {
-			secure: true
-		}
 	})
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(flash());
 /*app.use((req: Request, res: Response, next: NextFunction) => {
 	res.locals.sessionFlash = req.session?.sessionFlash;
