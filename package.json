@@ -16,7 +16,7 @@
     "create_views": "cd ./web && mkdir ./web/views && echo 'successfully created ./web/dist/web/views' || echo '.dist/web/views already exists'",
     "delete_dist": "rm -r ./dist && echo 'successfully deleted ./web/dist' && cd ./sensors && rm -r ./dist && echo 'successfully deleted ./sensors/dist'",
     "start": "cd ./web && node dist/web/src/server.js",
-    "transpile": "cd ./web && tsc && echo 'successfully transpiled web' && cd ../sensors && tsc && echo 'successfully transpiled sensors'"
+    "transpile": "cd ./web && npm run tsc && echo 'successfully transpiled web' && cd ../sensors && npm run tsc && echo 'successfully transpiled sensors'"
   },
   "repository": {
     "type": "git",
@@ -58,6 +58,7 @@
     "passport-local": "1.0.0",
     "pg": "8.3.3",
     "request": "2.88.2",
+    "rxjs": "6.4.0",
     "session": "0.1.0",
     "session-file-store": "1.4.0",
     "uuid": "8.3.0"
