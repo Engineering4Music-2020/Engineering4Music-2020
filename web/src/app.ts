@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import passport from "passport";
 import initialize from "./controllers/passportConfig";
 import flash from "express-flash";
-import http from "http";
+
 
 
 dotenv.config();
@@ -19,12 +19,10 @@ import * as downloadDataController from "./controllers/downloadData";
 import * as registerController from "./controllers/register";
 import * as loginController from "./controllers/login";
 import * as passportConfig from "./controllers/passportConfig";
-import { RSA_NO_PADDING } from "constants";
 
 
 // Create Express server
 const app = express();
-const redirectServer = http.createServer(app)
 initialize(passport);
 const sessionSecret: any = process.env.SESSION_SECRET;
 
@@ -47,12 +45,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function requireHTTPS(req: Request, res: Response, next: NextFunction) {
-	if (!req.secure) {
-		return res.redirect('https://' + req.headers.host + req.url);
-	}
-	next();
-})
 app.use(flash());
 /*app.use((req: Request, res: Response, next: NextFunction) => {
 	res.locals.sessionFlash = req.session?.sessionFlash;
