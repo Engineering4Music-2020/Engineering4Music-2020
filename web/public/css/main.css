@@ -23,6 +23,7 @@ body {
 	justify-content: center;
 	align-items: stretch;
 	text-align: center;
+	margin-bottom: 2em;
 }
 
 /* HOME */
@@ -119,7 +120,7 @@ body {
 	align-items: center;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin: 0 3em 3em 3em;
+	margin: 0 3em 1em 3em;
 	padding-top: 1em;
 }
 #navbar ul {
@@ -130,6 +131,13 @@ body {
 }
 #nav-links {
 	display: flex;
+}
+nav ul li {
+	color: white;
+	text-decoration: none;
+	font-family: "Work Sans";
+	font-size: 1em;
+	margin: 0 0 0 1.5em;
 }
 nav ul li a {
 	color: white;
@@ -150,9 +158,86 @@ nav ul li a:hover {
 #login.nav-item.true {
 	display: none;
 }
+#logout.nav-item.false {
+	display: none;
+}
+#login.nav-item.true {
+	display: none;
+}
+#logout.false {
+	display: none;
+}
+#login.true {
+	display: none;
+}
 .fa-lock-open,
 .fa-lock {
 	margin-right: 0.2em;
+}
+.nav-item .icon {
+	display: none;
+}
+
+/* NAVBAR RESPONSIVE */
+
+.nav-responsive {
+	display: none;
+	overflow: hidden;
+}
+.nav-responsive a {
+	float: left;
+	display: block;
+	color: #fff;
+	text-align: center;
+	padding: 0.4em 1em;
+	text-decoration: none;
+	font-size: 1.3em;
+}
+.nav-responsive a:hover {
+	color: #fece80;
+}
+.nav-responsive a.active {
+	color: #fece80;
+}
+
+@media screen and (max-width: 830px) {
+	.hide {
+		display: none;
+	}
+	#nav-links {
+		display: none;
+	}
+	#navbar {
+		display: block;
+		margin: 1em 0 1em 0;
+		padding: 1em;
+		height: fit-content;
+
+		font-family: "Work Sans";
+	}
+	.nav-responsive {
+		display: block;
+	}
+	.nav-responsive a:not(:first-child) {
+		display: none;
+	}
+	.nav-responsive a.icon {
+		float: right;
+		display: block;
+	}
+	.nav-responsive.responsive {
+		position: relative;
+	}
+	.nav-responsive.responsive a.icon {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.nav-responsive.responsive a {
+		float: none;
+		display: block;
+		text-align: left;
+	}
 }
 
 /* FOOTER */
@@ -189,6 +274,17 @@ nav ul li a:hover {
 .heart {
 	color: #d67436;
 	font-size: 125%;
+}
+
+@media screen and (max-width: 950px) {
+	#footer-bottom-right {
+		display: none;
+	}
+}
+@media screen and (max-width: 775px) {
+	#footer-bottom-logo {
+		display: none;
+	}
 }
 
 /* FOOTER: SOCIAL MEDIA ICONS */

@@ -1,8 +1,33 @@
+var resizeTimer;
+// let data;
+let status;
+var statusHumidity = 1;
+var statusTemperature = 1;
+
+window.addEventListener("resize", function () {
+	clearTimeout(resizeTimer);
+	resizeTimer = setTimeout(function () {
+		switch (status) {
+			case 1:
+				loadDataDefault();
+				break;
+			case 2:
+				loadDataLast24h();
+				break;
+			case 3:
+				loadDataLast7d();
+				break;
+			case 4:
+				loadDataLast1m();
+				break;
+		}
+	}, 250);
+});
+
 function loadDataDefault() {
-	fetch("https://engineering4music.herokuapp.com/dataJSONAll").then((result) =>
+	fetch("http://localhost:3000/dataJSONAll").then((result) =>
 		result.json().then(function (fetch_result) {
-			let data = fetch_result.rows;
-			console.log(data);
+			data = fetch_result.rows;
 
 			// SWITCH BUTTONS ON/OFF
 			document
@@ -12,16 +37,17 @@ function loadDataDefault() {
 			document.getElementById("showLast7d").setAttribute("class", "button");
 			document.getElementById("showLast1m").setAttribute("class", "button");
 
+			status = 1;
+
 			renderGraph(data);
 		})
 	);
 }
 
 function loadDataLast24h() {
-	fetch("https://engineering4music.herokuapp.com/dataJSONlast24h").then((result) =>
+	fetch("http://localhost:3000/dataJSONlast24h").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
-			console.log(data);
 
 			// SWITCH BUTTONS ON/OFF
 			document
@@ -31,15 +57,16 @@ function loadDataLast24h() {
 			document.getElementById("showLast7d").setAttribute("class", "button");
 			document.getElementById("showLast1m").setAttribute("class", "button");
 
+			status = 2;
+
 			renderGraph(data);
 		})
 	);
 }
 function loadDataLast7d() {
-	fetch("https://engineering4music.herokuapp.com/dataJSONlast7d").then((result) =>
+	fetch("http://localhost:3000/dataJSONlast7d").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
-			console.log(data);
 
 			// SWITCH BUTTONS ON/OFF
 			document
@@ -49,15 +76,16 @@ function loadDataLast7d() {
 			document.getElementById("showLast24h").setAttribute("class", "button");
 			document.getElementById("showLast1m").setAttribute("class", "button");
 
+			status = 3;
+
 			renderGraph(data);
 		})
 	);
 }
 function loadDataLast1m() {
-	fetch("https://engineering4music.herokuapp.com/dataJSONlast1m").then((result) =>
+	fetch("http://localhost:3000/dataJSONlast1m").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
-			console.log(data);
 
 			// SWITCH BUTTONS ON/OFF
 			document
@@ -66,6 +94,8 @@ function loadDataLast1m() {
 			document.getElementById("showAllData").setAttribute("class", "button");
 			document.getElementById("showLast24h").setAttribute("class", "button");
 			document.getElementById("showLast7d").setAttribute("class", "button");
+
+			status = 4;
 
 			renderGraph(data);
 		})
@@ -98,6 +128,7 @@ function renderGraph(data) {
 	});
 
 	// HEADER: MIN-DATE & MAX-DATE
+	d3.select("#raspberry-name").html(data[0].raspberry_name);
 	d3.select("#date-min").html(
 		d3.min(data, function (d) {
 			const datum = d.date;
@@ -135,15 +166,18 @@ function renderGraph(data) {
 
 	// SET DIMENSIONS AND MARGINS OF GRAPH
 	var margin = { top: 10, right: 30, bottom: 50, left: 60 },
-		width = 800 - margin.left - margin.right,
+		width = 0.8 * window.innerWidth - margin.left - margin.right,
 		height = 400 - margin.top - margin.bottom;
 
 	// APPEND SVG OBJECT TO BODY OF PAGE
 	var svg = d3
 		.select("#graph-graph")
 		.append("svg")
+		.attr("id", "graph-svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
+		// .attr("viewBox", `0 0 800 400`)
+		// .attr("preserveAspectRatio", "xMinYMin meet")
 		.append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -281,386 +315,37 @@ function renderGraph(data) {
 				.style("left", event.pageX + 10 + "px")
 				.style("top", event.pageY + 10 + "px");
 		});
+
+	if (statusTemperature === 0) {
+		toggleTemperature();
+	}
+	if (statusHumidity === 0) {
+		toggleHumidity();
+	}
 }
 
-// function toggleTemperature() {
-// 	var temperature_line = document.getElementById("temperature-line");
-// 	var temperature_label = document.getElementById("temperature-label");
-// 	if (temperature_line.style.display === "none") {
-// 		temperature_line.style.display = "block";
-// 		document.getElementById("toggleTemperature").innerHTML = "Hide Temperature";
-// 		document.getElementById("toggleTemperature").style.backgroundColor =
-// 			"#501215";
-// 		document.getElementById("toggleTemperature").style.color = "#fff";
-// 	} else {
-// 		temperature_line.style.display = "none";
-// 		document.getElementById("toggleTemperature").innerHTML = "Show Temperature";
-// 		document.getElementById("toggleTemperature").style.backgroundColor =
-// 			"rgb(239, 239, 239)";
-// 		document.getElementById("toggleTemperature").style.color = "#000";
-// 	}
-// 	if (temperature_label.style.display === "none") {
-// 		temperature_label.style.display = "block";
-// 	} else {
-// 		temperature_label.style.display = "none";
-// 	}
-// }
+function toggleTemperature() {
+	var temperature_line = document.getElementById("temperature-line");
+	if (temperature_line.style.display === "none") {
+		temperature_line.style.display = "block";
+		d3.selectAll(".dot-temperature").style("display", "block");
+		statusTemperature = 1;
+	} else {
+		temperature_line.style.display = "none";
+		d3.selectAll(".dot-temperature").style("display", "none");
+		statusTemperature = 0;
+	}
+}
 
-// function toggleHumidity() {
-// 	var humidity_line = document.getElementById("humidity-line");
-// 	var humidity_label = document.getElementById("humidity-label");
-// 	if (humidity_line.style.display === "none") {
-// 		humidity_line.style.display = "block";
-// 		document.getElementById("toggleHumidity").innerHTML = "Hide Humidity";
-// 		document.getElementById("toggleHumidity").style.backgroundColor = "#fece80";
-// 	} else {
-// 		humidity_line.style.display = "none";
-// 		document.getElementById("toggleHumidity").innerHTML = "Show Humidity";
-// 		document.getElementById("toggleHumidity").style.backgroundColor =
-// 			"rgb(239, 239, 239)";
-// 	}
-// 	if (humidity_label.style.display === "none") {
-// 		humidity_label.style.display = "block";
-// 	} else {
-// 		humidity_label.style.display = "none";
-// 	}
-// }
-
-mock_data = [
-	{
-		humidity: 50,
-		temperature: 8,
-		pressure: 1009,
-		date: "2020-09-09T00:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 10,
-		pressure: 1009,
-		date: "2020-09-09T01:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 11,
-		pressure: 1009,
-		date: "2020-09-09T02:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 10,
-		pressure: 1009,
-		date: "2020-09-09T03:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 10,
-		pressure: 1009,
-		date: "2020-09-09T04:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 13,
-		pressure: 1009,
-		date: "2020-09-09T05:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 12,
-		pressure: 1009,
-		date: "2020-09-09T06:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 14,
-		pressure: 1009,
-		date: "2020-09-09T07:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 18,
-		pressure: 1009,
-		date: "2020-09-09T08:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 20,
-		pressure: 1009,
-		date: "2020-09-09T09:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 25,
-		pressure: 1009,
-		date: "2020-09-09T10:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 75,
-		temperature: 15,
-		pressure: 1009,
-		date: "2020-09-09T11:00:00.000Z",
-		id: 2,
-	},
-	{
-		humidity: 45,
-		temperature: 20,
-		pressure: 1009,
-		date: "2020-09-09T12:00:00.000Z",
-		id: 3,
-	},
-	{
-		humidity: 65,
-		temperature: 35,
-		pressure: 1009,
-		date: "2020-09-09T13:00:00.000Z",
-		id: 4,
-	},
-	{
-		humidity: 55,
-		temperature: 23,
-		pressure: 1009,
-		date: "2020-09-09T14:00:00.000Z",
-		id: 5,
-	},
-	{
-		humidity: 35,
-		temperature: 22,
-		pressure: 1009,
-		date: "2020-09-09T15:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 20,
-		pressure: 1009,
-		date: "2020-09-09T16:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 18,
-		pressure: 1009,
-		date: "2020-09-09T17:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 30,
-		pressure: 1009,
-		date: "2020-09-09T18:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 22,
-		pressure: 1009,
-		date: "2020-09-09T19:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 26,
-		pressure: 1009,
-		date: "2020-09-09T20:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 14,
-		pressure: 1009,
-		date: "2020-09-09T21:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 12,
-		pressure: 1009,
-		date: "2020-09-09T22:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 10,
-		pressure: 1009,
-		date: "2020-09-09T23:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 50,
-		temperature: 8,
-		pressure: 1009,
-		date: "2020-09-10T00:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 10,
-		pressure: 1009,
-		date: "2020-09-10T01:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 11,
-		pressure: 1009,
-		date: "2020-09-10T02:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 10,
-		pressure: 1009,
-		date: "2020-09-10T03:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 10,
-		pressure: 1009,
-		date: "2020-09-10T04:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 13,
-		pressure: 1009,
-		date: "2020-09-10T05:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 12,
-		pressure: 1009,
-		date: "2020-09-10T06:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 14,
-		pressure: 1009,
-		date: "2020-09-10T07:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 18,
-		pressure: 1009,
-		date: "2020-09-10T08:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 20,
-		pressure: 1009,
-		date: "2020-09-10T09:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 50,
-		temperature: 25,
-		pressure: 1009,
-		date: "2020-09-10T10:00:00.000Z",
-		id: 1,
-	},
-	{
-		humidity: 75,
-		temperature: 15,
-		pressure: 1009,
-		date: "2020-09-10T11:00:00.000Z",
-		id: 2,
-	},
-	{
-		humidity: 45,
-		temperature: 20,
-		pressure: 1009,
-		date: "2020-09-10T12:00:00.000Z",
-		id: 3,
-	},
-	{
-		humidity: 65,
-		temperature: 35,
-		pressure: 1009,
-		date: "2020-09-10T13:00:00.000Z",
-		id: 4,
-	},
-	{
-		humidity: 55,
-		temperature: 23,
-		pressure: 1009,
-		date: "2020-09-10T14:00:00.000Z",
-		id: 5,
-	},
-	{
-		humidity: 35,
-		temperature: 22,
-		pressure: 1009,
-		date: "2020-09-10T15:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 20,
-		pressure: 1009,
-		date: "2020-09-10T16:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 18,
-		pressure: 1009,
-		date: "2020-09-10T17:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 30,
-		pressure: 1009,
-		date: "2020-09-10T18:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 22,
-		pressure: 1009,
-		date: "2020-09-10T19:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 26,
-		pressure: 1009,
-		date: "2020-09-10T20:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 14,
-		pressure: 1009,
-		date: "2020-09-10T21:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 12,
-		pressure: 1009,
-		date: "2020-09-10T22:00:00.000Z",
-		id: 6,
-	},
-	{
-		humidity: 35,
-		temperature: 10,
-		pressure: 1009,
-		date: "2020-09-10T23:00:00.000Z",
-		id: 6,
-	},
-];
+function toggleHumidity() {
+	var humidity_line = document.getElementById("humidity-line");
+	if (humidity_line.style.display === "none") {
+		humidity_line.style.display = "block";
+		d3.selectAll(".dot-humidity").style("display", "block");
+		statusHumidity = 1;
+	} else {
+		humidity_line.style.display = "none";
+		d3.selectAll(".dot-humidity").style("display", "none");
+		statusHumidity = 0;
+	}
+}

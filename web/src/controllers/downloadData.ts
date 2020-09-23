@@ -15,20 +15,27 @@ const createNewClientAndConnectToDatabase = async (
 	} catch (err) {
 		throw err;
 	}
-}
+	// console.log(req.user.name);
+	// res.render("data", {
+	// 	layout: false,
+	// 	title: req.user.name
+	// });
+};
 
 const readData = async (res: Response) => {
-		try {
-			const result = await pool.query(`SELECT * FROM data WHERE id = ${id} ORDER BY date;`);
-			console.log(result);
-			res.render("data", {
-				layout: false,
-				data: result.rows,
-			});
-		} catch (err) {
-			throw err;
-		}
-}
+	try {
+		const result = await pool.query(
+			`SELECT * FROM data WHERE id = ${id} ORDER BY date;`
+		);
+		console.log(result);
+		res.render("data", {
+			layout: false,
+			data: result.rows,
+		});
+	} catch (err) {
+		throw err;
+	}
+};
 
 export const loadData = (req: Request, res: Response): void => {
 	readData(res);
@@ -36,21 +43,36 @@ export const loadData = (req: Request, res: Response): void => {
 };
 
 export async function loadJSONAll(req: Request, res: Response) {
-	const query = `SELECT * FROM data WHERE raspiid = ${id} ORDER BY date;`;
+	const query = `SELECT * FROM data
+	JOIN raspberrypi ON data.raspiid=raspberrypi.id
+	WHERE raspiid = ${id}
+	ORDER BY date;`;
 	createNewClientAndConnectToDatabase(req, res, query);
 }
 
 export async function loadJSONlast24h(req: Request, res: Response) {
-	const query = `SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '24 HOURS' AND NOW() AND raspiid = ${id} ORDER BY date;`;
+	const query = `SELECT * FROM data
+	JOIN raspberrypi ON data.raspiid=raspberrypi.id
+	WHERE date BETWEEN NOW() - INTERVAL '24 HOURS' AND NOW()
+	AND raspiid = ${id}
+	ORDER BY date;`;
 	createNewClientAndConnectToDatabase(req, res, query);
 }
 
 export async function loadJSONlast7d(req: Request, res: Response) {
-	const query = `SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '7 DAYS' AND NOW() AND raspiid = ${id} ORDER BY date;`;
+	const query = `SELECT * FROM data
+	JOIN raspberrypi ON data.raspiid=raspberrypi.id
+	WHERE date BETWEEN NOW() - INTERVAL '7 DAYS' AND NOW()
+	AND raspiid = ${id}
+	ORDER BY date;`;
 	createNewClientAndConnectToDatabase(req, res, query);
 }
 
 export async function loadJSONlast1m(req: Request, res: Response) {
-	const query = `SELECT * FROM data WHERE date BETWEEN NOW() - INTERVAL '1 MONTH' AND NOW() AND raspiid = ${id} ORDER BY date;`;
+	const query = `SELECT * FROM data
+	JOIN raspberrypi ON data.raspiid=raspberrypi.id
+	WHERE date BETWEEN NOW() - INTERVAL '1 MONTH' AND NOW()
+	AND raspiid = ${id}
+	ORDER BY date;`;
 	createNewClientAndConnectToDatabase(req, res, query);
 }

@@ -8,15 +8,17 @@ dotenv.config();
 
 const LocalStrategy = passportLocal.Strategy;
 
-
 export const initialize = async (passport: any) => {
+	console.log("connected passport");
+
 	passport.use(
 		new LocalStrategy(
 			{
 				usernameField: "email",
 				passwordField: "password",
+				passReqToCallback: true
 			},
-			(email, password, done) => {
+			(req, email, password, done) => {
 				pool.query(
 					`SELECT * FROM login WHERE email LIKE '${email}';`,
 					(err, result) => {
@@ -33,11 +35,11 @@ export const initialize = async (passport: any) => {
 								if (isMatch) {
 									return done(null, user);
 								} else {
-									return done(null, false, { message: "Wrong Password!" });
+									return done(null, false, req.flash("err_msg", "Wrong Password!"));
 								}
 							});
 						} else {
-							return done(null, false, { message: "Email is not registered." });
+							return done(null, false, req.flash("not_registered_msg", "Click here to register."));
 						}
 					}
 				);
@@ -45,7 +47,7 @@ export const initialize = async (passport: any) => {
 		)
 	);
 	passport.serializeUser((user: any, done: any) => {
-		done(null, user.id);
+		done(null, user.id, user.name);
 	});
 	passport.deserializeUser((id: any, done: any) => {
 		pool.query(`SELECT * FROM login WHERE id = ${id};`, (err, result) => {
@@ -55,7 +57,6 @@ export const initialize = async (passport: any) => {
 			return done(null, result.rows[0]);
 		});
 	});
-	
 };
 
 export const checkAuthenticated = (
@@ -86,4 +87,12 @@ export const logout = (req: Request, res: Response) => {
 	res.redirect("/");
 	req.flash("info", "You have logged out successfully.");
 };
+
+const message = (req: Request, res: Response) => {
+	res.render("loginForm", {
+		layout: false,
+		expressFlash: req.flash("success"), sessionFlash: res.locals.sessionFlash
+	})
+}
+
 export default initialize;

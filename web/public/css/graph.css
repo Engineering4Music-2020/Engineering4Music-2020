@@ -4,6 +4,7 @@
 	background-color: #fff;
 	border-radius: 0.4em;
 	width: fit-content;
+	max-width: 90%;
 	height: fit-content;
 	padding: 1em;
 	display: flex;
@@ -91,6 +92,11 @@
 .date {
 	font-weight: bold;
 }
+#raspberry-name {
+	font-weight: bold;
+	font-size: 1.75em;
+	padding-bottom: 0.75em;
+}
 
 /* GRAPH-INFO */
 
@@ -132,6 +138,87 @@
 	color: #fff;
 	background-color: rgba(0, 0, 0, 1);
 	padding: 0.35em;
-	border: 1px solid black;
+	border: 1px solid #000;
 	border-radius: 0.4em;
+}
+
+/* GRAPH-CHECKBOXES */
+
+.checkbox {
+	display: block;
+	position: relative;
+	padding-left: 30px;
+	/* margin-bottom: 15px; */
+	cursor: pointer;
+	font-size: 20px;
+}
+
+input[type="checkbox"] {
+	visibility: hidden;
+}
+.checker {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background-color: black;
+}
+.checkbox:hover input ~ .checker {
+	background-color: gray;
+}
+/* Specify the background color to be shown when checkbox is active */
+.checkbox input:active ~ .checker {
+	background-color: white;
+}
+/* Specify the background color to be shown when checkbox is checked */
+.checkbox.temperature input:checked ~ .checker {
+	background-color: #cb464a;
+}
+.checkbox.humidity input:checked ~ .checker {
+	background-color: #248bcc;
+}
+/* Checkmark to be shown in checkbox */
+/* It is not be shown when not checked */
+.checker:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+/* Display checkmark when checked */
+.checkbox input:checked ~ .checker:after {
+	display: block;
+}
+/* Styling the checkmark using webkit */
+/* Rotated the rectangle by 45 degree and 
+      showing only two border to make it look
+      like a tickmark */
+.checkbox .checker:after {
+	left: 8px;
+	bottom: 5px;
+	width: 6px;
+	height: 12px;
+	border: solid white;
+	border-width: 0 4px 4px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+/* GRAPH-RESPONSIVE */
+
+@media screen and (max-width: 960px) {
+	#graph-middle {
+		flex-direction: column;
+	}
+	#graph-control {
+		flex-direction: row;
+		justify-content: center;
+	}
+}
+
+@media screen and (max-width: 580px) {
+	#graph-bottom {
+		flex-direction: column;
+	}
 }

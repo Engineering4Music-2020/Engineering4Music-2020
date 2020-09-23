@@ -13,25 +13,35 @@
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/45e20ca475.js" crossorigin="anonymous"></script>
+    <script src="js/nav_responsive.js"></script>
 </head>
 
 <body onload="loadDataDefault()">
     <nav id="navbar">
-        <a href="/home">
+        <a href="/home" class="hide">
             <img id="logo" src="/images/logo.png" alt="">
         </a>
         <ul id="nav-links">
-            <li class="nav-item"><a href="/">Home</a></li>
-            <li class="nav-item active"><a href="/data">Data</a></li>
-            <li class="nav-item {{login}}" id="logout"><a href="/logout"><i class="fas fa-lock"></i>Logout</a>
+            <li class="nav-item hide"><a href="/">Home</a></li>
+            <li class="nav-item hide active"><a href="/data">Data</a></li>
+            <li class="nav-item hide {{login}}" id="logout"><a href="/logout"><i class="fas fa-lock"></i>Logout</a>
             </li>
         </ul>
+        <div class="nav-responsive" id="myTopnav">
+            <a href="/data" class="active">Data</a>
+            <a href="/">Home</a>
+            <a href="/logout" id="logout" class="{{login}}">Logout</a>
+            <a href="javascript:void(0);" id="hamburger" class="icon" onclick="toggleNavbar()"><i
+                    class="fas fa-bars"></i></a>
+            </a>
+        </div>
     </nav>
 
     <div class="content">
         <div id="graph-content">
             <div id="graph-top">
                 <div id="graph-header">
+                    <div id="raspberry-name"></div>
                     <span class="date" id="date-min"></span>
                     <span> to </span>
                     <span class="date" id="date-max"></span>
@@ -58,7 +68,13 @@
 
             <div id="graph-bottom">
                 <div id="graph-info-humidity">
-                    <div id="humidity-info">Humidity </div>
+                    <div id="humidity-info">
+                        <label class="checkbox humidity">Humidity<input onclick="toggleHumidity()" class="checkbox"
+                                id="checkbox-humidity" type="checkbox" name="humidity" value="humidity"
+                                checked="checked">
+                            <span class="checker"></span>
+                        </label>
+                    </div>
                     <div id="humidity-min-max">
                         <div class="humidity-min-max-div"><span>Min: </span><span
                                 id="humidity-min"></span><span>%</span></div>
@@ -67,7 +83,13 @@
                     </div>
                 </div>
                 <div id="graph-info-temperature">
-                    <div id="temperature-info">Temperature </div>
+                    <div id="temperature-info">
+                        <label class="checkbox temperature">Temperature<input onclick="toggleTemperature()"
+                                class="checkbox" id="checkbox-temperature" type="checkbox" name="temperature"
+                                value="temperature" checked="checked">
+                            <span class="checker"></span>
+                        </label>
+                    </div>
                     <div id="temperature-min-max">
                         <div class="temperature-min-max-div"><span>Min: </span><span
                                 id="temperature-min"></span><span>°C</span></div>

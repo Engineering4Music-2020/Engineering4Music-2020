@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import passport from "passport";
 import initialize from "./controllers/passportConfig";
-import flash from "connect-flash";
+import flash from "express-flash";
 dotenv.config();
 
 import * as aboutController from "./controllers/about";
@@ -16,7 +16,7 @@ import * as downloadDataController from "./controllers/downloadData";
 import * as registerController from "./controllers/register";
 import * as loginController from "./controllers/login";
 import * as passportConfig from "./controllers/passportConfig";
-import { userInfo } from "os";
+
 
 // Create Express server
 const app = express();
@@ -42,7 +42,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash());
-
+/*app.use((req: Request, res: Response, next: NextFunction) => {
+	res.locals.sessionFlash = req.session?.sessionFlash;
+	delete req.session?.sessionFlash;
+	next();
+});*/
+app.all("/express-flash", (req: Request, res: Response) => {
+	req.flash("success", "This is a flash message");
+	res.redirect(301, "/");
+});
+app.use((req: Request, res: Response, next: NextFunction) => {
+	res.locals.success_msg = req.flash("success_msg");
+	res.locals.err_msg = req.flash("err_msg");
+	res.locals.not_registered_msg = req.flash("not_registered_msg");
+	next();
+});
 app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "../views"));
 app.engine("handlebars", exphbs());

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { getData } from "../../../sensors/src/main";
 
 export const main = (req: Request, res: Response) => {
+	console.log(name);
 	const temp = getData().then((data) => {
 		res.render("main", {
 			layout: false,

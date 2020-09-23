@@ -6,7 +6,7 @@ yarn.lock
 junit.xml
 copyStaticAssets.ts 
 express.d.ts
-**/dist/
+*/dist/
 
 # Secrets, local configuration
 .env
