@@ -2,6 +2,7 @@
 coverage
 node_modules
 bower_components
+<<<<<<< HEAD
 /auto-mail/
 /database/
 /login/
@@ -12,10 +13,13 @@ bower_components
 /web/views/
 /web/dist/sensors/
 */dist/
+=======
+>>>>>>> dc2643e4acd9ec94ee3d6331727c262cb14f5121
 yarn.lock
 junit.xml
 copyStaticAssets.ts 
 express.d.ts
+**/dist/
 
 # Secrets, local configuration
 .env

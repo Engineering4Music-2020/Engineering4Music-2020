@@ -9,6 +9,7 @@
   "author": "Andreas Ahlenstorf",
   "license": "Apache-2.0",
   "scripts": {
+    "tsc": "tsc",
     "start": "node dist/main.js",
     "start-debug": "nodemon --inspect dist/main.js",
     "build": "npm run build-ts && npm run tslint",
