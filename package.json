@@ -8,7 +8,7 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "build": "npm run transpile && npm run create_views && npm run create_public && npm run copy_views && npm run copy_public",
+    "build": "npm run clean && npm run transpile && npm run create_views && npm run create_public && npm run copy_views && npm run copy_public",
     "clean": "cd ./web && [ -d ./dist ] && echo 'web/dist exists' && npm run delete_dist || echo 'ERROR: web/dist does not exist'",
     "copy_public": "cd ./web && cp -r ./public/* ./dist/web/public && echo 'successfully copied ./web/public into ./web/dist/web/public'",
     "copy_views": "cd ./web && cp -r ./views/* ./dist/web/views && echo 'successfully copied ./web/views into ./dist/web/src/views'",
