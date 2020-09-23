@@ -35,9 +35,6 @@ app.use(
 		saveUninitialized: false,
 		resave: false,
 		name: "Engineering4Music",
-		cookie: {
-			secure: true
-		}
 	})
 );
 
