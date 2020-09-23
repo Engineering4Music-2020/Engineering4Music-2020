@@ -2,6 +2,16 @@
 coverage
 node_modules
 bower_components
+/auto-mail/
+/database/
+/login/
+/sensors/
+/web/src/
+/web/public/
+/web/sessions/
+/web/views/
+/web/dist/sensors/
+*/dist/
 yarn.lock
 junit.xml
 copyStaticAssets.ts 
