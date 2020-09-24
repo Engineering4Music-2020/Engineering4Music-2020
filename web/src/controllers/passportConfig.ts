@@ -9,8 +9,6 @@ dotenv.config();
 const LocalStrategy = passportLocal.Strategy;
 
 export const initialize = async (passport: any) => {
-	console.log("connected passport");
-
 	passport.use(
 		new LocalStrategy(
 			{

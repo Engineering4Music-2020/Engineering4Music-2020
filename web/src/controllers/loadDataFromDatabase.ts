@@ -22,7 +22,6 @@ const readData = async (res: Response) => {
 		const result = await pool.query(
 			`SELECT * FROM data WHERE id = ${id} ORDER BY date;`
 		);
-		console.log(result);
 		res.render("data", {
 			layout: false,
 			data: result.rows,
@@ -34,7 +33,6 @@ const readData = async (res: Response) => {
 
 export const loadData = (req: Request, res: Response): void => {
 	readData(res);
-	console.log(id);
 };
 
 export async function loadJSONAll(req: Request, res: Response) {

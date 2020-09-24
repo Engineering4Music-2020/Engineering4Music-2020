@@ -62,7 +62,6 @@ function checkToSendMail(status_value_current: string, status_value_last: string
 	) {
 		return { status: true, subject: "in range again" };
 	}
-	console.log("This shouldn't hapen...");
 	return { status: false, subject: "undefined" };
 }
 

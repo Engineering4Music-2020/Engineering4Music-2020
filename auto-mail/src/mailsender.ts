@@ -31,9 +31,6 @@ export const sendMail = (
 
 	sgMail
 		.send(msg)
-		.then(() => {
-			console.log(`Mail with subject "${msg.subject}" has been sent.`);
-		})
 		.catch((error: any) => {
 			console.log(error);
 		});

@@ -2,7 +2,7 @@
 coverage
 node_modules
 bower_components
-*/dist/
+
 yarn.lock
 junit.xml
 copyStaticAssets.ts 

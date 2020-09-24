@@ -17,9 +17,6 @@ const checkHowManyRowsThereAreAndIfNecessaryDeleteSome = (
 			const rowNumber = result.rowCount;
 			if (rowNumber >= 1000) {
 				await client.query(delete100latestrows);
-				console.log("Rows deleted");
-			} else {
-				console.log("Nothing deleted");
 			}
 		} catch (err) {
 			throw err;
@@ -34,18 +31,10 @@ const fillDataBase = async (
 	temperature: number,
 	raspiid: any
 ) => {
-	let d = new Date();
-	let year = d.getFullYear();
-	let month = d.getMonth() + 1;
-	let day = d.getDate();
-	let hour = d.getHours();
-	let minutes = d.getMinutes();
-	console.log(`date '${year}-${month}-${day}' + time '${hour}:${minutes}'`);
 	try {
 		await pool.query(
 			`INSERT INTO data (humidity, temperature, date, raspiid) VALUES(${humidity}, ${temperature}, LOCALTIMESTAMP, ${raspiid});`
 		);
-		console.log("Released");
 	} catch (err) {
 		throw err;
 	}

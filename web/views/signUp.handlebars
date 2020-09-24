@@ -40,7 +40,7 @@
         <div id="register-form" class="login-form">
             <h1>{{title}}</h1>
             {{#if err_msg}}
-            <p>{{err_msg}}</p>
+            <p class="flash-message">{{err_msg}}</p>
             {{/if}}
             <form action="auth" method="post">
                 <div class="login-input"><input type="number" name="raspiId"
@@ -55,7 +55,7 @@
                 <div id="login-signup">Already signed up? <a href="/data">Click here to log in.</a></div>
             </form>
             {{#if sessionFlash.message}}
-            <div id="flash-messages" class="container">
+            <div id="flash-messages" class="container flash-message">
                 {{#contains sessionFlash.type "warning"}}
                 <div class="message">{{{sessionFlash.message}}}</div>
                 {{/contains}}

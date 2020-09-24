@@ -8,7 +8,6 @@ export async function getData(): Promise<MeasureData> {
 	let sensors_m: any;
 	let sensor: any;
 	if (process.env.RASPBERRY_AVAILABLE === "true") {
-		console.log("Sensors are available. Sending data from sensors:");
 		sensors_m = require("./sensors");
 		sensor = new sensors_m.GrovePi(1);
 		const humidity: Humidity = await sensor.measureHumidity();
@@ -16,7 +15,6 @@ export async function getData(): Promise<MeasureData> {
 		const measureData = new MeasureData(temperature.value, humidity.value);
 		return measureData;
 	} else {
-		console.log("Sensors are not available. Sending mock data:");
 		class Temperature {
 			readonly value: number;
 

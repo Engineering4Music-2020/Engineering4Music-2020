@@ -108,6 +108,14 @@ body {
 #register-form {
 	width: 800px;
 }
+.flash-message {
+	color: #cb464a;
+	font-style: italic;
+}
+.flash-message a {
+	color: #cb464a;
+	font-weight: bold;
+}
 
 /* NAVIGATION TOP */
 
