@@ -57,6 +57,7 @@ export const initialize = async (passport: any) => {
 			return done(null, result.rows[0]);
 		});
 	});
+
 };
 
 export const checkAuthenticated = (
@@ -65,17 +66,12 @@ export const checkAuthenticated = (
 	next: NextFunction
 ) => {
 	if (req.isAuthenticated()) {
-		// document.getElementById("logout").setAttribute("class") = "visible";
 		return res.redirect("data" + { user: req.user } + { id });
 	}
 	next();
 };
 
-export const checkNotAuthenticated = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
+export const checkNotAuthenticated = (req: Request, res: Response, next: NextFunction) => {
 	if (req.isAuthenticated()) {
 		return next();
 	}
@@ -85,14 +81,14 @@ export const checkNotAuthenticated = (
 export const logout = (req: Request, res: Response) => {
 	req.logout();
 	res.redirect("/");
-	req.flash("info", "You have logged out successfully.");
+	req.flash("success_msg", "You have logged out successfully.");
 };
 
 const message = (req: Request, res: Response) => {
 	res.render("loginForm", {
 		layout: false,
 		expressFlash: req.flash("success"), sessionFlash: res.locals.sessionFlash
-	})
-}
+	});
+};
 
 export default initialize;

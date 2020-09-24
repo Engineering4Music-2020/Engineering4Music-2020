@@ -64,15 +64,16 @@ const uploadToDB = (raspiId, name, email, password, res, req) => {
 };
 exports.register = (req, res) => {
     const plainTextPassword = req.body.password;
+    const raspiId = req.body.raspiId;
+    const name = req.body.name;
+    const email = req.body.email;
     bcrypt_1.default
         .hash(plainTextPassword, 10)
         .then((hash) => {
-        const raspiId = req.body.raspiId;
-        const name = req.body.name;
-        const email = req.body.email;
         const password = hash;
         uploadToDB(raspiId, name, email, password, res, req);
-    }).catch((err) => {
+    })
+        .catch((err) => {
         throw err;
     });
 };

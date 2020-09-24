@@ -64,7 +64,6 @@ exports.initialize = (passport) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.checkAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
-        // document.getElementById("logout").setAttribute("class") = "visible";
         return res.redirect("data" + { user: req.user } + { id });
     }
     next();
@@ -78,7 +77,7 @@ exports.checkNotAuthenticated = (req, res, next) => {
 exports.logout = (req, res) => {
     req.logout();
     res.redirect("/");
-    req.flash("info", "You have logged out successfully.");
+    req.flash("success_msg", "You have logged out successfully.");
 };
 const message = (req, res) => {
     res.render("loginForm", {

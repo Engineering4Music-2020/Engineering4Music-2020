@@ -1,9 +1,6 @@
 import sgMail from "@sendgrid/mail";
 import dotenv from "dotenv";
-import {
-	temperature_threshold,
-	humidity_threshold,
-} from "../../database/src/warnUser";
+import { temperature_threshold, humidity_threshold } from "../../database/src/warnUser";
 
 dotenv.config();
 

@@ -21,7 +21,7 @@ const checkHowManyRowsThereAreAndIfNecessaryDeleteSome = (checkForRows, deleteRo
         try {
             const result = yield client.query(checkForRows);
             const rowNumber = result.rowCount;
-            if (rowNumber === 1000) {
+            if (rowNumber >= 1000) {
                 yield client.query(deleteRows);
                 client.release();
                 console.log("Rows deleted");
@@ -37,7 +37,7 @@ const checkHowManyRowsThereAreAndIfNecessaryDeleteSome = (checkForRows, deleteRo
         }
     }));
 };
-const fillDataBase = (humidity, temperature, raspiid) => __awaiter(void 0, void 0, void 0, function* () {
+const fillDataBase = (humidity, temperature, raspiid) => {
     let d = new Date();
     let year = d.getFullYear();
     let month = d.getMonth() + 1;
@@ -56,7 +56,7 @@ const fillDataBase = (humidity, temperature, raspiid) => __awaiter(void 0, void 
             console.log(err.stack);
         }
     }));
-});
+};
 const checkForRows = `SELECT * FROM data;`;
 const deleteRows = `DELETE FROM data where date in (
     select date from data order by date limit 100);`;
@@ -66,13 +66,18 @@ const measure = () => {
         let humidity = data.humidity;
         let temperature = data.temperature;
         // PREVENT ZEROS
+        // if (humidity === 0) {
+        // 	measure();
+        // }
+        dotenv_1.default.config();
         if (humidity === 0) {
             measure();
         }
-        dotenv_1.default.config();
-        const raspiid = process.env.RASPI_ID;
-        warnUser_1.warnUser(humidity, temperature);
-        fillDataBase(humidity, temperature, raspiid);
+        else {
+            const raspiid = process.env.RASPI_ID;
+            warnUser_1.warnUser(humidity, temperature);
+            fillDataBase(humidity, temperature, raspiid);
+        }
     });
 };
-setInterval(measure, 900000);
+setInterval(measure, 5000);

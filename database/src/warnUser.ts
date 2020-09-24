@@ -48,10 +48,7 @@ function isValueInRange(value: number, threshold: number[]) {
 	}
 }
 
-function checkToSendMail(
-	status_value_current: string,
-	status_value_last: string
-) {
+function checkToSendMail(status_value_current: string, status_value_last: string) {
 	if (status_value_current === status_value_last) {
 		return { status: false, subject: "undefined" };
 	} else if (
@@ -69,45 +66,21 @@ function checkToSendMail(
 	return { status: false, subject: "undefined" };
 }
 
-export const warnUser = (
-	humidity_current: number,
-	temperature_current: number
-) => {
-	const status_temperature_current = isValueInRange(
-		temperature_current,
-		temperature_threshold
-	);
-	const status_humidity_current = isValueInRange(
-		humidity_current,
-		humidity_threshold
-	);
+export const warnUser = (humidity_current: number, temperature_current: number) => {
+	const status_temperature_current = isValueInRange(temperature_current, temperature_threshold);
+	const status_humidity_current = isValueInRange(humidity_current, humidity_threshold);
+
 	checkLatestMeasurement(query).then((datas: any) => {
 		let [humidity_last, temperature_last, email] = datas;
-		const status_temperature_last = isValueInRange(
-			temperature_last,
-			temperature_threshold
-		);
-		const status_humidity_last = isValueInRange(
-			humidity_last,
-			humidity_threshold
-		);
 
-		const sendMailTemperature = checkToSendMail(
-			status_temperature_current,
-			status_temperature_last
-		);
-		const sendMailHumidity = checkToSendMail(
-			status_humidity_current,
-			status_humidity_last
-		);
+		const status_temperature_last = isValueInRange(temperature_last, temperature_threshold);
+		const status_humidity_last = isValueInRange(humidity_last, humidity_threshold);
+
+		const sendMailTemperature = checkToSendMail(status_temperature_current, status_temperature_last);
+		const sendMailHumidity = checkToSendMail(status_humidity_current, status_humidity_last);
 
 		if (sendMailTemperature.status === true) {
-			sendMail(
-				"temperature",
-				temperature_current,
-				sendMailTemperature.subject,
-				email
-			);
+			sendMail("temperature", temperature_current, sendMailTemperature.subject, email);
 		}
 		if (sendMailHumidity.status === true) {
 			sendMail("humidity", humidity_current, sendMailHumidity.subject, email);

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Engineering4Music: Sign Up</title>
+
     <link href="css/main.css" rel="stylesheet" title="Default Style" />
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -42,7 +43,7 @@
             <p>{{err_msg}}</p>
             {{/if}}
             <form action="auth" method="post">
-                <div class="login-input"><input type="text" name="raspiId"
+                <div class="login-input"><input type="number" name="raspiId"
                         placeholder="Enter the number written on your RaspberryPi" required></div>
                 <div class="login-input"><input type="text" name="name" placeholder="Enter a name for your RaspberryPi"
                         required></div>

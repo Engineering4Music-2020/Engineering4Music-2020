@@ -9,21 +9,18 @@ import initialize from "./controllers/passportConfig";
 import flash from "express-flash";
 dotenv.config();
 
-import * as aboutController from "./controllers/about";
 import * as homeController from "./controllers/home";
-import * as dataOutputController from "./controllers/dataOutput";
-import * as downloadDataController from "./controllers/downloadData";
+import * as downloadDataController from "./controllers/loadDataFromDatabase";
 import * as registerController from "./controllers/register";
 import * as loginController from "./controllers/login";
 import * as passportConfig from "./controllers/passportConfig";
 
-
-// Create Express server
+// CREATE EXPRESS SERVER
 const app = express();
 initialize(passport);
 const sessionSecret: any = process.env.SESSION_SECRET;
 
-// Express configuration
+// EXPRESS CONFIGURATION
 const public_path = path.join(__dirname, "../public");
 console.log("Public path is " + public_path);
 app.use(express.static(public_path));
@@ -42,11 +39,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash());
-/*app.use((req: Request, res: Response, next: NextFunction) => {
-	res.locals.sessionFlash = req.session?.sessionFlash;
-	delete req.session?.sessionFlash;
-	next();
-});*/
 app.all("/express-flash", (req: Request, res: Response) => {
 	req.flash("success", "This is a flash message");
 	res.redirect(301, "/");
@@ -62,35 +54,21 @@ app.set("views", path.join(__dirname, "../views"));
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
-// Primary app routes.
+// PRIMARY APP ROUTES
 
 app.post("/auth", registerController.register);
-app.get(
-	"/loginForm",
-	passportConfig.checkAuthenticated,
-	loginController.loginForm
-);
+app.get("/loginForm", passportConfig.checkAuthenticated, loginController.loginForm);
 app.get("/join", registerController.form);
-// app.post("/login", loginController.postLogin);
-// app.post("/login", passportConfig.initialize);
-app.post(
-	"/login",
-	passport.authenticate("local", {
-		successRedirect: "/data",
-		failureRedirect: "/loginform",
-		failureFlash: true,
-	})
+app.post("/login", passport.authenticate("local", {
+	successRedirect: "/data",
+	failureRedirect: "/loginform",
+	failureFlash: true,
+})
 );
 app.get("/logout", passportConfig.logout);
-app.get("/about", aboutController.index);
 app.get("/", homeController.index);
 app.get("/home", homeController.index);
-app.get("/main", dataOutputController.main);
-app.get(
-	"/data",
-	passportConfig.checkNotAuthenticated,
-	downloadDataController.loadData
-);
+app.get("/data", passportConfig.checkNotAuthenticated, downloadDataController.loadData);
 app.get("/dataJSONAll", downloadDataController.loadJSONAll);
 app.get("/dataJSONlast24h", downloadDataController.loadJSONlast24h);
 app.get("/dataJSONlast7d", downloadDataController.loadJSONlast7d);

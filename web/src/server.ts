@@ -1,14 +1,14 @@
 import errorHandler from "errorhandler";
-
 import app from "./app";
 
-// Error handler that outputs full stacktraces is active when developing.
+// ERROR HANDLER THAT OUTPUTS FULL STACKTRACES
+// IS ACTIVE WHEN DEVELOPING
 
 if (app.get("env") == "development") {
 	app.use(errorHandler());
 }
 
-// Start Express server.
+// START EXPRESS SERVER
 
 const server = app.listen(app.get("port"), () => {
 	console.log(

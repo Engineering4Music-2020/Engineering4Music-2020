@@ -1,4 +1,3 @@
-import { Client } from "pg";
 import dotenv from "dotenv";
 import { pool } from "./pool";
 
@@ -17,5 +16,3 @@ async function dataToJSON() {
 		console.log(error);
 	}
 }
-
-// dataToJSON();

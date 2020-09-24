@@ -12,25 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.warnUser = exports.humidity_threshold = exports.temperature_threshold = void 0;
 const pg_1 = require("pg");
 const dotenv_1 = __importDefault(require("dotenv"));
 const mailsender_1 = require("../../auto-mail/src/mailsender");
 dotenv_1.default.config();
 const raspiId = process.env.RASPI_ID;
-const checkData = (latestHumidity, latestTemperature) => {
-    if ((latestHumidity > 60 || latestHumidity < 40) && (latestTemperature > 25 || latestTemperature < 15)) {
-        return true;
-    }
-    else {
-        return false;
-    }
-};
-const connectToDataBaseAndCheckData = (query) => __awaiter(void 0, void 0, void 0, function* () {
+const query = `SELECT humidity, temperature, raspiid, email 
+FROM data 
+INNER JOIN login 
+ON data.raspiid = login.id 
+WHERE raspiid = ${raspiId} 
+ORDER BY date ASC;`;
+exports.temperature_threshold = [24, 26];
+exports.humidity_threshold = [40, 50];
+const checkLatestMeasurement = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const client = new pg_1.Client({
         connectionString: process.env.DB_URI,
         ssl: {
-            rejectUnauthorized: false
-        }
+            rejectUnauthorized: false,
+        },
     });
     yield client.connect();
     try {
@@ -50,40 +51,43 @@ const connectToDataBaseAndCheckData = (query) => __awaiter(void 0, void 0, void 
         yield client.end();
     }
 });
-const query = `SELECT humidity, temperature, raspiid, email 
-FROM data 
-INNER JOIN login 
-ON data.raspiid = login.id 
-WHERE raspiid = ${raspiId} 
-ORDER BY date ASC;`;
-exports.warnUser = (humidity, temperature) => {
-    if (humidity > 60 || humidity < 40 || temperature > 25 || temperature < 15) {
-        connectToDataBaseAndCheckData(query).then((datas) => {
-            let [humidity, temperature, email] = datas;
-            switch (checkData(humidity, temperature)) {
-                case true:
-                    console.log("No Mail sent");
-                    break;
-                case false:
-                    mailsender_1.sendWarning(temperature, humidity, email);
-                    console.log("Mail sent");
-                    break;
-            }
-        });
+function isValueInRange(value, threshold) {
+    if (value > threshold[1] || value < threshold[0]) {
+        return "out_of_range";
     }
     else {
-        console.log("Good again");
-        connectToDataBaseAndCheckData(query).then((datas) => {
-            let [humidity, temperature, email] = datas;
-            switch (checkData(humidity, temperature)) {
-                case true:
-                    mailsender_1.sendAllClear(temperature, humidity, email);
-                    console.log("Mail sent");
-                    break;
-                case false:
-                    console.log("No Mail sent");
-                    break;
-            }
-        });
+        return "in_range";
     }
+}
+function checkToSendMail(status_value_current, status_value_last) {
+    if (status_value_current === status_value_last) {
+        return { status: false, subject: "undefined" };
+    }
+    else if (status_value_current === "out_of_range" &&
+        status_value_last === "in_range") {
+        return { status: true, subject: "out of range" };
+    }
+    else if (status_value_current === "in_range" &&
+        status_value_last === "out_of_range") {
+        return { status: true, subject: "in range again" };
+    }
+    console.log("This shouldn't hapen...");
+    return { status: false, subject: "undefined" };
+}
+exports.warnUser = (humidity_current, temperature_current) => {
+    const status_temperature_current = isValueInRange(temperature_current, exports.temperature_threshold);
+    const status_humidity_current = isValueInRange(humidity_current, exports.humidity_threshold);
+    checkLatestMeasurement(query).then((datas) => {
+        let [humidity_last, temperature_last, email] = datas;
+        const status_temperature_last = isValueInRange(temperature_last, exports.temperature_threshold);
+        const status_humidity_last = isValueInRange(humidity_last, exports.humidity_threshold);
+        const sendMailTemperature = checkToSendMail(status_temperature_current, status_temperature_last);
+        const sendMailHumidity = checkToSendMail(status_humidity_current, status_humidity_last);
+        if (sendMailTemperature.status === true) {
+            mailsender_1.sendMail("temperature", temperature_current, sendMailTemperature.subject, email);
+        }
+        if (sendMailHumidity.status === true) {
+            mailsender_1.sendMail("humidity", humidity_current, sendMailHumidity.subject, email);
+        }
+    });
 };
