@@ -42,7 +42,7 @@ const uploadToDB = (
 				}
 			} else {
 				const result = await client.query(
-					`SELECT * FROM login WHERE raspiid = ${raspiId}`
+					`SELECT * FROM login WHERE id = ${raspiId}`
 				);
 				if (result.rows[0]) {
 					req.flash("err_msg", "This ID already belongs to someone else!");
