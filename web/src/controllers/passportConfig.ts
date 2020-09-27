@@ -78,8 +78,8 @@ export const checkNotAuthenticated = (req: Request, res: Response, next: NextFun
 
 export const logout = (req: Request, res: Response) => {
 	req.logout();
-	res.redirect("/");
 	req.flash("success_msg", "You have logged out successfully.");
+	res.redirect("/");	
 };
 
 const message = (req: Request, res: Response) => {

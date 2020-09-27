@@ -21,7 +21,6 @@ function getData() {
         let sensors_m;
         let sensor;
         if (process.env.RASPBERRY_AVAILABLE === "true") {
-            console.log("Sensors are available. Sending data from sensors:");
             sensors_m = require("./sensors");
             sensor = new sensors_m.GrovePi(1);
             const humidity = yield sensor.measureHumidity();
@@ -30,7 +29,6 @@ function getData() {
             return measureData;
         }
         else {
-            console.log("Sensors are not available. Sending mock data:");
             class Temperature {
                 constructor(value) {
                     this.toString = () => {
