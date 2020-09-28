@@ -17,7 +17,7 @@ This project was created by Michael Schnyder and Lars Schmid in September 2020 a
 - When the values for temperature/humidity get out of a defined range, automatic e-mails are sent to warn the user. Another automatic e-mail is sent when this value returns within the defined range, to give the user the all-clear.
 
 ### Website (Frontend)
-- The Website [engineering4music.herokuapp.com](https://engineering4music.herokuapp.com) shows the data of your Raspberry Pi on a graph and lets you choose different time frames (`All Data`, `24 Hours`, `7 Days`, `1 Month`) which will redraw the graph accordingly.
+- The Website [https://engineering4music.herokuapp.com](https://engineering4music.herokuapp.com) shows the data of your Raspberry Pi on a graph and lets you choose different time frames (`All Data`, `24 Hours`, `7 Days`, `1 Month`) which will redraw the graph accordingly.
 - Within the graph, the two lines for humidity and temperature can be toggled on and off in case they overlap. They will stay on/off even when changing the chosen time frame.
 - When hovering over the graph lines, a tooltip will appear and show you the exact date/time and value.
 - The website is responsive and displays data on mobile screens as well as on a browser on your laptop/PC.
