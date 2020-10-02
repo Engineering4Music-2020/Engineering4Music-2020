@@ -25,7 +25,7 @@ window.addEventListener("resize", function () {
 });
 
 function loadDataDefault() {
-	fetch("https://engineering4music.herokuapp.com/dataJSONAll").then((result) =>
+	fetch("http://localhost:3000/dataJSONAll").then((result) =>
 		result.json().then(function (fetch_result) {
 			data = fetch_result.rows;
 
@@ -45,7 +45,7 @@ function loadDataDefault() {
 }
 
 function loadDataLast24h() {
-	fetch("https://engineering4music.herokuapp.com/dataJSONlast24h").then((result) =>
+	fetch("http://localhost:3000/dataJSONlast24h").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
 
@@ -64,7 +64,7 @@ function loadDataLast24h() {
 	);
 }
 function loadDataLast7d() {
-	fetch("https://engineering4music.herokuapp.com/dataJSONlast7d").then((result) =>
+	fetch("http://localhost:3000/dataJSONlast7d").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
 
@@ -83,7 +83,7 @@ function loadDataLast7d() {
 	);
 }
 function loadDataLast1m() {
-	fetch("https://engineering4music.herokuapp.com/dataJSONlast1m").then((result) =>
+	fetch("http://localhost:3000/dataJSONlast1m").then((result) =>
 		result.json().then(function (fetch_result) {
 			let data = fetch_result.rows;
 
@@ -132,12 +132,14 @@ function renderGraph(data) {
 	d3.select("#date-min").html(
 		d3.min(data, function (d) {
 			const datum = d.date;
+			console.log(d.date);
 			return `${datum.toLocaleDateString()}, ${datum.toLocaleTimeString()}`;
 		})
 	);
 	d3.select("#date-max").html(
 		d3.max(data, function (d) {
 			const datum = d.date;
+			console.log(d.date)
 			return `${datum.toLocaleDateString()}, ${datum.toLocaleTimeString()}`;
 		})
 	);
