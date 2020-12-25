@@ -124,7 +124,7 @@ export async function getData(): Promise<MeasureData> {
 		class GrovePi implements Sensor {
 			measureTemperature(): Promise<Temperature> {
 				return new Promise((resolve, reject) => {
-					resolve(new Temperature(15));
+					resolve(new Temperature(0));
 				});
 			}
 

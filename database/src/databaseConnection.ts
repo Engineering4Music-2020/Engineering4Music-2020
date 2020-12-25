@@ -2,6 +2,9 @@ import dotenv from "dotenv";
 import { getData } from "../../sensors/src/measureData";
 import { warnUser } from "./warnUser";
 import { pool } from "./pool";
+import { QueryResult } from "pg";
+
+dotenv.config();
 
 const checkForRows = `SELECT * FROM data;`;
 const delete100latestrows = `DELETE FROM data where date in (
@@ -40,6 +43,80 @@ const fillDataBase = async (
 	}
 };
 
+const getTemperature = async (): Promise<number> => {
+	const result: QueryResult = await pool.query(`SELECT temperature 
+	FROM data WHERE date=(
+	SELECT MAX(date)
+	FROM data
+	) AND raspiid = 1;`);
+	const data: any = result.rows[0];
+	const temperature: number = data.temperature;
+	return temperature;
+};
+
+const humidityIsZero = (humidity: number): boolean => {
+	if (humidity === 0) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
+const temperatureIsZero = (temperature: number): boolean => {
+	if (temperature === 0) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
+const temperatureBefore = async (): Promise<number | undefined> => {
+	let temperatureBefore: unknown = await getTemperature().then((temp) => {
+		const loadedTemperature: unknown = temp;
+		if (typeof loadedTemperature === "number") {
+			return loadedTemperature;
+		} else {
+			return;
+		}
+	});
+	if (typeof temperatureBefore === "number") {
+		return temperatureBefore;
+	}
+};
+
+const checkIfDataCanBeUploaded = (measuredTemperature: number, loadedTemperature: number, measuredHumidity: number) => {
+	const loadedTemperatureIsNotLow: boolean = loadedTemperature > 5;
+	if (loadedTemperatureIsNotLow) {
+		measure();
+	} else {
+		uploadAndNotifyUser(measuredTemperature, measuredHumidity);
+	}
+};
+
+const uploadAndNotifyUser = (humidity: number, temperature: number) => {
+	const raspiid = process.env.RASPI_ID;
+	warnUser(humidity, temperature);
+	fillDataBase(humidity, temperature, raspiid);
+};
+
+const preventZerosFromBeingUploaded = (humidity: number, temperature: number) => {
+	if (humidityIsZero(humidity)) {
+		measure();
+	} else if (temperatureIsZero(temperature)) {
+		console.log("Temp is zero");
+		temperatureBefore().then((result) => {
+			if (typeof result === "undefined") {
+				uploadAndNotifyUser(humidity, temperature);
+			} else {
+				checkIfDataCanBeUploaded(temperature, result, humidity);
+			}
+		});
+	} else {
+		console.log("Is good");
+		uploadAndNotifyUser(humidity, temperature);
+	}
+};
+
 const measure = () => {
 	checkHowManyRowsThereAreAndIfNecessaryDeleteSome(
 		checkForRows,
@@ -49,18 +126,10 @@ const measure = () => {
 		let humidity = data.humidity;
 		let temperature = data.temperature;
 
-		dotenv.config();
+		console.log(data);
 
-		// PREVENT ZEROS
-
-		if (humidity === 0) {
-			measure();
-		} else {
-			const raspiid = process.env.RASPI_ID;
-			warnUser(humidity, temperature);
-			fillDataBase(humidity, temperature, raspiid);
-		}
+		preventZerosFromBeingUploaded(humidity, temperature);
 	});
 };
 
-setInterval(measure, 5000);
+setInterval(measure, 900000);
