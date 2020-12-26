@@ -1,32 +1,26 @@
 {
-  "name": "database",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node dist/main.js",
-    "start-debug": "nodemon --inspect dist/main.js",
-    "build": "npm run build-ts && npm run tslint",
-    "watch-node": "nodemon dist/main.js",
-    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-    "test": "jest --forceExit --coverage --verbose",
-    "watch-test": "npm run test -- --watchAll",
-    "build-ts": "tsc",
-    "watch-ts": "tsc -w",
-    "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "debug": "npm run build && npm run watch-debug",
-    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run start-debug\""
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@sendgrid/mail": "^7.2.6",
-    "@types/dotenv": "^8.2.0",
-    "@types/i2c-bus": "^5.1.0",
-    "@types/pg": "^7.14.4",
-    "dotenv": "^8.2.0",
-    "i2c-bus": "^5.2.0",
-    "pg": "^8.3.3",
-    "typescript": "^4.0.2"
-  }
+	"name": "database",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test_db_connection": "cd .. && node database/dist/database/src/databaseConnection.js",
+		"build": "npm run clean && npm run compile",
+		"delete_dist": "rm -r ./dist",
+		"clean": "[ -d ./dist ] && npm run delete_dist || echo 'dist does not exist'",
+		"compile": "tsc && echo succesfully compiled database"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@sendgrid/mail": "^7.2.6",
+		"@types/dotenv": "^8.2.0",
+		"@types/i2c-bus": "^5.1.0",
+		"@types/pg": "^7.14.4",
+		"dotenv": "^8.2.0",
+		"i2c-bus": "^5.2.0",
+		"pg": "^8.3.3",
+		"sendgrid": "^5.2.3",
+		"typescript": "^4.0.2"
+	}
 }

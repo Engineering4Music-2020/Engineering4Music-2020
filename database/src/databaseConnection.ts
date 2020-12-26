@@ -43,44 +43,21 @@ const fillDataBase = async (
 	}
 };
 
-const getTemperature = async (): Promise<number> => {
+const getPreviouslyMeasuredTemperature = async (): Promise<number> => {
+	const raspiid = process.env.RASPI_ID;
 	const result: QueryResult = await pool.query(`SELECT temperature 
 	FROM data WHERE date=(
 	SELECT MAX(date)
 	FROM data
-	) AND raspiid = 1;`);
-	const data: any = result.rows[0];
-	const temperature: number = data.temperature;
-	return temperature;
-};
-
-const humidityIsZero = (humidity: number): boolean => {
-	if (humidity === 0) {
-		return true;
+	) AND raspiid = ${raspiid};`);
+	const defaultValue: number = 10;
+	const userHasNoValuesSaved: boolean = result.rowCount === 0;
+	if (userHasNoValuesSaved) {
+		return defaultValue;
 	} else {
-		return false;
-	}
-};
-
-const temperatureIsZero = (temperature: number): boolean => {
-	if (temperature === 0) {
-		return true;
-	} else {
-		return false;
-	}
-};
-
-const temperatureBefore = async (): Promise<number | undefined> => {
-	let temperatureBefore: unknown = await getTemperature().then((temp) => {
-		const loadedTemperature: unknown = temp;
-		if (typeof loadedTemperature === "number") {
-			return loadedTemperature;
-		} else {
-			return;
-		}
-	});
-	if (typeof temperatureBefore === "number") {
-		return temperatureBefore;
+		const data: any = result.rows[0];
+		const temperature: number = data.temperature;
+		return temperature;
 	}
 };
 
@@ -100,19 +77,15 @@ const uploadAndNotifyUser = (humidity: number, temperature: number) => {
 };
 
 const preventZerosFromBeingUploaded = (humidity: number, temperature: number) => {
-	if (humidityIsZero(humidity)) {
+	const humidityIsZero: boolean = humidity === 0;
+	const temperatureIsZero: boolean = temperature === 0;
+	if (humidityIsZero) {
 		measure();
-	} else if (temperatureIsZero(temperature)) {
-		console.log("Temp is zero");
-		temperatureBefore().then((result) => {
-			if (typeof result === "undefined") {
-				uploadAndNotifyUser(humidity, temperature);
-			} else {
-				checkIfDataCanBeUploaded(temperature, result, humidity);
-			}
-		});
+	} else if (temperatureIsZero) {
+		getPreviouslyMeasuredTemperature().then((previousTemperature) => {
+			checkIfDataCanBeUploaded(temperature, previousTemperature, humidity);
+		}).catch((error) => console.log(error));
 	} else {
-		console.log("Is good");
 		uploadAndNotifyUser(humidity, temperature);
 	}
 };
@@ -129,7 +102,7 @@ const measure = () => {
 		console.log(data);
 
 		preventZerosFromBeingUploaded(humidity, temperature);
-	});
+	}).catch((error) => console.log(error));
 };
 
-setInterval(measure, 900000);
+setInterval(measure, 5000);
