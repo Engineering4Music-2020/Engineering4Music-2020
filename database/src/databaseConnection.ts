@@ -50,7 +50,7 @@ const getPreviouslyMeasuredTemperature = async (): Promise<number> => {
 	SELECT MAX(date)
 	FROM data
 	) AND raspiid = ${raspiid};`);
-	const defaultValue: number = 10;
+	const defaultValue: number = 0;
 	const userHasNoValuesSaved: boolean = result.rowCount === 0;
 	if (userHasNoValuesSaved) {
 		return defaultValue;
@@ -61,6 +61,12 @@ const getPreviouslyMeasuredTemperature = async (): Promise<number> => {
 	}
 };
 
+const uploadAndNotifyUser = (humidity: number, temperature: number) => {
+	const raspiid = process.env.RASPI_ID;
+	warnUser(humidity, temperature);
+	fillDataBase(humidity, temperature, raspiid);
+};
+
 const checkIfDataCanBeUploaded = (measuredTemperature: number, loadedTemperature: number, measuredHumidity: number) => {
 	const loadedTemperatureIsNotLow: boolean = loadedTemperature > 5;
 	if (loadedTemperatureIsNotLow) {
@@ -68,12 +74,6 @@ const checkIfDataCanBeUploaded = (measuredTemperature: number, loadedTemperature
 	} else {
 		uploadAndNotifyUser(measuredTemperature, measuredHumidity);
 	}
-};
-
-const uploadAndNotifyUser = (humidity: number, temperature: number) => {
-	const raspiid = process.env.RASPI_ID;
-	warnUser(humidity, temperature);
-	fillDataBase(humidity, temperature, raspiid);
 };
 
 const preventZerosFromBeingUploaded = (humidity: number, temperature: number) => {
@@ -105,4 +105,4 @@ const measure = () => {
 	}).catch((error) => console.log(error));
 };
 
-setInterval(measure, 5000);
+setInterval(measure, 900000);
