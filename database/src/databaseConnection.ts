@@ -85,7 +85,10 @@ const preventZerosFromBeingUploaded = (humidity: number, temperature: number) =>
 		getPreviouslyMeasuredTemperature().then((previousTemperature) => {
 			checkIfDataCanBeUploaded(temperature, previousTemperature, humidity);
 		}).catch((error) => console.log(error));
-	} else {
+	} else if (humidityIsZero && temperatureIsZero) {
+		measure();
+	}
+	else {
 		uploadAndNotifyUser(humidity, temperature);
 	}
 };
