@@ -45,26 +45,30 @@ const fillDataBase = async (
 
 const getPreviouslyMeasuredTemperature = async (): Promise<number> => {
 	const raspiid = process.env.RASPI_ID;
-	const result: QueryResult = await pool.query(`SELECT temperature 
-	FROM data WHERE date=(
-	SELECT MAX(date)
-	FROM data
-	) AND raspiid = ${raspiid};`);
-	const defaultValue: number = 0;
-	const userHasNoValuesSaved: boolean = result.rowCount === 0;
-	if (userHasNoValuesSaved) {
-		return defaultValue;
-	} else {
-		const data: any = result.rows[0];
-		const temperature: number = data.temperature;
-		return temperature;
+	try {
+		const result: QueryResult = await pool.query(`SELECT temperature 
+		FROM data WHERE date=(
+		SELECT MAX(date)
+		FROM data
+		) AND raspiid = ${raspiid};`);
+		const defaultValue: number = 0;
+		const userHasNoValuesSaved: boolean = result.rowCount === 0;
+		if (userHasNoValuesSaved) {
+			return defaultValue;
+		} else {
+			const data: any = result.rows[0];
+			const temperature: number = data.temperature;
+			return temperature;
+		}
+	} catch (error) {
+		throw error;
 	}
 };
 
 const uploadAndNotifyUser = (humidity: number, temperature: number) => {
 	const raspiid = process.env.RASPI_ID;
 	warnUser(humidity, temperature);
-	fillDataBase(humidity, temperature, raspiid);
+	fillDataBase(humidity, temperature, raspiid).catch((error) => console.log(error));
 };
 
 const checkIfDataCanBeUploaded = (measuredTemperature: number, loadedTemperature: number, measuredHumidity: number) => {

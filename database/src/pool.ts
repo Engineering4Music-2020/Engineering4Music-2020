@@ -5,7 +5,7 @@ dotenv.config();
 
 const determinePool = (): Pool => {
     let pool: Pool;
-    if (process.env.WHEREIS_DB === "local") {
+    if (process.env.DB_IS_NOT_HEROKU === "true") {
         pool = new Pool({
             user: process.env.LOCAL_USER,
             host: process.env.LOCAL_HOST,
